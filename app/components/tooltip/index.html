@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Tooltip</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Tooltip</h1>
+
+			<p>This is a
+				<span class="tooltip" tabindex="0" role="dialog" aria-labelledby="tooltip-example-trigger" aria-describedby="tooltip-example-body">
+					<span class="tooltip__trigger" id="tooltip-example-trigger">tooltip</span>.
+					<span class="tooltip__body" id="tooltip-example-body">
+						<span class="p">Tooltips can exist within <code>&lt;p&gt;</code> tags, but typically need to contain paragraphs themselves. However, if any element which is block level by default is put inside a <code>&lt;p&gt;</code> tag, it forces the <code>&lt;p&gt;</code> tag to close.</span>
+
+						<span class="p">To get around this, a <code>&lt;span class="p"&gt;</code> tag can be used to emulate the styles of a <code>&lt;p&gt;</code> tag.</span>
+					</span>
+				</span>
+			</p>
+
+			<p>These tooltips don't use any JavaScript. Instead, they rely on the <code>:hover</code>, <code>:focus</code>, and (where supported) <code>:focus-within</code> pseudoclasses.</p>
+
+			<p>The disadvantage of not using JavaScript is that the tooltips can't detect how close they are to the edge of the page. If they are near enough to the right hand edge of the window that they don't fit, the page width will increase to accommodate them, causing a horizontal scrollbar to appear.</p>
+
+			<p>It's best to avoid putting tooltips close enough to the bottom of the window that their content can't fit, since this can cause the page to jump back and forth.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (dragsort) {
+			dragsort.init();
+		})(dragsort);
+	</script>
+</body>
+</html>

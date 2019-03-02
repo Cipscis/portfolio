@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Activate</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/activate.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Activate</h1>
+
+			<p>This is a method for binding accessible activation events, for elements that should act like buttons. These events will be fired when an element is clicked (or tapped, on touch devices), or when the <kbd>enter</kbd> key is pressed down or the <kbd>space</kbd> key is released while the element has focus.</p>
+
+			<p>This emulates how browsers natively apply click events to <code>&lt;button&gt;</code> elements.</p>
+
+			<span class="button js-activate-example" tabindex="0">Activate 0</span>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (activate) {
+			var activateEvent = function (e) {
+				e.preventDefault();
+
+				var el = e.target;
+				var activateNum = parseInt(el.textContent.match(/\d+/), 10);
+
+				activateNum += 1;
+
+				el.textContent = 'Activate ' + activateNum;
+			};
+
+			var button = document.querySelectorAll('.js-activate-example')[0];
+
+			activate(button, activateEvent);
+		})(activate);
+	</script>
+</body>
+</html>

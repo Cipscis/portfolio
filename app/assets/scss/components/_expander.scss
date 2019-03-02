@@ -1,0 +1,43 @@
+.expander {}
+
+.expander__trigger {
+	cursor: pointer;
+
+	&:before {
+		content: "-";
+		display: inline-block;
+		text-align: center;
+		width: 30px;
+		margin-right: 10px;
+
+		border-radius: 50%;
+	}
+	.expander[aria-expanded="false"] &:before {
+		content: "+";
+	}
+
+	&:focus {
+		outline: none;
+		&:before {
+			background: lighten($green--pale, 10%);
+		}
+	}
+}
+
+.expander__body {
+	display: block;
+	padding-bottom: 50px;
+	.expander[aria-expanded="false"] & {
+		display: none;
+	}
+}
+
+@media print {
+	.expander__trigger:before {
+		display: none;
+	}
+
+	.expander__body {
+		display: block !important;
+	}
+}

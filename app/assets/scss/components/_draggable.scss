@@ -63,10 +63,11 @@
 		@include list-reset;
 	}
 	.draggable__item {
-		margin-top: -1px;
+		margin-top: -2px;
 		border: 1px solid $black;
 	}
-	.demo__draggable-item {
-		padding: 10px;
-	}
+}
+.demo__draggable-item {
+	border: 1px solid black;
+	padding: 10px;
 }

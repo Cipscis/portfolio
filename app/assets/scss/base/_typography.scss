@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+
+html {
+	font-family: $base-font-family;
+	line-height: 1.5;
+	font-size: 18px;
+
+	color: $grey--dark;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $heading-font-family;
+}
+
+.content p,
+.p {
+	display: block;
+	margin: 18px 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+.content > p:last-child {
+	margin-bottom: 18px;
+}
+
+.content a,
+.a {
+	cursor: pointer;
+	color: $grey--dark;
+	text-decoration: none;
+
+	$link-bg-height: 20%;
+
+	background: linear-gradient(to top, $blue--pale 0%, $blue--pale $link-bg-height, transparent ($link-bg-height + 0.1%), transparent 100%);
+	&:hover,
+	&:focus {
+		outline: none;
+		background: linear-gradient(to top, darken($blue--pale, 10%) 0%, darken($blue--pale, 10%) $link-bg-height, transparent ($link-bg-height + 0.1%), transparent 100%);
+	}
+}
+
+.content blockquote,
+.blockquote {
+	display: block;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 0 30px;
+
+	&:before {
+		content: "“";
+		font-size: 60px;
+		line-height: 1;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	cite {
+		&:before {
+			content: "― ";
+		}
+	}
+}
+
+.content code,
+.code {
+	display: inline-block;
+	background: $grey--lightest;
+	padding: 2px 7px;
+	border-radius: 5px;
+	font-family: monospace;
+}
+
+.content kbd,
+.kbd {
+	display: inline-block;
+	padding: 0 5px;
+	border-radius: 5px;
+	border: 1px solid $grey--dark;
+	box-shadow: 0 2px 5px rgba($grey--dark, 0.2);
+	font-family: monospace;
+}
+
+.content {
+	ul, ol {
+		padding-left: 20px;
+		> li {
+			margin: 9px 0;
+		}
+	}
+
+	hr {
+		margin: 36px 0;
+		border: none;
+		border-bottom: 1px solid $grey--lighter;
+	}
+
+	h4 {
+		margin-bottom: 0;
+		+ p,
+		+ .p {
+			margin-top: 0;
+		}
+	}
+}
+
+@media print {
+	a[href^="http"],
+	a[href^="mailto"],
+	a[href^="tel"] {
+		&:after {
+			content: " [" attr(href) "]";
+			overflow-wrap: break-word;
+		}
+	}
+}

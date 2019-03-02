@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Expander</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/activate.js"></script>
+	<script type="text/javascript" src="/assets/scripts/expander.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Expander</h1>
+
+			<p>These expandable sections use the <code>aria-expanded</code> attribute to control whether or not their content is visible. Their triggers are bound with accessible activation events using <a href="/components/activate">activate</a>.</p>
+
+			<p>When the page loads, the expanders are all closed via JavaScript. This ensures they will be open if the page is loaded without JavaScript. They are also forced to be open when printing a page.</p>
+
+			<p>If the page is loaded with a hash, or an anchor link is clicked, and the page's hash aligns with the <code>id</code> attribute of an expander, that section will be expanded when the page is loaded. To see an example of this, load this page with <a href="#expander-demo">#expander-demo</a>.</p>
+
+			<div class="expander js-expander" id="expander-demo">
+				<h3 class="expander__trigger js-expander-trigger">Expander Trigger</h3>
+
+				<div class="expander__body js-expander-body">
+					<p>This is an expander.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (expander) {
+			expander.init();
+		})(expander);
+	</script>
+</body>
+</html>

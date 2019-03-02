@@ -1,0 +1,28 @@
+{
+  "name": "Portfolio",
+  "author": {
+  	"name": "Mark Hanna",
+  	"email": "mark@honestuniverse.com",
+  	"url": "https://honestuniverse.com"
+  },
+  "version": "0.0.1",
+  "description": "Portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js | node server/build.js"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+  	"type": "git",
+  	"url": "https://github.com/Cipscis/portfolio.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}

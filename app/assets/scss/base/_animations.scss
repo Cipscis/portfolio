@@ -1,0 +1,75 @@
+// Animations can be compounded and used with animation-fill-mode: forwards
+// For example, this compound animation will cause an element to become visible
+// fade in, then fade out and become hidden:
+
+// animation: 0.5s becomeVisible forwards,
+//            0.5s 0.1s fadein forwards,
+//            0.5s 1.5s fadeout forwards,
+//            0.5s 1.5s becomeHidden forwards;
+
+////////////////
+// Visibility //
+////////////////
+
+// The display property can't be animated, but visibility can
+// Instead of interpolating the value, the closest one is used,
+// which is why these utility animations change the property in
+// a step instead of gradually
+
+@keyframes becomeVisible {
+	  0% { visibility: visible; }
+	100% { visibility: visible; }
+}
+@keyframes becomeHidden {
+	  0% { visibility: visible; }
+	100% { visibility: visible; }
+	100% { visibility: hidden; }
+}
+
+////////////////////////
+// Sliding in and out //
+////////////////////////
+@keyframes slideinDown {
+	  0% { transform: translateY(-100%); }
+	100% { transform: translateY(0); }
+}
+@keyframes slideoutDown {
+	  0% { transform: translateY(0); }
+	100% { transform: translateY(100%); }
+}
+@keyframes slideinUp {
+	  0% { transform: translateY(100%); }
+	100% { transform: translateY(0); }
+}
+@keyframes slideoutUp {
+	  0% { transform: translateY(0); }
+	100% { transform: translateY(-100%); }
+}
+@keyframes slideinRight {
+	  0% { transform: translateX(100%); }
+	100% { transform: translateX(0); }
+}
+@keyframes slideoutRight {
+	  0% { transform: translateX(0); }
+	100% { transform: translateX(100%); }
+}
+@keyframes slideinLeft {
+	  0% { transform: translateX(-100%); }
+	100% { transform: translateX(0); }
+}
+@keyframes slideoutLeft {
+	  0% { transform: translateX(0); }
+	100% { transform: translateX(-100%); }
+}
+
+/////////////
+// Opacity //
+/////////////
+@keyframes fadein {
+	  0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes fadeout {
+	  0% { opacity: 1; }
+	100% { opacity: 0; }
+}

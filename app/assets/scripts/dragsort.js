@@ -17,8 +17,6 @@ var dragsort = (function ($, publish) {
 	var fullSupport = !(isIE11 || isSafari);
 	var useClone = fullSupport;
 
-	var touchSupport = (('ontouchstart' in window) || window.TouchEvent || window.DocumentTouch && document instanceof DocumentTouch);
-
 	var selectors = {
 		list: '.js-dragsort-list',
 		wrap: '.js-dragsort-wrap',
@@ -41,11 +39,6 @@ var dragsort = (function ($, publish) {
 
 	var module = {
 		init: function () {
-			if (touchEvents && $(window).width() < 1024) {
-				// Don't initialise on small touch devices
-				return;
-			}
-
 			module._initEvents();
 
 			if (fullSupport) {

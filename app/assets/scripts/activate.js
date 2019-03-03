@@ -1,8 +1,16 @@
 var { activate, deactivate } = (function () {
-	var boundEventsMap = {};
+	var boundEventsMap = [];
 
 	var module = {
 		activate: function (el, fn) {
+			if (el.length && el.forEach) {
+				// el is Array-like, so iterate over its elements
+				el.forEach(function (innerEl) {
+					module.activate(innerEl, fn);
+				});
+				return;
+			}
+
 			module._bind(el, 'click', fn);
 
 			if (module._isButton(el) === false) {
@@ -12,7 +20,17 @@ var { activate, deactivate } = (function () {
 		},
 
 		deactivate: function (el, fn) {
-			var binding = boundEventsMap[el];
+			var binding;
+
+			if (el.length && el.forEach) {
+				// el is Array-like, so iterate over its elements
+				el.forEach(function (innerEl) {
+					module.activate(innerEl, fn);
+				});
+				return;
+			}
+
+			binding = module._getElBinding(el);
 
 			module._unbind(el, 'click', fn);
 
@@ -22,7 +40,7 @@ var { activate, deactivate } = (function () {
 			}
 
 			if (binding.click.length === 0) {
-				delete boundEventsMap[el];
+				module._removeElBinding(el);
 			}
 		},
 
@@ -34,11 +52,11 @@ var { activate, deactivate } = (function () {
 
 		_bind: function (el, eventType, fn) {
 			var fnWrapper;
-			var binding = boundEventsMap[el];
+			var binding = module._getElBinding(el);
 			var fnBinding;
 
 			if (!binding) {
-				binding = boundEventsMap[el] = module._makeNewBinding();
+				binding = module._createElBinding(el);
 			}
 
 			fnBinding = module._getFnBinding(el, eventType, fn);
@@ -63,7 +81,7 @@ var { activate, deactivate } = (function () {
 		},
 
 		_getFnBinding: function (el, eventType, fn) {
-			var binding = boundEventsMap[el];
+			var binding = module._getElBinding(el);
 			var fnBinding;
 			var i;
 
@@ -80,8 +98,42 @@ var { activate, deactivate } = (function () {
 			}
 		},
 
+		_getElBinding: function (el) {
+			var binding;
+			var i;
+
+			for (i = 0; i < boundEventsMap.length; i++) {
+				binding = boundEventsMap[i];
+
+				if (binding.el === el) {
+					return binding;
+				}
+			}
+		},
+
+		_createElBinding: function (el) {
+			var binding = module._makeNewBinding(el);
+
+			boundEventsMap.push(binding);
+			return binding;
+		},
+
+		_removeElBinding: function (el) {
+			var binding;
+			var i;
+
+			for (i = 0; i < boundEventsMap.length; i++) {
+				binding = boundEventsMap[i];
+
+				if (binding.el === el) {
+					boundEventsMap.splice(i, 1);
+					return;
+				}
+			}
+		},
+
 		_unbind: function (el, eventType, fn) {
-			var binding = boundEventsMap[el];
+			var binding = module._getElBinding(el);
 			var fnBinding;
 			var i;
 
@@ -96,8 +148,9 @@ var { activate, deactivate } = (function () {
 			binding[eventType].splice(i, 1);
 		},
 
-		_makeNewBinding: function () {
+		_makeNewBinding: function (el) {
 			return {
+				el: el,
 				click: [],
 				keydown: [],
 				keyup: []

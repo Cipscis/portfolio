@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Modal</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/lib/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/assets/scripts/lib/ba-tiny-pubsub.min.js"></script>
+
+	<script type="text/javascript" src="/assets/scripts/activate-jquery.js"></script>
+	<script type="text/javascript" src="/assets/scripts/keybinding.js"></script>
+	<script type="text/javascript" src="/assets/scripts/modal.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Modal</h1>
+
+			<p>This allows us to show an accessible and customisable modal window.</p>
+
+			<p><button class="js-modal-trigger" data-modal-target="modal-example">Show modal</button></p>
+
+			<p>Modal windows are shown when an element with the class <code>js-modal-trigger</code> is clicked. Each of these triggers is tied to a particular modal window via a <code>data-modal-target</code> attribute that contains the value of the modal window's <code>id</code> attribute.</p>
+
+			<p>Modal windows can be closed by clicking outside the window (i.e. on the overlay between it and the content), by clicking the "close button", or by pressing the "escape" key.</p>
+
+			<p>Focus is automatically moved inside the modal window when it is opened, kept inside it while it is opened (tabbing through elements wraps within the modal window), and returned to the appropriate element when the modal window is closed.</p>
+
+			<p>Please note several attributes in the example markup are necessary for the modal window to be fully accessible, such as the <code>role</code> and <code>aria-live</code> attributes.</p>
+
+			<h2>onShow callback</h2>
+
+			<p>A function to be called when a modal window is shown can be passed in via an options object to the <code>init</code> method.
+
+			<h2>Pubsub events</h2>
+
+			<p>This code also uses a pubsub implementation to subscribe to two events:</p>
+
+			<p><code>/modal/show</code> can be published to show a modal window of a specified ID.</p>
+
+			<p><code>/modal/resize</code> can be published to force a modal window to recalculate its size. This is not necessary to trigger on page resize, as that detection is automatic, but it may be necessary if the content of a modal window is changed.</p>
+		</div>
+	</div>
+
+	<div class="modal js-modal" id="modal-example" aria-modal="true" role="dialog" aria-live="polite" aria-labelledby="modal-example-name">
+		<div class="modal__body js-modal-body">
+			<button class="modal__close js-modal-close" aria-label="Close"></button>
+
+			<div class="content">
+				<p>You can put any markup within the body of a modal.</p>
+
+				<p>See <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank">the WAI-ARIA specification</a> for how an accessible modal window should be implemented.</p>
+			</div>
+		</div>
+		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>
+	</div>
+
+	<script type="text/javascript">
+		(function (modal) {
+			modal.init();
+		})(modal);
+	</script>
+</body>
+</html>

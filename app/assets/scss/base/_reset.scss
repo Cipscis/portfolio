@@ -24,8 +24,20 @@ p:last-child {
 	margin-bottom: 0;
 }
 
+button {
+	font-size: 1rem;
+}
+
 
 @mixin list-reset {
 	list-style: none;
 	padding: 0;
+}
+
+@mixin button-reset {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	cursor: pointer;
 }

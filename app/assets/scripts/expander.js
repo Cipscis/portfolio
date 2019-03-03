@@ -25,9 +25,7 @@ var expander = (function (activate) {
 			var i;
 
 			$triggers = document.querySelectorAll(selectors.trigger);
-			for (i = 0; i < $triggers.length; i++) {
-				activate($triggers[i], module._activateTrigger);
-			}
+			activate($triggers, module._activateTrigger);
 
 			window.addEventListener('hashchange', module._openByHash);
 		},

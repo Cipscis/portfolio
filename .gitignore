@@ -1,3 +1,4 @@
 /.jshintrc
 /node_modules
 /*.sublime-workspace
+/app/assets/css/*.css

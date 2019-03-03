@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>Keybinding</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/activate.js"></script>
+	<script type="text/javascript" src="/assets/scripts/keybinding.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Keybinding</h1>
+
+			<p>Allows you to bind and unbind events to individual keypresses or sequences of keypresses. Intended for implementing keyboard shortcuts.</p>
+
+			<p>Try the following keyboard shortcuts/sequences:</p>
+
+			<ul>
+				<li><kbd>a</kbd></li>
+				<li><kbd>Ctrl</kbd> + <kbd>m</kbd> (will work while focus in input)</li>
+				<li>Konami code (<kbd>up</kbd> <kbd>up</kbd> <kbd>down</kbd> <kbd>down</kbd> <kbd>left</kbd> <kbd>right</kbd> <kbd>left</kbd> <kbd>right</kbd> <kbd>b</kbd> <kbd>a</kbd> <kbd>enter</kbd>)</li>
+			</ul>
+
+			<p>Keyboard shortcuts won't fire when your focus is in an input, unless it's specified that it should.</p>
+
+			<p><input type="text" /></p>
+
+			<p>Keep in mind that only some browser shortcuts (e.g. <kbd>Ctrl</kbd> + <kbd>s</kbd>) can have their default action prevented with <code>event.preventDefault()</code>. If you ever do this, be sure to test it in multiple browsers.</p>
+
+			<p>
+				<button class="js-bind">Bind shortcut to <kbd>k</kbd></button>
+				<button class="js-unbind">Unbind shortcut to <kbd>k</kbd></button>
+			</p>
+
+			<p>
+				<button class="js-unbind-sequence">Unbind Konami code shortcut</button>
+			</p>
+
+			<div class="o-panel">
+				<p class="js-text-message">&nbsp;</p>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (keys, activate) {
+			var setMessage = function (message) {
+				return function (e) {
+					var $el;
+
+					e.preventDefault();
+
+					$el = document.querySelectorAll('.js-text-message')[0];
+					$el.textContent = message;
+				};
+			};
+
+			var konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a' ,'enter'];
+			var cheat = setMessage('Hey, stop cheating!');
+
+			keys.bind('a', setMessage('You pressed the \'a\' key'));
+			keys.bind('m', setMessage('You pressed Ctrl + \'m\''), true, true);
+
+			keys.bindSequence(konamiCode, cheat);
+
+			activate(document.querySelectorAll('.js-unbind-sequence')[0], function (e) {
+				keys.unbindSequence(konamiCode, cheat);
+			});
+
+			var kPress = setMessage('You pressed the \'k\' key');
+			activate(document.querySelectorAll('.js-bind')[0], function (e) {
+				keys.bind('k', kPress);
+			});
+			activate(document.querySelectorAll('.js-unbind')[0],  function (e) {
+				keys.unbind('k', kPress);
+			});
+		})(keys, activate);
+	</script>
+</body>
+</html>

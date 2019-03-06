@@ -1,5 +1,5 @@
-var { activate, deactivate } = (function () {
-	var boundEventsMap = [];
+const { activate, deactivate } = (function () {
+	const boundEventsMap = [];
 
 	var module = {
 		activate: function (el, fn) {
@@ -82,15 +82,13 @@ var { activate, deactivate } = (function () {
 
 		_getFnBinding: function (el, eventType, fn) {
 			var binding = module._getElBinding(el);
-			var fnBinding;
-			var i;
 
 			if (!binding) {
 				return;
 			}
 
-			for (i = 0 ; i < binding[eventType].length; i++) {
-				fnBinding = binding[eventType][i];
+			for (let i = 0 ; i < binding[eventType].length; i++) {
+				let fnBinding = binding[eventType][i];
 
 				if (fnBinding.fn === fn) {
 					return fnBinding;
@@ -100,9 +98,8 @@ var { activate, deactivate } = (function () {
 
 		_getElBinding: function (el) {
 			var binding;
-			var i;
 
-			for (i = 0; i < boundEventsMap.length; i++) {
+			for (let i = 0; i < boundEventsMap.length; i++) {
 				binding = boundEventsMap[i];
 
 				if (binding.el === el) {
@@ -120,9 +117,8 @@ var { activate, deactivate } = (function () {
 
 		_removeElBinding: function (el) {
 			var binding;
-			var i;
 
-			for (i = 0; i < boundEventsMap.length; i++) {
+			for (let i = 0; i < boundEventsMap.length; i++) {
 				binding = boundEventsMap[i];
 
 				if (binding.el === el) {
@@ -135,22 +131,22 @@ var { activate, deactivate } = (function () {
 		_unbind: function (el, eventType, fn) {
 			var binding = module._getElBinding(el);
 			var fnBinding;
-			var i;
+			var index;
 
 			if (!binding) {
 				return;
 			}
 
 			fnBinding = module._getFnBinding(el, eventType, fn);
-			i = binding[eventType].indexOf(fnBinding);
+			index = binding[eventType].indexOf(fnBinding);
 
 			el.removeEventListener(eventType, fnBinding.fnWrapper);
-			binding[eventType].splice(i, 1);
+			binding[eventType].splice(index, 1);
 		},
 
 		_makeNewBinding: function (el) {
 			return {
-				el: el,
+				el,
 				click: [],
 				keydown: [],
 				keyup: []
@@ -160,9 +156,7 @@ var { activate, deactivate } = (function () {
 		_makeKeydownEvent: function (fn) {
 			return function () {
 				var enterEvent = module._makeKeySpecificEvent(fn, 'enter');
-				var spaceEvent = module._makeKeySpecificEvent(function (event) {
-					event.preventDefault();
-				}, ' ');
+				var spaceEvent = module._makeKeySpecificEvent(e => e.preventDefault(), ' ');
 
 				enterEvent.apply(this, arguments);
 				spaceEvent.apply(this, arguments);
@@ -170,12 +164,12 @@ var { activate, deactivate } = (function () {
 		},
 
 		_makeKeyupEvent: function (fn) {
-			return module._makeKeySpecificEvent(fn, ' ');
+			return module._makeKeySpecificEvent(fn, ' ', 'spacebar');
 		},
 
-		_makeKeySpecificEvent: function (fn, key) {
+		_makeKeySpecificEvent: function (fn, ...keys) {
 			return function (event) {
-				if (event.key.toLowerCase() === key) {
+				if (keys.indexOf(event.key.toLowerCase()) !== -1) {
 					fn.apply(this, arguments);
 				}
 			};

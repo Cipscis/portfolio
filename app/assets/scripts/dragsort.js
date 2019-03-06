@@ -1,4 +1,4 @@
-// Requires jQuery and a pubsub implementation (using jQuery pubsub)
+// Requires jQuery and a pubsub implementation
 
 var dragsort = (function ($, publish) {
 
@@ -163,7 +163,7 @@ var dragsort = (function ($, publish) {
 		_startDragging: function ($el, e) {
 			var $list = $el.closest(selectors.list);
 
-			publish(events.dragStart, [$list]);
+			publish(events.dragStart, $list);
 
 			$draggedEl = $el;
 			module._createClone($el, e);
@@ -183,7 +183,7 @@ var dragsort = (function ($, publish) {
 
 			$('.' + classes.droppable).removeClass(classes.droppable).css('padding', 0);
 
-			publish(events.dragStop, [$list]);
+			publish(events.dragStop, $list);
 		},
 
 		// Clone
@@ -243,4 +243,4 @@ var dragsort = (function ($, publish) {
 		init: module.init
 	};
 
-})(jQuery, jQuery.publish);
+})(jQuery, publish);

@@ -1,7 +1,7 @@
 const { activate, deactivate } = (function () {
 	const boundEventsMap = [];
 
-	var module = {
+	const module = {
 		activate: function (el, fn) {
 			if (el.length && el.forEach) {
 				// el is Array-like, so iterate over its elements

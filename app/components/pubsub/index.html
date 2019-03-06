@@ -1,0 +1,54 @@
+<html>
+<head>
+	<title>Pubsub</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/pubsub.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Pubsub</h1>
+
+			<p>Publish and subscribe to arbitrary events, allowing otherwise independent components to communicate with one another. This works well for opportunistic integrations, along the lines of "if this component is present, work with it, otherwise don't do anything special".</p>
+
+			<h2>Methods:</h2>
+
+			<h3>Subscribe</h3>
+
+			<pre class="code">let logSum = (a, b) => console.log(a + b);
+subscribe('event name', logSum);</pre>
+
+			<p>Bind a function to an event. Whenever that event is published, the function will be called, and it will be passed any arguments recieved by <code>publish</code>.</p>
+
+			<p>Trying to bind the same function to the same event will do nothing.</p>
+
+			<h3>Publish</h3>
+
+			<pre class="code">publish('event name', 3, 4); // Console output: 7</pre>
+
+			<p>Publishing an event causes every function bound to that event to be called. Each of those functions will be passed any number of optional arguments received by <code>publish</code> after the event name.</p>
+
+			<h3>Unsubscribe</h3>
+
+			<pre class="code">unsubscribe('event name', logSum);</pre>
+
+			<p>Unbind a function from an event. Does nothing if no such binding exists.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (publish, subscribe, unsubscribe) {
+			let logSum = (a, b) => console.log(a + b);
+			subscribe('event name', logSum);
+
+			publish('event name', 3, 4);
+
+			unsubscribe('event name', logSum);
+		})(publish, subscribe, unsubscribe);
+	</script>
+</body>
+</html>

@@ -72,8 +72,8 @@ var modal = (function ($, activate, keys, subscribe) {
 		},
 
 		_initSubscriptions: function () {
-			$.subscribe(events.show, module._showById);
-			$.subscribe(events.resize, module._resizeBody);
+			subscribe(events.show, module._showById);
+			subscribe(events.resize, module._resizeBody);
 		},
 
 		_bindModalActiveEvents: function () {
@@ -255,4 +255,4 @@ var modal = (function ($, activate, keys, subscribe) {
 	return {
 		init: module.init
 	};
-})(jQuery, activate, keys, jQuery.subscribe);
+})(jQuery, activate, keys, subscribe);

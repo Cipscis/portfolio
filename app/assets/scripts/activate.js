@@ -158,7 +158,15 @@ var { activate, deactivate } = (function () {
 		},
 
 		_makeKeydownEvent: function (fn) {
-			return module._makeKeySpecificEvent(fn, 'enter');
+			return function () {
+				var enterEvent = module._makeKeySpecificEvent(fn, 'enter');
+				var spaceEvent = module._makeKeySpecificEvent(function (event) {
+					event.preventDefault();
+				}, ' ');
+
+				enterEvent.apply(this, arguments);
+				spaceEvent.apply(this, arguments);
+			}
 		},
 
 		_makeKeyupEvent: function (fn) {

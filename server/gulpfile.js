@@ -8,7 +8,8 @@ var paths = {
 
 function style() {
 	return gulp.src(paths.src)
-		.pipe(sass(), sass.logError)
+		.pipe(sass())
+		.on('error', sass.logError)
 		.pipe(gulp.dest(paths.dest));
 }
 

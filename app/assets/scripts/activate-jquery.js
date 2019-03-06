@@ -7,19 +7,25 @@
 // e.g. $(document).on(activate.event, selector, activate(callback));
 var activate = (function ($) {
 	var enterEvent = 'keydown';
-	var enterKeycode = 13;
-
 	var spaceEvent = 'keyup';
-	var spaceKeycode = 32;
 
 	var activate = function ( callback ) {
 		return function (e) {
 			var eventType = e.type;
 			var isButton = e.target.nodeName.toLowerCase() === 'button';
 
-			var enterTrigger = eventType === enterEvent && e.which === enterKeycode;
-			var spaceTrigger = eventType === spaceEvent && e.which === spaceKeycode;
+			var isEnter = e.key && (e.key.toLowerCase() === 'enter');
+			// Need to check for 'spacebar' because of IE11
+			var isSpace = e.key && (e.key === ' ' || e.key.toLowerCase() === 'spacebar');
+
+			var enterTrigger = eventType === enterEvent && isEnter;
+			var spaceTrigger = eventType === spaceEvent && isSpace;
 			var otherTrigger = eventType !== enterEvent && eventType !== spaceEvent;
+
+			// Prevent space from scrolling the page down
+			if (!isButton && eventType === 'keydown' && isSpace) {
+				e.preventDefault(e);
+			}
 
 			if (otherTrigger || (!isButton && (enterTrigger || spaceTrigger))) {
 				callback.apply(this, arguments);

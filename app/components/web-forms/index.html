@@ -60,7 +60,7 @@ pointer-events: none;</pre>
 
 			<form>
 				<fieldset class="form__section">
-					<h2 class="form__section-heading">Styled radio buttons</h2>
+					<h3 class="form__section-heading">Styled radio buttons</h3>
 
 					<ol class="form__section-list">
 						<li class="form__section-item">
@@ -82,7 +82,7 @@ pointer-events: none;</pre>
 				</fieldset>
 
 				<fieldset class="form__section">
-					<h2 class="form__section-heading">Styled checkboxes</h2>
+					<h3 class="form__section-heading">Styled checkboxes</h3>
 
 					<ol class="form__section-list">
 						<li class="form__section-item">
@@ -105,10 +105,81 @@ pointer-events: none;</pre>
 			</form>
 		</section>
 
-		<div class="content">
-			<h2>What can I do to improve it?</h2>
+		<section>
+			<div class="content">
+				<h2>Non-exclusionary design</h2>
 
-			<p>This is something I care about, but I am not an expert in it. A lot of the issues that can cause web forms to be inaccessible or exclusionary do not apply to me directly, so I'm sure I will be ignorant of some issues.</p>
+				<p>It's common for web forms to be designed in a way that is unnecessarily exclusionary. This may be because it's been made impossible for someone to fill out a form without lying, or because the form requires them to provide personal information that shouldn't be necessary for the purpose of the form.</p>
+
+				<p>For example, if a form requires users to fill in a "gender" field but only offers "male" and "female" as options, it is excluding nonbinary people. They can't fill in the form without lying.</p>
+
+				<p>Requiring users to provide unnecessary information can be more generally exclusionary. For example, I have seen a web form that required my postal address in order to unsubscribe me from an email mailing list.</p>
+
+				<p>As I've thought about this, I've come up with what I consider some fundamental principles of non-exclusionary web form design:</p>
+
+				<ul>
+					<li>Ask for the information you need.</li>
+					<li>Don't make anyone lie to you.</li>
+				</ul>
+
+				<p>If you need information for a single purpose, being explicit about that purpose when you ask for it can help the user filling out the form understand how their information will be used.</p>
+
+				<p>Here is an example:</p>
+			</div>
+
+			<form>
+				<fieldset class="form__section">
+					<h3 class="form__section-heading">How should we address you?</h3>
+					<ol class="form__section-list">
+						<li class="form__section-item">
+							<label for="name" class="form__section-label">Please call me</label>
+							<input type="text" name="name" id="name" class="form__section-input" />
+						</li>
+						<li class="form__section-item">
+							<label for="gender" class="form__section-label">My gender is</label>
+							<input type="text" name="gender" id="gender" class="form__section-input" />
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="content">
+				<h2>How to address someone</h2>
+
+				<p>A common purpose of fields in a web form is knowing how to address someone. Often this means using their name to greet them when sending them an email, and it can also be useful to know which pronoun to use when referring to them in the third person.</p>
+
+				<h3>Please call me ______</h3>
+
+				<p>"What is your name?" might be a clearer question, but I think "How should we address you?" has the advantage of making it clear what this information is intended to be used for.</p>
+
+				<p>Web forms often split name into multiple required fields. This almost always includes a first name, and often also includes a last name and a title.</p>
+
+				<p>Though it's uncommon in most cultures, not everyone has two names. Also, referring to name parts as "first name" and "last name" centres cultures that present full names in this way, whereas other cultures present full names with a family name first and a personal name last.</p>
+
+				<p>Requiring users to pick a title from a finite list can require them to provide more information than necessary. For example, forcing women filling in your form to choose between "Miss" or "Mrs", in cases where other titles such as "Dr" do not apply to them, is effectively asking them to disclose their martial status.</p>
+
+				<p>Requiring users to choose a title can also require them to lie, if you have not provided any titles that would apply to them. Often, the only gender-neutral titles available in such a list are tied to qualifications, such as "Dr". This can leave nonbinary people without those qualifications with no option available that they can honestly say applies to them, but the form may not let them submit anything unless they choose one.</p>
+
+				<p>Often, the only purpose a user's name and title is used for is in addressing the user in correspondence. Asking users a question that refers directly to the purpose for which the information is intended to be used gives them the opportunity to provide the required information in a way that works for them.</p>
+
+				<p>This way, users that prefer to be addressed informally may simply provide a personal name, or a nickname. Those that prefer to be addressed more formally may provide a title and surname.</p>
+
+				<h3>My gender is ______</h3>
+
+				<p>Many web forms that ask for a user's gender don't need to ask for this question. If you don't need to know, you should not ask.</p>
+
+				<p>If your reason for asking is that you need to know what pronouns to use to refer to a user, then consider asking them for that information instead.</p>
+
+				<p>As with requiring users to specify a title, requiring users to pick from a finite list of genders often means nonbinary people cannot fill in your form without lying.</p>
+
+				<p>If you do need to know a user's gender, make sure your form allows them to tell you what their gender is. If you're worried about inconsistent entries, try to find a solution that doesn't make it difficult for anyone to fill in your form honestly.</p>
+			</div>
+		</section>
+
+		<div class="content">
+			<h2>What can I do to improve this page?</h2>
+
+			<p>These are topics I care about, but I am not an expert in them. A lot of the issues that can cause web forms to be inaccessible or exclusionary do not apply to me directly, so I'm sure I will be ignorant of some issues.</p>
 
 			<p>If you think there's something I can do to improve this page, please <a href="/contact/">let me know</a>!</p>
 		</div>

@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 
 var paths = {
-	src: './app/assets/scss/**/*.scss',
-	dest: './app/assets/css'
+	src: './assets/scss/**/*.scss',
+	dest: './assets/css'
 };
 
 function style() {
@@ -17,4 +17,4 @@ function watch() {
 	gulp.watch(paths.src, style);
 }
 
-exports.build = gulp.series(style, watch);
+exports.build = gulp.series(style);

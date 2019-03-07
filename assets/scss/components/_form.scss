@@ -95,7 +95,7 @@
 
 	&:checked + .fake-input__display {
 		&::before {
-			content: "✔";
+			content: "✓";
 		}
 	}
 

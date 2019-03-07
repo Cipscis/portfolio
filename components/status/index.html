@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Status</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/portfolio/assets/scripts/pubsub.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/status.js"></script>
+
+	<script type="text/javascript" src="/portfolio/assets/scripts/activate.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Status</h1>
+
+			<p>This can be used to show global success or error messages, relying on the presence of an element on the page that should be using <code>position: fixed;</code>. Default styles can be found in <a href="/portfolio/assets/scss/_status.scss">status.scss</a>.</p>
+
+			<p>These default styles use a combination of CSS animations with <code>animation-fill-mode: forwards;</code> to show and hide the status message automatically.</p>
+
+			<p>
+				<button class="button js-status-example-success">Show success message</button>
+				<button class="button js-status-example-error">Show error message</button>
+			</p>
+
+			<p>An element can also be specified to show a non-global success or error message:</p>
+
+			<p>
+				<button class="button js-status-example-custom">Show success message on custom element</button>
+			</p>
+
+			<p>Status message can be invoked either via the <code>success</code> or <code>error</code> methods on the <code>statusMessage</code> function, or by <a href="/portfolio/components/pubsub">publishing</a> the <code>/status/success</code> or <code>/status/error</code> events.</p>
+
+			<span class="status status--static js-status-custom" aria-live="polite"></span>
+		</div>
+	</div>
+
+	<span class="status js-status" aria-live="polite"></span>
+
+	<script type="text/javascript">
+		(function (statusMessage) {
+
+			activate('.js-status-example-success', () => statusMessage.success('Success :)'));
+			activate('.js-status-example-error', () => statusMessage.error('Error :('));
+			activate('.js-status-example-custom', () => statusMessage.success('Custom success :)', '.js-status-custom'));
+
+		})(statusMessage);
+	</script>
+</body>
+
+</html>

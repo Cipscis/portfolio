@@ -5,9 +5,7 @@ const { activate, deactivate } = (function () {
 		activate: function (el, fn) {
 			if (el.length && el.forEach) {
 				// el is Array-like, so iterate over its elements
-				el.forEach(function (innerEl) {
-					module.activate(innerEl, fn);
-				});
+				el.forEach((el) => module.activate(el, fn));
 				return;
 			}
 

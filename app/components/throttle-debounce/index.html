@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>Throttle/Debounce</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/throttle-debounce.js"></script>
+
+	<script type="text/javascript" src="/assets/scripts/activate.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Throttle/Debounce</h1>
+
+			<p>These helper methods convert functions into throttled or debounced versions.</p>
+
+			<h2>Throttle</h2>
+
+			<p>A throttled function is called no more than once in a specified duration of time, regardless of how many times it is invoked. Try activating this button quickly to see how it works:</p>
+
+			<button class="js-throttle">Activated 0 times</button>
+
+			<p>A throttled function is created like this, where <code>delay</code> is a number of milliseconds:</p>
+
+			<pre class="code">var throttledFn = throttle(fn, delay);</pre>
+
+			<h2>Debounce</h2>
+
+			<p>A debounced function is not called until a specified duration of time has elapsed since it was last invoked. Try activating this button quickly to see how it works:</p>
+
+			<button class="js-debounce">Activated 0 times</button>
+
+			<p>A debounced function is created similarly to a throttled function, with <code>delay</code> being a number of milliseconds:</p>
+
+			<pre class="code">var debouncedFn = debounce(fn, delay);</pre>
+
+			<p>Debounced functions are useful in cases such as retrieving autocomplete suggestions after a user has stopped typing, instead of calling the event on every keypress.</p>
+
+			<p>It's important to be aware that debounced functions will be dissociated from any user input that caused them. This matters because browsers block some behaviour, such as opening new windows, unless it is directly associated with user input.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (throttle, debounce, activate) {
+			var $throttle = document.querySelectorAll('.js-throttle');
+			var $debounce = document.querySelectorAll('.js-debounce');
+
+			var callback = function (e) {
+				var el = e.target;
+				var activateNum = parseInt(el.textContent.match(/\d+/), 10);
+
+				activateNum += 1;
+
+				el.textContent = `Activated ${activateNum} times`;
+			};
+
+			activate($throttle, throttle(callback, 500));
+			activate($debounce, debounce(callback, 500));
+		})(throttle, debounce, activate);
+	</script>
+</body>
+</html>

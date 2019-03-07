@@ -596,7 +596,7 @@ body {
   outline: 1px solid blue; }
 
 .fake-input__input:checked + .fake-input__display::before {
-  content: "✔"; }
+  content: "✓"; }
 
 .fake-input__input:invalid + .fake-input__display {
   border-color: red; }
@@ -609,3 +609,38 @@ body {
 
 .fake-input__input[type="radio"] + .fake-input__display {
   border-radius: 20px; }
+
+.status {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  pointer-events: none;
+  font-size: 12px;
+  visibility: hidden;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px; }
+  .status::after {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    color: #fff; }
+  .status.success, .status.error {
+    animation: 0.5s becomeVisible forwards, 0.5s 0.1s fadein forwards, 0.5s 3.6s fadeout forwards, 0.5s 3.6s becomeHidden forwards; }
+  .status.success::after {
+    background: green;
+    content: "✓"; }
+  .status.error::after {
+    background: red;
+    content: "❌";
+    font-size: 0.7em; }
+
+.status--static {
+  position: static; }

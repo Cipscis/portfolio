@@ -20,8 +20,17 @@ form {
 	margin: 0;
 }
 
+p:first-child {
+	margin-top: 0;
+}
 p:last-child {
 	margin-bottom: 0;
+}
+
+fieldset {
+	padding: 0;
+	margin: 0;
+	border: none;
 }
 
 button, input {
@@ -32,6 +41,7 @@ button, input {
 @mixin list-reset {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 
 @mixin button-reset {

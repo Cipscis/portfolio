@@ -17,4 +17,4 @@ function watch() {
 	gulp.watch(paths.src, style);
 }
 
-exports.build = gulp.series(style);
+exports.build = gulp.series(style, watch);

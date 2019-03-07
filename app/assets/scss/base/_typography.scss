@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 .content p,
 .p {
 	display: block;
-	margin: 18px 0;
+	margin: 20px 0;
 	&:first-child {
 		margin-top: 0;
 	}
@@ -75,11 +75,15 @@ h1, h2, h3, h4, h5, h6 {
 .content code,
 .code {
 	display: inline-block;
+	vertical-align: middle;
 	background: $grey--lightest;
-	padding: 2px 7px;
+	padding: 0 7px;
 	border-radius: 5px;
 	font-family: monospace;
 	white-space: pre;
+
+	max-width: 100%;
+	overflow: auto;
 
 	&.tag {
 		&::before {

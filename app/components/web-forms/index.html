@@ -1,0 +1,117 @@
+<html>
+<head>
+	<title>Web Forms</title>
+
+	<link rel="stylesheet" href="/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/assets/scripts/throttle-debounce.js"></script>
+	<script type="text/javascript" src="/assets/scripts/validate.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Web Forms</h1>
+
+			<p>This page will probably always be a work in progress. It's not the only way to do things, but I mean for it to be a useful reference for myself on what I've learned. I hope it might be useful for others as well.</p>
+
+			<p>There are a lot of common issues with web form design that can make a form inaccessible or exclusionary. Some things to consider include:</p>
+
+			<ul>
+				<li>If you're using colour to indicate something (e.g. status), make sure the status indicator is accessible not only to people using a screen reader but also to people with any form of colour blindness.</li>
+				<li>Think about the information you are asking for. If you are limiting user input in <em>any way</em>, make sure you have a good reason for it. This includes any use of <code class="tag">select</code> elements, radio buttons, or checkboxes, as well as validation rules on text inputs.</li>
+			</ul>
+		</div>
+
+		<section>
+			<div class="content">
+				<h2>Accessible design</h2>
+
+				<p>It's important that disabled users are able to fill in your web forms. This means they have to be usable with screen readers, and navigable via the keyboard.</p>
+
+				<p>By default, form elements such as <code class="tag">input</code>, <code class="tag">select</code>, and <code class="textarea">textarea</code> can receive focus via the keyboard.</p>
+
+				<p>Wrapping inputs in an <code class="tag">ol</code> will allow screen readers to report the number of items in the list when a user enters the list.</p>
+
+				<h3>Styling radio buttons and checkboxes</h3>
+
+				<p>Because some common form elements cannot be styled heavily in CSS, it is common for other elements (which can be styled) to be used as proxies for them. When this is done, it should be done accessibly.</p>
+
+				<p>These fake radio buttons and checkboxes rely on the presence of an <code class="tag">input</code> element that is not visible, but is still read out by screen readers and can receive focus via the <kbd>Tab</kbd> key.</p>
+
+				<p>To achieve this, the following CSS rules are used on the <code class="tag">input</code>:</p>
+
+				<pre class="code">position: absolute;
+display: block;
+width: 1px;
+height: 1px;
+opacity: 0;
+pointer-events: none;</pre>
+
+				<p>The visible element in this example is a <code class="tag">span</code> tag (though various other tags could be used instead), which can be styled much more freely. It uses the adjacent sibling selector to change its appearance based on the state of the semi-hidden <code class="tag">input</code> element, using the <code>:focus</code> and <code>:checked</code> pseudoclasses. For example:</p>
+
+				<pre class="code">.fake-input__input[type="radio"]:checked + .fake-input__display::before {
+	content: "✔"
+}</pre>
+
+				<p>Though the <code class="tag">input</code> element itself has <code>pointer-events: none;</code> on it, the whole group is wrapped in a <code class="tag">label</code> tag. This causes the click to be delegated to the <code class="tag">input</code> element, so it still behaves like a normal radio button or checkbox in this respect.</p>
+			</div>
+
+			<form>
+				<fieldset class="form__section">
+					<h2 class="form__section-heading">Styled radio buttons</h2>
+
+					<ol class="form__section-list">
+						<li class="form__section-item">
+							<label class="fake-input">
+								<input class="fake-input__input" type="radio" name="fake-radio" value="1" />
+								<span class="fake-input__display"></span>
+								<span class="fake-input__label">Fake radio button 1</span>
+							</label>
+						</li>
+
+						<li class="form__section-item">
+							<label class="fake-input">
+								<input class="fake-input__input" type="radio" name="fake-radio" value="2" />
+								<span class="fake-input__display"></span>
+								<span class="fake-input__label">Fake radio button 2</span>
+							</label>
+						</li>
+					</ol>
+				</fieldset>
+
+				<fieldset class="form__section">
+					<h2 class="form__section-heading">Styled checkboxes</h2>
+
+					<ol class="form__section-list">
+						<li class="form__section-item">
+							<label class="fake-input">
+								<input class="fake-input__input" type="checkbox" name="fake-checkbox-1" value="1" />
+								<span class="fake-input__display"></span>
+								<span class="fake-input__label">Fake checkbox 1</span>
+							</label>
+						</li>
+
+						<li class="form__section-item">
+							<label class="fake-input">
+								<input class="fake-input__input" type="checkbox" name="fake-checkbox-2" value="2" />
+								<span class="fake-input__display"></span>
+								<span class="fake-input__label">Fake checkbox 2</span>
+							</label>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+		</section>
+
+		<div class="content">
+			<h2>What can I do to improve it?</h2>
+
+			<p>This is something I care about, but I am not an expert in it. A lot of the issues that can cause web forms to be inaccessible or exclusionary do not apply to me directly, so I'm sure I will be ignorant of some issues.</p>
+
+			<p>If you think there's something I can do to improve this page, please <a href="/contact/">let me know</a>!</p>
+		</div>
+	</div>
+</body>
+</html>

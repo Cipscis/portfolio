@@ -1,0 +1,130 @@
+.form__section {
+	label[for] {
+		cursor: pointer;
+	}
+}
+
+.form__section-heading {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.form__section-list {
+	@include list-reset;
+
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.form__section-item {
+	width: 100%;
+	+ .form__section-item {
+		margin-top: 20px;
+	}
+
+	display: flex;
+	align-items: center;
+}
+
+.form__section-label {
+	margin-right: 5px;
+}
+
+.form__section-input {
+	padding: 5px;
+
+	border: none;
+	border-bottom: 1px solid $black;
+	background: $grey--lightest;
+}
+
+.form__controls {
+	margin: 20px 0;
+}
+
+.form__status {
+
+}
+
+// Fake inputs
+.fake-input {
+	cursor: pointer;
+}
+
+.fake-input__input {
+	position: absolute;
+	display: block;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.fake-input__display {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.fake-input__label {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.fake-input__input {
+	+ .fake-input__display {
+		width: 20px;
+		height: 20px;
+
+		line-height: 20px;
+		text-align: center;
+
+		border: 1px solid $grey--dark;
+
+		&::before {
+			content: "";
+			font-size: 14px;
+			line-height: 20px;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&:focus + .fake-input__display {
+		outline: 1px solid blue;
+	}
+
+	&:checked + .fake-input__display {
+		&::before {
+			content: "✔";
+		}
+	}
+
+	&:invalid + .fake-input__display {
+		border-color: red;
+	}
+
+	&:disabled + .fake-input__display {
+		cursor: default;
+	}
+	&:disabled ~ .fake-input__label {
+		cursor: default;
+	}
+}
+
+.fake-input__input[type="radio"] {
+	+ .fake-input__display {
+		border-radius: 20px;
+	}
+
+	&:focus + .fake-input__display {}
+
+	&:checked + .fake-input__display {}
+}
+
+.fake-input__input[type="checkbox"] {
+	+ .fake-input__display {}
+
+	&:focus + .fake-input__display {}
+
+	&:checked + .fake-input__display {}
+}

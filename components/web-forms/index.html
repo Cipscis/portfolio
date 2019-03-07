@@ -107,6 +107,41 @@ pointer-events: none;</pre>
 
 		<section>
 			<div class="content">
+				<h2>Validation</h2>
+
+				<p>Modern browsers support <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation" target="_blank">native form validation</a> that allows the browser to handle validation rules and reporting errors to the user. However, these error messages are not always reported to the user.</p>
+			</div>
+
+			<form class="js-validate-form">
+				<fieldset class="form__section">
+					<h3 class="form__section-heading">Required field</h3>
+
+					<ol class="form__section-list">
+						<li class="form__section-item">
+							<label for="required-example" class="form__section-label">Required input</label>
+							<input id="required-example" type="text" class="form__section-input" required />
+						</li>
+						<li class="form__section-item">
+							<label for="required-example" class="form__section-label">Required input</label>
+							<input id="required-example" type="text" class="form__section-input" required />
+						</li>
+					</ol>
+				</fieldset>
+
+				<div class="form__controls">
+					<button type="submit" class="button">Submit</button>
+
+					<p class="form__status js-validate-status" aria-live="polite"></p>
+				</div>
+			</form>
+
+			<script type="text/javascript">
+				validate('.js-validate-form');
+			</script>
+		</section>
+
+		<section>
+			<div class="content">
 				<h2>Non-exclusionary design</h2>
 
 				<p>It's common for web forms to be designed in a way that is unnecessarily exclusionary. This may be because it's been made impossible for someone to fill out a form without lying, or because the form requires them to provide personal information that shouldn't be necessary for the purpose of the form.</p>

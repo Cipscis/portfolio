@@ -3,6 +3,10 @@ const { activate, deactivate } = (function () {
 
 	const module = {
 		activate: function (el, fn) {
+			if (typeof el === 'string') {
+				el = document.querySelectorAll(el);
+			}
+
 			if (el.length && el.forEach) {
 				// el is Array-like, so iterate over its elements
 				el.forEach((el) => module.activate(el, fn));

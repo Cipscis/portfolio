@@ -9,6 +9,9 @@
 	bottom: 0;
 
 	background: rgba($black, 0.6);
+	&:target {
+		display: block;
+	}
 }
 
 .modal__body-open {
@@ -61,6 +64,7 @@
 	top: 5px;
 	right: 5px;
 
+	text-decoration: none;
 	@include button-reset;
 
 	display: block;

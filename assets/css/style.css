@@ -448,8 +448,12 @@ body {
   padding: 0;
   cursor: pointer;
   display: inline-block;
+  vertical-align: bottom;
   padding: 5px 10px;
   border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  line-height: 1.5;
   background: #eee;
   cursor: pointer;
   transition: 0.3s background; }
@@ -467,6 +471,8 @@ body {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6); }
+  .modal:target {
+    display: block; }
 
 .modal__body {
   position: absolute;
@@ -502,6 +508,7 @@ body {
   position: absolute;
   top: 5px;
   right: 5px;
+  text-decoration: none;
   background: transparent;
   border: none;
   border-radius: 0;

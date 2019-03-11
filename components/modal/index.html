@@ -19,16 +19,30 @@
 			<h1>Modal</h1>
 
 			<p>This allows us to show an accessible and customisable modal window.</p>
+		</div>
 
-			<p><button class="js-modal-trigger" data-modal-target="modal-example">Show modal</button></p>
+		<p>
+			<a href="#modal-example" class="button js-modal-trigger" role="button">Show modal (href)</a>
+		</p>
 
-			<p>Modal windows are shown when an element with the class <code>js-modal-trigger</code> is clicked. Each of these triggers is tied to a particular modal window via a <code>data-modal-target</code> attribute that contains the value of the modal window's <code>id</code> attribute.</p>
+		<p>
+			<button class="button js-modal-trigger" data-modal-target="modal-example">Show modal (data attribute)</button>
+		</p>
+
+		<div class="content">
+			<p>Modal windows are shown when an element with the class <code>js-modal-trigger</code> is clicked. Each of these triggers is tied to a particular modal window via one of two ways:</p>
+
+			<p>1. View an <code>href</code> attribute, assuming it is pointing to the id of a modal window (e.g. <code>href="#modal-example"</code>).</p>
+
+			<p>2. If no appropriate <code>href</code> attribute is present, via a <code>data-modal-target</code> attribute that contains the value of the modal window's <code>id</code> attribute.</p>
 
 			<p>Modal windows can be closed by clicking outside the window (i.e. on the overlay between it and the content), by clicking the "close button", or by pressing the "escape" key.</p>
 
 			<p>Focus is automatically moved inside the modal window when it is opened, kept inside it while it is opened (tabbing through elements wraps within the modal window), and returned to the appropriate element when the modal window is closed.</p>
 
 			<p>Please note several attributes in the example markup are necessary for the modal window to be fully accessible, such as the <code>role</code> and <code>aria-live</code> attributes.</p>
+
+			<p>If there is no JavaScript, the <code>:target</code> attribute is used to show and hide modal windows depending on the current hash. Using <code class="tag">a</code> tags with appropriate <code>href</code> attributes for both trigger and clode button is necessary to support this. Otherwise, they can use <code class="tag">button</code> tags if support for no JavaScrpit is not necessary.</p>
 
 			<h2>onShow callback</h2>
 
@@ -46,7 +60,7 @@
 
 	<div class="modal js-modal" id="modal-example" aria-modal="true" role="dialog" aria-live="polite" aria-labelledby="modal-example-name">
 		<div class="modal__body js-modal-body">
-			<button class="modal__close js-modal-close" aria-label="Close"></button>
+			<a href="#" class="modal__close js-modal-close" aria-label="Close" role="button"></a>
 
 			<div class="content">
 				<p>You can put any markup within the body of a modal.</p>

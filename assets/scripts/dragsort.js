@@ -188,13 +188,19 @@ var dragsort = (function ($, publish) {
 
 		// Clone
 		_createClone: function ($el, e) {
-			var width = $el.width();
-			var height = $el.height();
+			var width;
+			var height;
+			var pos;
 
 			if (useClone) {
 				$clone = $el.clone();
-				cloneOffsetX = e.originalEvent.clientX - $el.offset().left;
-				cloneOffsetY = e.originalEvent.clientY - $el.offset().top;
+
+				width = $el.width();
+				height = $el.height();
+				pos = $el[0].getBoundingClientRect();
+
+				cloneOffsetX = e.originalEvent.clientX - pos.x;
+				cloneOffsetY = e.originalEvent.clientY - pos.y;
 
 				$clone.width(width);
 				$clone.height(height);

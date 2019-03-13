@@ -3,8 +3,13 @@
 	@include button-reset;
 
 	display: inline-block;
+	vertical-align: bottom;
+
 	padding: 5px 10px;
 	border-radius: 5px;
+	color: $grey--dark;
+	text-decoration: none;
+	line-height: 1.5;
 	background: $grey--lightest;
 	cursor: pointer;
 

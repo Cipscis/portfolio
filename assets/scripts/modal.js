@@ -7,8 +7,7 @@ var modal = (function ($, activate, keys, subscribe) {
 	};
 
 	var dataSelectors = {
-		target: 'modal-target',
-		tabindexBackup: 'modal-tabindex-backup'
+		target: 'modal-target'
 	};
 
 	var classes = {
@@ -97,9 +96,15 @@ var modal = (function ($, activate, keys, subscribe) {
 		// Event callbacks
 		_processTriggerClick: function (e) {
 			var $trigger = $(e.target).closest(selectors.trigger);
-			var targetId = $trigger.data(dataSelectors.target);
+			var targetId = $trigger.attr('href');
 
 			e.preventDefault();
+
+			if (/^#/.test(targetId) === true) {
+				targetId = targetId.substring(1);
+			} else {
+				targetId = $trigger.data(dataSelectors.target);
+			}
 
 			module._showById(targetId);
 		},

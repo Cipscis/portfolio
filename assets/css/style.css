@@ -1,6 +1,16 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
+.u-visuallyhidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px; }
+
 @keyframes becomeVisible {
   0% {
     visibility: visible; }
@@ -103,7 +113,7 @@ fieldset {
   margin: 0;
   border: none; }
 
-button, input {
+button, input, select, textarea {
   font-size: 1rem; }
 
 html {
@@ -114,6 +124,10 @@ html {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", Arial, sans-serif; }
+
+.content input, .content select, .content textarea {
+  line-height: 1.5;
+  padding: 3px 8px; }
 
 .content p,
 .p {
@@ -180,6 +194,9 @@ h1, h2, h3, h4, h5, h6 {
   .content code.tag::after,
   .code.tag::after {
     content: ">"; }
+
+.code--block {
+  display: block; }
 
 .content kbd,
 .kbd {

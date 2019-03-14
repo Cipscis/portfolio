@@ -13,6 +13,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: $heading-font-family;
 }
 
+.content {
+	input, select, textarea {
+		line-height: 1.5;
+		padding: 3px 8px;
+	}
+}
+
 .content p,
 .p {
 	display: block;
@@ -93,6 +100,9 @@ h1, h2, h3, h4, h5, h6 {
 			content: ">";
 		}
 	}
+}
+.code--block {
+	display: block;
 }
 
 .content kbd,

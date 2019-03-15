@@ -9,7 +9,7 @@ var activate = (function ($) {
 	var enterEvent = 'keydown';
 	var spaceEvent = 'keyup';
 
-	var activate = function ( callback ) {
+	var activate = function (callback) {
 		return function (e) {
 			var eventType = e.type;
 			var isButton = e.target.nodeName.toLowerCase() === 'button';

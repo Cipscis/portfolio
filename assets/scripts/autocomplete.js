@@ -1,5 +1,5 @@
-var autocomplete = (function ($, templayed, debounce, activate, publish) {
-	var selectors = {
+const autocomplete = (function ($, templayed, debounce, activate, publish) {
+	const selectors = {
 		wrapper: '.js-autocomplete',
 		input: '.js-autocomplete-input',
 
@@ -10,20 +10,16 @@ var autocomplete = (function ($, templayed, debounce, activate, publish) {
 		status: '.js-autocomplete-status'
 	};
 
-	var dataSelectors = {
+	const dataSelectors = {
 		source: 'autocomplete-source',
 		value: 'autocomplete-value',
 		templateId: 'autocomplete-template-id'
 	};
 
-	var classes = {};
+	const delay = 500;
+	const minQueryLength = 3;
 
-	var events = {};
-
-	var delay = 500;
-	var minQueryLength = 3;
-
-	var module = {
+	const module = {
 		init: function ($el) {
 			if (typeof $el === 'undefined') {
 				$el = selectors.wrapper;
@@ -47,8 +43,8 @@ var autocomplete = (function ($, templayed, debounce, activate, publish) {
 
 			$input.on('input', module._inputEvent);
 
-			$wrapper.on(activate.keyboardEvent, selectors.input, activate(module._selectResultEvent));
 			$wrapper.on(activate.event, selectors.resultItem, activate(module._selectResultEvent));
+			$wrapper.on('keydown', selectors.input, module._selectResultOnEnter);
 
 			$wrapper.on('keydown', [selectors.input, selectors.resultItem].join(', '), module._changeResultFocus);
 
@@ -147,9 +143,7 @@ var autocomplete = (function ($, templayed, debounce, activate, publish) {
 			}
 
 			// Asynchronous to allow screen readers to read it out
-			window.setTimeout(function () {
-				$results.html(resultsHtml);
-			}, 100);
+			window.setTimeout(() => $results.html(resultsHtml), 100);
 		},
 
 		_hideResults: function ($wrapper) {
@@ -231,6 +225,12 @@ var autocomplete = (function ($, templayed, debounce, activate, publish) {
 
 			if ($result.length !== 0) {
 				module._selectResult($result, true);
+			}
+		},
+
+		_selectResultOnEnter: function (e) {
+			if (e.key.toLowerCase() === 'enter') {
+				module._selectResultEvent(e);
 			}
 		},
 

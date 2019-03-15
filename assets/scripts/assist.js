@@ -1,9 +1,13 @@
-var assist = (function () {
+var assist = (function (subscribe) {
 	const $messageEl = document.createElement('span');
 	var messageElInit = false;
 
 	const classes = {
 		visuallyhidden: 'u-visuallyhidden'
+	};
+
+	const events = {
+		speak: '/assist/speak'
 	};
 
 	var module = {
@@ -26,7 +30,11 @@ var assist = (function () {
 		}
 	};
 
+	if (subscribe) {
+		subscribe('/assist/speak', module.speak);
+	}
+
 	return {
 		speak: module.speak
 	};
-})();
+})(subscribe);

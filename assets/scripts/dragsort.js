@@ -163,7 +163,9 @@ var dragsort = (function ($, publish) {
 		_startDragging: function ($el, e) {
 			var $list = $el.closest(selectors.list);
 
-			publish(events.dragStart, $list);
+			if (publish) {
+				publish(events.dragStart, $list);
+			}
 
 			$draggedEl = $el;
 			module._createClone($el, e);
@@ -183,7 +185,9 @@ var dragsort = (function ($, publish) {
 
 			$('.' + classes.droppable).removeClass(classes.droppable).css('padding', 0);
 
-			publish(events.dragStop, $list);
+			if (publish) {
+				publish(events.dragStop, $list);
+			}
 		},
 
 		// Clone

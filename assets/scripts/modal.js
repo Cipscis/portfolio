@@ -71,8 +71,10 @@ var modal = (function ($, activate, keys, subscribe) {
 		},
 
 		_initSubscriptions: function () {
-			subscribe(events.show, module._showById);
-			subscribe(events.resize, module._resizeBody);
+			if (subscribe) {
+				subscribe(events.show, module._showById);
+				subscribe(events.resize, module._resizeBody);
+			}
 		},
 
 		_bindModalActiveEvents: function () {

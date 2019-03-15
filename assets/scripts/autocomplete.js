@@ -74,7 +74,7 @@ const autocomplete = (function ($, templayed, debounce, activate, publish) {
 					data: {
 						query: val
 					},
-					method: 'POST',
+					method: 'GET',
 					success: module._querySuccess($wrapper),
 					error: module._queryError($wrapper)
 				});

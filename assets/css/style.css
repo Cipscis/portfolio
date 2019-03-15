@@ -668,3 +668,36 @@ body {
 
 .status--static {
   position: static; }
+
+.status--absolute {
+  position: absolute;
+  bottom: 0;
+  right: 0; }
+
+.autocomplete {
+  position: relative; }
+
+.autocomplete__input {
+  display: block;
+  width: 100%;
+  padding: 5px; }
+
+.autocomplete__results {
+  display: none;
+  position: absolute;
+  width: 100%; }
+
+.autocomplete__result-list {
+  margin: -1px 0 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #000; }
+
+.autocomplete__result-item {
+  display: block;
+  padding: 5px;
+  cursor: pointer; }
+  .autocomplete__result-item:hover, .autocomplete__result-item[aria-selected="true"] {
+    outline: none;
+    background: #eee; }

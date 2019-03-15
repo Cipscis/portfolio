@@ -34,7 +34,8 @@ var activate = (function ($) {
 	};
 
 	// It's not necessary to use this to specify events, but it's a useful shorthand
-	activate.event = 'click keydown keyup';
+	activate.keyboardEvent = 'keydown keyup';
+	activate.event = 'click ' + activate.keyboardEvent;
 
 	return activate;
 })(jQuery);

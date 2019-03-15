@@ -1,0 +1,67 @@
+<html>
+<head>
+	<title>Autocomplete</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/portfolio/assets/scripts/lib/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/lib/templayed.min.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/throttle-debounce.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/activate-jquery.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/pubsub.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/status.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/assist.js"></script>
+
+	<script type="text/javascript" src="/portfolio/assets/scripts/autocomplete.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Autocomplete</h1>
+
+			<p>An accessible autocomplete component, implemented according to the <a href="https://www.w3.org/TR/wai-aria-practices/#combobox" target="_blank">ARIA 1.1 combobox</a> specification.</p>
+		</div>
+
+		<div class="autocomplete js-autocomplete" data-autocomplete-source="data/search-static.json" role="combobox">
+			<input type="text" class="autocomplete__input js-autocomplete-input" role="textbox" aria-controls="autocomplete-results" aria-autocomplete="list" />
+
+			<div class="autocomplete__results js-autocomplete-result-list">
+			</div>
+
+			<span class="status status--absolute js-autocomplete-status"></span>
+
+			<script type="text/template" class="js-autocomplete-template">
+				<ol class="autocomplete__result-list" role="listbox" id="autocomplete-results">
+					{{#results}}
+						<li class="autocomplete__result-item js-autocomplete-result-item" tabindex="-1" data-autocomplete-value="{{value}}" id="autocomplete-results-{{id}}" aria-labelledby="autocomplete-results-text-{{id}}">
+							<div id="autocomplete-results-text-{{id}}">
+								{{value}}
+							</div>
+						</li>
+					{{/results}}
+				</ol>
+			</script>
+		</div>
+
+		<div class="content">
+			<p>Autocomplete components can be initialised via <code>autocomplete.init($el);</code>, where <code>$el</code> is a selector or a jQuery element that either is or within an autocomplete wrapper element. If no argument is passed, the default selector <code>'.js-autocomplete'</code> will be used.</p>
+
+			<p>When a user enters text into the autocomplete's input, so long as the value of the input reaches a minimum length (configured to 3 by default), after a 500 ms delay a query will be sent to the server based on a URL specified in the <code>data-autocomplete-source</code> attribute on the main autocomplete element.</p>
+
+			<p>When results are returned, they will be used to build the results via a templayed template. This template can be specified via id using a <code>data-autocomplete-template-id</code> attribute on the main autocomplete element, or by placing a <code class="tag">script</code> template with class <code>js-autocomplete-template</code> inside the autocomplete element.</p>
+
+			<p>Though the data returned by the server can vary, each item needs to have at least a <code>value</code> and an <code>id</code>. If these change, the corresponding keys used in the template will also need to be updated.</p>
+
+			<p>All the ajax handling code is in the <code>_doQuery</code> method. If a local autocomplete is needed, this method alone could be changed to run the filtering on the front end.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		(function (autocomplete) {
+			autocomplete.init();
+		})(autocomplete);
+	</script>
+</body>
+</html>

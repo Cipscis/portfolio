@@ -2,11 +2,20 @@
 	label[for] {
 		cursor: pointer;
 	}
+
+	margin: 20px 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .form__section-heading {
 	width: 100%;
-	margin-bottom: 20px;
+	margin-top: 0;
+	margin-bottom: 5px;
 }
 
 .form__section-list {
@@ -19,7 +28,7 @@
 .form__section-item {
 	width: 100%;
 	+ .form__section-item {
-		margin-top: 20px;
+		margin-top: 10px;
 	}
 
 	display: flex;
@@ -27,23 +36,34 @@
 }
 
 .form__section-label {
-	margin-right: 5px;
+	margin-right: 10px;
 }
 
 .form__section-input {
 	padding: 5px;
+	min-width: 250px;
 
 	border: none;
 	border-bottom: 1px solid $black;
 	background: $grey--lightest;
 }
 
+.form__section-input--full {
+	width: 100%;
+}
+
 .form__controls {
 	margin: 20px 0;
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .form__status {
-
+	margin: 0;
 }
 
 // Fake inputs

@@ -30,9 +30,96 @@
 
 				<p>It's important that disabled users are able to fill in your web forms. This means they have to be usable with screen readers, and navigable via the keyboard.</p>
 
-				<p>By default, form elements such as <code class="tag">input</code>, <code class="tag">select</code>, and <code class="textarea">textarea</code> can receive focus via the keyboard.</p>
+				<p>By default, form elements such as <code class="tag">input</code>, <code class="tag">select</code>, and <code class="tag">textarea</code> can receive focus via the keyboard.</p>
 
 				<p>Wrapping inputs in an <code class="tag">ol</code> will allow screen readers to report the number of items in the list when a user enters the list.</p>
+
+				<h3>Labelling inputs</h3>
+
+				<p>The same information should be presented to users that use screen readers and to users relying on visual cues. The simplest way to do this is to associate a <code class="tag">label</code> tag with every input.</p>
+
+				<p>A <code class="tag">label</code> can be linked to an input either by having a <code>for</code> attribute with the input's <code>id</code> as its value, or by being a parent of the input. This example uses a <code>for</code> attribute:</p>
+			</div>
+
+			<div class="panel">
+				<form>
+					<fieldset class="form__section">
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label class="form__section-label" for="for-attribute-input">Input label</label>
+								<input class="form__section-input" id="for-attribute-input" type="text" />
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
+
+			<div class="content">
+				<p>Labels linked to inputs in this way also have the advantage of moving focus to the linked input when the <code class="tag">label</code> is clicked. This means it can sometimes be useful to associate multiple <code class="tag">label</code> elements with a single input.</p>
+
+				<p>To be explicit about which <code class="tag">label</code> should be read out when the input receives focus, the input can be given an <code>aria-labelledby</code> attribute with the <code class="tag">label</code> element's <code>id</code> as its value:</p>
+			</div>
+
+			<div class="panel">
+				<form>
+					<fieldset class="form__section">
+						<p><label class="button" for="aria-labelledby-attribute-input">This is a label</label></p>
+
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label class="form__section-label" for="aria-labelledby-attribute-input" id="aria-labelledby-attribute-label">Input label</label>
+								<input class="form__section-input" id="aria-labelledby-attribute-input" aria-labelledby="aria-labelledby-attribute-label" type="text" />
+							</li>
+						</ol>
+
+						<p><label class="button" for="aria-labelledby-attribute-input">This is also a label</label></p>
+					</fieldset>
+				</form>
+			</div>
+
+			<div class="content">
+				<p>A <code>placeholder</code> attribute can also be used by screen readers to read out the label of an input, but once the input has a value entered in it this prompt will no longer be visible.</p>
+
+				<p>Some designs implement a <code class="tag">label</code> that appears when the <code>placeholder</code> is hidden. Testing with <a href="https://www.nvaccess.org/download/" target="_blank">NVDA</a>, if an input only has a <code>placeholder</code> attribute, and no visible <code class="tag">label</code>, then its <code>placeholder</code> text will be treated like a <code class="tag">label</code>.</p>
+
+				<p>However, if there is both a <code>placeholder</code> attribute and a <code class="tag">label</code>, then both will be read out if the <code>placeholder</code> is visible, but only the <code class="tag">label</code> will be read out if the input has a value. This means approaches that cause only one of either the <code>placeholder</code> or the <code class="tag">label</code> to be visible at any given time should not result in the same text being read out twice, and the input will always have label text.</p>
+			</div>
+
+			<div class="panel">
+				<div class="content">
+					<p>This example uses <code><a href="https://caniuse.com/#feat=css-placeholder-shown" target="_blank">:placeholder-shown</a></code> to avoid the need for custom JavaScript for a one-off example. At the time of writing, this pseudoclass has poor browser support, so should not be relied on.</p>
+				</div>
+
+				<style class="code code--block">.form__section-input--dynamic-label + label {
+	margin-right: 0;
+	margin-left: 10px;
+
+	animation: 0.5s becomeVisible forwards,
+	           0.5s fadein forwards;
+}
+.form__section-input--dynamic-label:placeholder-shown + label {
+	animation: 0.5s becomeHidden forwards,
+	           0.5s fadeout forwards;
+}</style>
+				<form>
+					<fieldset class="form__section">
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<input class="form__section-input" placeholder="Placeholder only" type="text" />
+							</li>
+							<li class="form__section-item">
+								<input class="form__section-input form__section-input--dynamic-label" id="label-and-placeholder-input" placeholder="Placeholder + dynamic label" type="text" />
+								<label class="form__section-label" for="label-and-placeholder-input">Placeholder + dynamic label (label)</label>
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
+
+			<div class="content">
+				<h3>Autocomplete</h3>
+
+				<p>See the <a href="/portfolio/components/autocomplete">autocomplete</a> component page for an example of an accessible autocomplete input.</p>
 
 				<h3>Styling radio buttons and checkboxes</h3>
 
@@ -42,7 +129,7 @@
 
 				<p>To achieve this, the following CSS rules are used on the <code class="tag">input</code>:</p>
 
-				<pre class="code">position: absolute;
+				<pre class="code code--block">position: absolute;
 display: block;
 width: 1px;
 height: 1px;
@@ -51,89 +138,93 @@ pointer-events: none;</pre>
 
 				<p>The visible element in this example is a <code class="tag">span</code> tag (though various other tags could be used instead), which can be styled much more freely. It uses the adjacent sibling selector to change its appearance based on the state of the semi-hidden <code class="tag">input</code> element, using the <code>:focus</code> and <code>:checked</code> pseudoclasses. For example:</p>
 
-				<pre class="code">.fake-input__input[type="radio"]:checked + .fake-input__display::before {
+				<pre class="code code--block">.fake-input__input[type="radio"]:checked + .fake-input__display::before {
 	content: "✓"
 }</pre>
 
 				<p>Though the <code class="tag">input</code> element itself has <code>pointer-events: none;</code> on it, the whole group is wrapped in a <code class="tag">label</code> tag. This causes the click to be delegated to the <code class="tag">input</code> element, so it still behaves like a normal radio button or checkbox in this respect.</p>
 			</div>
 
-			<form>
-				<fieldset class="form__section">
-					<h3 class="form__section-heading">Styled radio buttons</h3>
+			<div class="panel">
+				<form>
+					<fieldset class="form__section">
+						<h3 class="form__section-heading" id="styled-radio-buttons-label">Styled radio buttons</h3>
 
-					<ol class="form__section-list">
-						<li class="form__section-item">
-							<label class="fake-input">
-								<input class="fake-input__input" type="radio" name="fake-radio" value="1" />
-								<span class="fake-input__display"></span>
-								<span class="fake-input__label">Fake radio button 1</span>
-							</label>
-						</li>
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label class="fake-input">
+									<input class="fake-input__input" type="radio" name="fake-radio" value="1" />
+									<span class="fake-input__display" aria-hidden="true"></span>
+									<span class="fake-input__label">Fake radio button 1</span>
+								</label>
+							</li>
 
-						<li class="form__section-item">
-							<label class="fake-input">
-								<input class="fake-input__input" type="radio" name="fake-radio" value="2" />
-								<span class="fake-input__display"></span>
-								<span class="fake-input__label">Fake radio button 2</span>
-							</label>
-						</li>
-					</ol>
-				</fieldset>
+							<li class="form__section-item">
+								<label class="fake-input">
+									<input class="fake-input__input" type="radio" name="fake-radio" value="2" />
+									<span class="fake-input__display" aria-hidden="true"></span>
+									<span class="fake-input__label">Fake radio button 2</span>
+								</label>
+							</li>
+						</ol>
+					</fieldset>
 
-				<fieldset class="form__section">
-					<h3 class="form__section-heading">Styled checkboxes</h3>
+					<fieldset class="form__section">
+						<h3 class="form__section-heading">Styled checkboxes</h3>
 
-					<ol class="form__section-list">
-						<li class="form__section-item">
-							<label class="fake-input">
-								<input class="fake-input__input" type="checkbox" name="fake-checkbox-1" value="1" />
-								<span class="fake-input__display"></span>
-								<span class="fake-input__label">Fake checkbox 1</span>
-							</label>
-						</li>
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label class="fake-input">
+									<input class="fake-input__input" type="checkbox" name="fake-checkbox-1" value="1" />
+									<span class="fake-input__display" aria-hidden="true"></span>
+									<span class="fake-input__label">Fake checkbox 1</span>
+								</label>
+							</li>
 
-						<li class="form__section-item">
-							<label class="fake-input">
-								<input class="fake-input__input" type="checkbox" name="fake-checkbox-2" value="2" />
-								<span class="fake-input__display"></span>
-								<span class="fake-input__label">Fake checkbox 2</span>
-							</label>
-						</li>
-					</ol>
-				</fieldset>
-			</form>
+							<li class="form__section-item">
+								<label class="fake-input">
+									<input class="fake-input__input" type="checkbox" name="fake-checkbox-2" value="2" />
+									<span class="fake-input__display" aria-hidden="true"></span>
+									<span class="fake-input__label">Fake checkbox 2</span>
+								</label>
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
 		</section>
 
 		<section>
 			<div class="content">
 				<h2>Validation</h2>
 
-				<p>Modern browsers support <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation" target="_blank">native form validation</a> that allows the browser to handle validation rules and reporting errors to the user. However, these error messages are not always reported to the user.</p>
+				<p>Modern browsers support <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation" target="_blank">native form validation</a> that allows the browser to handle validation rules and reporting errors to the user. However, these error messages are not always reported to users who use screen readers.</p>
 			</div>
 
-			<form class="js-validate-form">
-				<fieldset class="form__section">
-					<h3 class="form__section-heading">Required field</h3>
+			<div class="panel">
+				<form class="js-validate-form">
+					<fieldset class="form__section">
+						<h3 class="form__section-heading">Required field</h3>
 
-					<ol class="form__section-list">
-						<li class="form__section-item">
-							<label for="required-example" class="form__section-label">Required input</label>
-							<input id="required-example" type="text" class="form__section-input" required />
-						</li>
-						<li class="form__section-item">
-							<label for="required-example" class="form__section-label">Required input</label>
-							<input id="required-example" type="text" class="form__section-input" required />
-						</li>
-					</ol>
-				</fieldset>
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label for="required-example" class="form__section-label">Required input</label>
+								<input id="required-example" type="text" class="form__section-input" required />
+							</li>
+							<li class="form__section-item">
+								<label for="required-example" class="form__section-label">Required input</label>
+								<input id="required-example" type="text" class="form__section-input" required />
+							</li>
+						</ol>
+					</fieldset>
 
-				<div class="form__controls">
-					<button type="submit" class="button">Submit</button>
+					<div class="form__controls">
+						<button type="submit" class="button">Submit</button>
 
-					<p class="form__status js-validate-status" aria-live="polite"></p>
-				</div>
-			</form>
+						<p class="form__status js-validate-status" aria-live="polite"></p>
+					</div>
+				</form>
+			</div>
 
 			<script type="text/javascript">
 				validate('.js-validate-form');
@@ -162,21 +253,23 @@ pointer-events: none;</pre>
 				<p>Here is an example:</p>
 			</div>
 
-			<form>
-				<fieldset class="form__section">
-					<h3 class="form__section-heading">How should we address you?</h3>
-					<ol class="form__section-list">
-						<li class="form__section-item">
-							<label for="name" class="form__section-label">Please call me</label>
-							<input type="text" name="name" id="name" class="form__section-input" />
-						</li>
-						<li class="form__section-item">
-							<label for="gender" class="form__section-label">My gender is</label>
-							<input type="text" name="gender" id="gender" class="form__section-input" />
-						</li>
-					</ol>
-				</fieldset>
-			</form>
+			<div class="panel">
+				<form>
+					<fieldset class="form__section">
+						<h3 class="form__section-heading">How should we address you?</h3>
+						<ol class="form__section-list">
+							<li class="form__section-item">
+								<label for="name" class="form__section-label">Please call me</label>
+								<input type="text" name="name" id="name" class="form__section-input" />
+							</li>
+							<li class="form__section-item">
+								<label for="gender" class="form__section-label">My gender is</label>
+								<input type="text" name="gender" id="gender" class="form__section-input" />
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
 
 			<div class="content">
 				<h2>How to address someone</h2>

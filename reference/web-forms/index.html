@@ -23,7 +23,7 @@
 
 			<ul>
 				<li>If you're using colour to indicate something (e.g. status), make sure the status indicator is accessible not only to people using a screen reader but also to people with any form of colour blindness.</li>
-				<li>Think about the information you are asking for. If you are limiting user input in <em>any way</em>, make sure you have a good reason for it. This includes any use of <code class="tag">select</code> elements, radio buttons, or checkboxes, as well as validation rules on text inputs.</li>
+				<li>Think about the information you are asking for. If you are limiting user input in <em>any way</em>, make sure you have a good reason for it. This includes requiring users to select from a finite list of options via any use of <code class="tag">select</code> elements, radio buttons, or checkboxes, as well as validation rules on text inputs.</li>
 			</ul>
 		</div>
 
@@ -289,7 +289,7 @@
 
 					<p>For example, if a form requires users to fill in a "gender" field but only offers "male" and "female" as options, it is excluding nonbinary people. They can't fill in the form without lying.</p>
 
-					<p>Requiring users to provide unnecessary information can be more generally exclusionary. For example, I have seen a web form that required my postal address in order to unsubscribe me from an email mailing list.</p>
+					<p>Requiring users to provide unnecessary information can be more generally exclusionary. For example, I have seen a web form for unsubscribing from an email mailing list that could not be submitted unless a postal address was provided.</p>
 
 					<p>As I've thought about this, I've come up with what I consider some fundamental principles of non-exclusionary web form design:</p>
 
@@ -328,11 +328,13 @@
 
 					<h3>Please call me ______</h3>
 
-					<p>"What is your name?" might be a clearer question, but I think "How should we address you?" has the advantage of making it clear what this information is intended to be used for.</p>
+					<p>"What is your name?" might be a clearer question in many contexts, but I think "How should we address you?" has the advantage of making it clear how this information is intended to be used.</p>
 
-					<p>Web forms often split name into multiple required fields. This almost always includes a first name, and often also includes a last name and a title.</p>
+					<p>Web forms often split name into separate required fields. This almost always includes a first name, and often also includes a last name and a title.</p>
 
-					<p>Though it's uncommon in most cultures, not everyone has two names. Also, referring to name parts as "first name" and "last name" centres cultures that present full names in this way, whereas other cultures present full names with a family name first and a personal name last.</p>
+					<p>Though it's uncommon in most cultures, not everyone has two names. If you require a person with one name to enter two names in order to submit your form, you are requiring them to lie.</p>
+
+					<p>Also, referring to name parts as "first name" and "last name" centres cultures that present full names in this way, whereas other cultures present full names with a family name first and a personal name last.</p>
 
 					<p>Requiring users to pick a title from a finite list can require them to provide more information than necessary. For example, forcing women filling in your form to choose between "Miss" or "Mrs", in cases where other titles such as "Dr" do not apply to them, is effectively asking them to disclose their martial status.</p>
 
@@ -344,7 +346,7 @@
 
 					<h3>My gender is ______</h3>
 
-					<p>Many web forms that ask for a user's gender don't need to ask for this question. If you don't need to know, you should not ask.</p>
+					<p>Many web forms that ask for a user's gender don't need to ask for this question. If you don't need to know, you don't need to ask.</p>
 
 					<p>If your reason for asking is that you need to know what pronouns to use to refer to a user, then consider asking them for that information instead.</p>
 

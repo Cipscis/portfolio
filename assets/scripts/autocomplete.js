@@ -218,12 +218,13 @@ const autocomplete = (function ($, templayed, debounce, activate, publish) {
 			var $wrapper;
 			var $result = $(e.target).closest(selectors.resultItem);
 
-			if ($result.length === 0) {
+			if ($result.length === 0 || $result.is(selectors.resultItem) === false) {
 				$wrapper = $(e.target).closest(selectors.wrapper);
 				$result = module._getFocusEl($wrapper);
 			}
 
-			if ($result.length !== 0) {
+			if ($result.length !== 0 && $result.is(selectors.resultItem)) {
+				e.preventDefault();
 				module._selectResult($result, true);
 			}
 		},

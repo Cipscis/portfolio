@@ -24,25 +24,36 @@
 			<p>An accessible autocomplete component, implemented according to the <a href="https://www.w3.org/TR/wai-aria-practices/#combobox" target="_blank">ARIA 1.1 combobox</a> specification.</p>
 		</div>
 
-		<div class="autocomplete js-autocomplete" data-autocomplete-source="data/search-static.json" role="combobox">
-			<input type="text" class="autocomplete__input js-autocomplete-input" role="textbox" aria-controls="autocomplete-results" aria-autocomplete="list" />
+		<div class="panel">
+			<form>
+				<fieldset class="form__section">
+					<ol class="form__section-list">
+						<li class="form__section-item">
+							<label class="form__section-label">Autocomplete</label>
+							<div class="autocomplete js-autocomplete" data-autocomplete-source="data/search-static.json" role="combobox">
+								<input type="text" class="autocomplete__input js-autocomplete-input" role="textbox" aria-controls="autocomplete-results" aria-autocomplete="list" />
 
-			<div class="autocomplete__results js-autocomplete-result-list">
-			</div>
+								<div class="autocomplete__results js-autocomplete-result-list">
+								</div>
 
-			<span class="status status--absolute js-autocomplete-status"></span>
+								<span class="status status--absolute js-autocomplete-status"></span>
 
-			<script type="text/template" class="js-autocomplete-template">
-				<ol class="autocomplete__result-list" role="listbox" id="autocomplete-results">
-					{{#results}}
-						<li class="autocomplete__result-item js-autocomplete-result-item" tabindex="-1" data-autocomplete-value="{{value}}" id="autocomplete-results-{{id}}" aria-labelledby="autocomplete-results-text-{{id}}">
-							<div id="autocomplete-results-text-{{id}}">
-								{{value}}
+								<script type="text/template" class="js-autocomplete-template">
+									<ol class="autocomplete__result-list" role="listbox" id="autocomplete-results">
+										{{#results}}
+											<li class="autocomplete__result-item js-autocomplete-result-item" tabindex="-1" data-autocomplete-value="{{value}}" id="autocomplete-results-{{id}}" aria-labelledby="autocomplete-results-text-{{id}}">
+												<div id="autocomplete-results-text-{{id}}">
+													{{value}}
+												</div>
+											</li>
+										{{/results}}
+									</ol>
+								</script>
 							</div>
 						</li>
-					{{/results}}
-				</ol>
-			</script>
+					</ol>
+				</fieldset>
+			</form>
 		</div>
 
 		<div class="content">

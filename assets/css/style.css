@@ -116,6 +116,9 @@ fieldset {
 button, input, select, textarea {
   font-size: 1rem; }
 
+.is-error {
+  color: red; }
+
 html {
   font-family: "Roboto Slab", "Times New Roman", Times, serif;
   line-height: 1.5;
@@ -319,7 +322,13 @@ body {
     margin-bottom: 0; }
 
 .form__status {
-  margin: 0; }
+  display: none; }
+
+.is-validated .form__section-input:invalid {
+  background: #fee; }
+
+.is-validated .form__status {
+  display: block; }
 
 .fake-input {
   cursor: pointer; }

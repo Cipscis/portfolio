@@ -216,6 +216,14 @@
 			<div class="expander__body js-expander-body">
 				<div class="content">
 					<p>Modern browsers support <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation" target="_blank">native form validation</a> that allows the browser to handle validation rules and reporting errors to the user. However, these error messages are not always reported to users who use screen readers.</p>
+
+					<p>The validation JavaScript running on this page relies on the browser to determine which inputs are valid and invalid.</p>
+
+					<p>Because browser application of the <code>:invalid</code> pseudoclass on initial load is inconsistent, the JavaScript applies an <code>is-validated</code> class to the form when it fails validation. Styles association with invalid inputs depend on the presence of this class, so fields will not appear invalid by default.</p>
+
+					<p>When a form fails to submit, this JavaScript displays a message at the end explaining that the form failed to submit due to a specific number of invalid inputs. This message is read out due to the presence of <code>aria-live="polite"</code>.</p>
+
+					<p>The actual validation rules, as well as helping the user correct the errors that prevented the form from being validated, are left up to the browser.</p>
 				</div>
 
 				<div class="panel">
@@ -225,12 +233,24 @@
 
 							<ol class="form__section-list">
 								<li class="form__section-item">
-									<label for="required-example" class="form__section-label">Required input</label>
-									<input id="required-example" type="text" class="form__section-input" required />
+									<label for="required-example-1" class="form__section-label">Required A</label>
+									<input id="required-example-1" type="text" class="form__section-input" required />
 								</li>
 								<li class="form__section-item">
-									<label for="required-example" class="form__section-label">Required input</label>
-									<input id="required-example" type="text" class="form__section-input" required />
+									<label for="required-example-2" class="form__section-label">Required B</label>
+									<input id="required-example-2" type="text" class="form__section-input" required />
+								</li>
+								<li class="form__section-item">
+									<label for="email-example" class="form__section-label">Email</label>
+									<input id="email-example" type="email" class="form__section-input" />
+								</li>
+								<li class="form__section-item">
+									<label for="number-range-example" class="form__section-label">Number range</label>
+									<input id="number-range-example" type="number" class="form__section-input" min="1" step="1" max="10" />
+								</li>
+								<li class="form__section-item">
+									<label for="number-range-example" class="form__section-label">Text length range</label>
+									<input id="number-range-example" type="text" class="form__section-input" minlength="2" maxlength="10" />
 								</li>
 							</ol>
 						</fieldset>
@@ -241,11 +261,20 @@
 							<p class="form__status js-validate-status" aria-live="polite"></p>
 						</div>
 					</form>
+
+					<script type="text/javascript" class="code code--block">validate('.js-validate-form');</script>
 				</div>
 
-				<script type="text/javascript">
-					validate('.js-validate-form');
-				</script>
+				<div class="content">
+					<p>The presence of a <code>required</code> attribute is specified by screen readers. Other validation requirements are not. These include:</p>
+
+					<ul>
+						<li>"email" or "url" inputs.</li>
+						<li>The <code>pattern</code> attribute, which specifies a regular expression against which a field should be validated.</li>
+						<li>The <code>minlength</code> attribute (modern browsers prevent adding text beyond a specified <code>maxlength</code>).</li>
+						<li>"number" inputs that have <code>min</code>, <code>max</code>, or <code>step</code> attributes.</li>
+					</ul>
+				</div>
 			</div>
 		</section>
 

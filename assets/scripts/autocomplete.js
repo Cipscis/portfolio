@@ -1,4 +1,6 @@
 const autocomplete = (function ($, templayed, debounce, activate, publish) {
+	'use strict';
+
 	const selectors = {
 		wrapper: '.js-autocomplete',
 		input: '.js-autocomplete-input',

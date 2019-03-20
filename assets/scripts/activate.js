@@ -1,4 +1,6 @@
 const { activate, deactivate } = (function () {
+	'use strict';
+
 	const boundEventsMap = [];
 
 	const module = {

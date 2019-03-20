@@ -1,4 +1,6 @@
 var assist = (function (subscribe) {
+	'use strict';
+
 	const $messageEl = document.createElement('span');
 	var messageElInit = false;
 

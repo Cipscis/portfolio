@@ -1,4 +1,6 @@
 var statusMessage = (function (subscribe) {
+	'use strict';
+
 	var selectors = {
 		status: '.js-status'
 	};

@@ -1,15 +1,15 @@
-var expander = (function (activate) {
-	var selectors = {
+const expander = (function (activate) {
+	const selectors = {
 		section: '.js-expander',
 		trigger: '.js-expander-trigger',
 		body: '.js-expander-body'
 	};
 
-	var classes = {
+	const classes = {
 		section: 'js-expander'
 	};
 
-	var module = {
+	const module = {
 		init: function () {
 			module._initEvents();
 
@@ -22,7 +22,6 @@ var expander = (function (activate) {
 
 		_initEvents: function () {
 			var $triggers;
-			var i;
 
 			$triggers = document.querySelectorAll(selectors.trigger);
 			activate($triggers, module._activateTrigger);
@@ -46,7 +45,6 @@ var expander = (function (activate) {
 
 		_toggleSection: function ($section, close) {
 			var $triggers = $section.querySelectorAll(selectors.trigger);
-			var i;
 
 			if (typeof close === 'undefined') {
 				close = $section.getAttribute('aria-expanded') === 'false';
@@ -55,34 +53,25 @@ var expander = (function (activate) {
 			if (close) {
 				// Open the expander
 				$section.setAttribute('aria-expanded', 'true');
-				for (i = 0; i < $triggers.length; i++) {
-					$triggers[i].setAttribute('aria-expanded', 'true');
-				}
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'true'));
 			} else {
 				// Close the expander
 				$section.setAttribute('aria-expanded', 'false');
-				for (i = 0; i < $triggers.length; i++) {
-					$triggers[i].setAttribute('aria-expanded', 'false');
-				}
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'false'));
 			}
 		},
 
 		_closeByDefault: function () {
 			var $sections;
-			var i;
-
-			var $triggers;
-			var j;
 
 			$sections = document.querySelectorAll(selectors.section);
-			for (i = 0; i < $sections.length; i++) {
-				$sections[i].setAttribute('aria-expanded', 'false');
 
-				$triggers = $sections[i].querySelectorAll(selectors.trigger);
-				for (j = 0; j < $triggers.length; j++) {
-					$triggers[j].setAttribute('aria-expanded', 'false');
-				}
-			}
+			$sections.forEach(($section) => {
+				$section.setAttribute('aria-expanded', 'false');
+
+				let $triggers = $section.querySelectorAll(selectors.trigger);
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'false'));
+			});
 		},
 
 		_openByHash: function () {
@@ -101,34 +90,26 @@ var expander = (function (activate) {
 					$hash = $hash[0];
 					$expander = $hash;
 
-					while ($expander.parentElement && (Array.prototype.indexOf.call($expander.classList || [], classes.section) === -1)) {
+					while ($expander.parentElement && ($expander.classList.contains(classes.section) === false)) {
 						$expander = $expander.parentElement;
 					}
 
-					if (Array.prototype.indexOf.call($expander.classList || [], classes.section) !== -1) {
+					if ($expander.classList.contains(classes.section)) {
 						module._toggleSection($expander, true);
 					}
 
 					// Scroll to the given element
 					// Only works if asynchronous
-					window.setTimeout(
-						function () {
-							$hash.scrollIntoView();
-						},
-						0
-					);
+					window.setTimeout(() => $hash.scrollIntoView(), 0);
 				}
 			}
 		},
 
 		_addTabIndex: function () {
 			var $triggers;
-			var i;
 
 			$triggers = document.querySelectorAll(selectors.trigger);
-			for (i = 0; i < $triggers.length; i++) {
-				$triggers[i].setAttribute('tabindex', 0);
-			}
+			$triggers.forEach(($trigger) => $trigger.setAttribute('tabindex', '0'));
 		}
 	};
 

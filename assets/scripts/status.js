@@ -1,11 +1,11 @@
-var statusMessage = (function (subscribe) {
+const statusMessage = (function (subscribe) {
 	'use strict';
 
-	var selectors = {
+	const selectors = {
 		status: '.js-status'
 	};
 
-	var events = {
+	const events = {
 		success: '/status/success',
 		error: '/status/error'
 	};
@@ -22,9 +22,9 @@ var statusMessage = (function (subscribe) {
 
 	// Delay is used for screen reader accessibility.
 	// Make sure it matches the delay on CSS animations or transitions
-	var delay = 100; // ms
+	const delay = 100; // ms
 
-	var module = {
+	const module = {
 		_initSubscriptions: function () {
 			if (subscribe) {
 				subscribe(events.success, module.success);
@@ -47,11 +47,8 @@ var statusMessage = (function (subscribe) {
 		},
 
 		_clearType: function ($status) {
-			var type;
-			var cssClass;
-
-			for (type in Types) {
-				cssClass = classes[type];
+			for (let type in Types) {
+				let cssClass = classes[type];
 
 				if ($status.classList.contains(cssClass)) {
 					$status.classList.remove(cssClass);

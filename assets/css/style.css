@@ -714,7 +714,8 @@ body {
   right: 0; }
 
 .autocomplete {
-  position: relative; }
+  position: relative;
+  flex-grow: 1; }
 
 .autocomplete__input {
   display: block;

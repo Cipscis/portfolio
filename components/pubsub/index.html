@@ -19,7 +19,7 @@
 
 			<h3>Subscribe</h3>
 
-			<pre class="code">let logSum = (a, b) => console.log(a + b);
+			<pre class="code code--block">let logSum = (a, b) => console.log(a + b);
 subscribe('event name', logSum);</pre>
 
 			<p>Bind a function to an event. Whenever that event is published, the function will be called, and it will be passed any arguments recieved by <code>publish</code>.</p>
@@ -28,13 +28,13 @@ subscribe('event name', logSum);</pre>
 
 			<h3>Publish</h3>
 
-			<pre class="code">publish('event name', 3, 4); // Console output: 7</pre>
+			<pre class="code code--block">publish('event name', 3, 4); // Console output: 7</pre>
 
 			<p>Publishing an event causes every function bound to that event to be called. Each of those functions will be passed any number of optional arguments received by <code>publish</code> after the event name.</p>
 
 			<h3>Unsubscribe</h3>
 
-			<pre class="code">unsubscribe('event name', logSum);</pre>
+			<pre class="code code--block">unsubscribe('event name', logSum);</pre>
 
 			<p>Unbind a function from an event. Does nothing if no such binding exists.</p>
 		</div>

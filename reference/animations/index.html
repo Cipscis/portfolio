@@ -1,0 +1,170 @@
+<html>
+<head>
+	<title>Animations</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="/portfolio/assets/scripts/activate.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/scripts/expander.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Animations</h1>
+		</div>
+
+		<section class="expander js-expander" id="hiding-and-showing">
+			<div class="content">
+				<h2 class="expander__trigger js-expander-trigger">Hiding and Showing</h2>
+			</div>
+
+			<div class="expander__body js-expander-body">
+				<div class="content">
+					<p>Through the use of <code>animation-fill-mode: forwards;</code> it's possible to animate CSS properties permanently. Thanks to the fact that the <code>visibility</code> property can be animated, this can make it much easier to handle all animation via CSS, instead of having animation code in JavaScript.</p>
+
+					<p>These animations are triggered by state changes that can be detected through CSS rules. These state changes could be associated with with the presence of classes added or removed via JavaScript.</p>
+
+					<p>If <code>animation-delay</code> is also used, it's possible to use a single state change to transition an element through a series of animations. For example, the <a href="/portfolio/components/status/">status</a> component uses a series of animations to show a status message and then hide it again after a delay:</p>
+
+					<pre class="code code--block">animation: 0.5s becomeVisible forwards,
+           // Make sure the delay here matches the delay in status.js
+           0.5s 0.1s fadein forwards,
+
+           0.5s 3.6s fadeout forwards,
+           0.5s 3.6s becomeHidden forwards;</pre>
+
+		           <p>Four utility animations are used here to make it easier to create custom animations with different speeds and delays, instead of using separate CSS animations that each affect multiple properties. These utility animations are all simple:</p>
+
+		           <pre class="code code--block">@keyframes becomeVisible {
+	  0% { visibility: visible; }
+	100% { visibility: visible; }
+}
+@keyframes becomeHidden {
+	  0% { visibility: visible; }
+	100% { visibility: visible; }
+	100% { visibility: hidden; }
+}
+
+@keyframes fadein {
+	  0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes fadeout {
+	  0% { opacity: 1; }
+	100% { opacity: 0; }
+}</pre>
+
+					<p>The <code>becomeVisible</code> animation just sets an element's <code>visibility</code> to <code>visible</code> instantly. The <code>becomeHidden</code> animation, in contrast, makes an element remain <code>visible</code> until the end of the animation, at which point its <code>visibility</code> becomes <code>hidden</code>.</p>
+
+					<p>HTML elements are often hidden via <code>display: none;</code>, but this property cannot be animated. Though <code>visibility</code> can animated, its value cannot change gradually because it is qualitative. So when its value is animated from one value to another, it switches immediately at the halfway point between the transition.</p>
+
+					<p>If the <code>becomeHidden</code> animation had <code>visibility: visible;</code> at the start and <code>visibility: hidden;</code> at the end, then the element's visibility would switch halfway through the animation. By remaining <code>visible</code> until the end, then applying <code>visibility: hidden;</code>, it's ensured that the element will only become hidden at the very end of the animation.</p>
+
+					<p>Because <code>visibility: hidden;</code> doesn't remove an element from the flow, if it's being shown or hidden by changing its <code>opacity</code> then changing its <code>visibility</code> will node change the appearance of the animation. However, animating the <code>visibility</code> property when showing or hiding an element ensures that screen readers can know whether or not to read it out.</p>
+
+					<p>The fact that <code>visibility: hidden;</code> doesn't remove an element from the flow also means this is typically most useful for making elements with <code>position: absolute;</code> or <code>position: fixed;</code> appear and disappear.</p>
+
+					<p>In the case of <a href="/portfolio/components/status/">status</a>, there is also a 0.1 second delay between the element becoming visible and it starting to fade in. This delay is accompanied by JavaScript that sets the element's text <em>after</em> it becomes visible. This ensures, with help from <code>aria-live="polite"</code>, that the element's text will be read out when it appears.</p>
+
+					<pre class="code code--block">const delay 100; // ms
+// ...
+$status.textContent = '';
+// ...
+window.setTimeout(() => $status.textContent = message, delay);</pre>
+				</div>
+			</div>
+		</section>
+
+		<section class="expander js-expander" id="initialisation">
+			<div class="content">
+				<h2 class="expander__trigger js-expander-trigger">Initialisation</h2>
+			</div>
+
+			<div class="expander__body js-expander-body">
+				<div class="content">
+					<p>There is a drawback to using CSS animations this heavily, which is that elements will run the animation to reach their initial state when the page loads. This is often not intended, for example an element that is meant to be hidden would start visible but immediately run the animation to hide it.</p>
+
+					<p>For example, the following element will disappear when this section is initially opened:</p>
+				</div>
+
+				<div class="panel ghost">
+					<p>I'm a ghost... oooOOOOoooooOOOoooo...</p>
+
+					<style class="code code--block">.ghost {
+	animation: 5s fadeout forwards,
+	           5s becomeHidden forwards;
+}
+
+.ghost--visible {
+	animation: 1s becomeVisible forwards,
+	           1s fadein forwards;
+}
+</style>
+				</div>
+
+				<div class="content">
+					<p>Spooky, right? If you didn't catch that, you can <button class="js-make-ghosts-visible">make it reappear</button> or <button class="js-make-ghosts-invisible">disappear again</button>.</p>
+
+					<p>
+						That state change that triggers that reappearing animation is represented by
+						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-class-trigger" aria-describedby="tooltip-ghost-class-body">
+							<span class="tooltip__trigger" id="tooltip-ghost-class-trigger">adding a class</span>
+							<span class="tooltip__body" id="tooltip-ghost-class-body">
+								<script type="text/javascript" class="code code--block">(function (activate) {
+	activate('.js-make-ghosts-visible', () => {
+		document.querySelectorAll('.ghost').forEach(($ghost) => {
+			$ghost.classList.add('allow-animations', 'ghost--visible');
+		});
+	});
+
+	activate('.js-make-ghosts-invisible', () => {
+		document.querySelectorAll('.ghost').forEach(($ghost) => {
+			$ghost.classList.add('allow-animations');
+			$ghost.classList.remove('ghost--visible');
+		});
+	});
+})(activate);
+</script>
+							</span>
+						.
+					</p>
+
+					<p>One way around this is to restrict the animations to only be applied when the element to be animated also has another class to allow animations (I even like to call it <code>allow-animations</code>). When the JavaScript that changes an element's state runs, it can also add this class if it doesn't already exist.</p>
+
+					<p>For example, this element is the same as the one above except that it also restricts its animations to only run when it has an <code>allow-animations</code> class:</p>
+				</div>
+
+				<div>
+					<div class="panel ghost ghost--no-initial-animation">
+					<p>I'm a ghost... oooOOOOoooooOOOoooo...</p>
+
+					<style class="code code--block">.ghost--no-initial-animation {
+	opacity: 0;
+	visibility: hidden;
+	animation: none;
+}
+.ghost--no-initial-animation.allow-animations {
+	animation: 5s fadeout forwards,
+	           5s becomeHidden forwards;
+}
+
+.ghost--no-initial-animation.allow-animations.ghost--visible {
+	animation: 1s becomeVisible forwards,
+	           1s fadein forwards;
+}
+</style>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		(function (expander) {
+			expander.init();
+		})(expander);
+	</script>
+</body>
+</html>

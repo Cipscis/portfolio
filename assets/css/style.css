@@ -510,6 +510,8 @@ body {
     display: inline-block;
     text-align: center;
     width: 30px;
+    height: 30px;
+    line-height: 30px;
     margin-right: 10px;
     border-radius: 50%; }
   .expander[aria-expanded="false"] .expander__trigger:before {

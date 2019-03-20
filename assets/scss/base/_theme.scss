@@ -9,5 +9,12 @@ $black: #000;
 $blue--pale: darken(#def, 10%);
 $green--pale: darken(#dfe, 10%);
 
+$red--pale: #fee;
+
 $base-font-family: "Roboto Slab", "Times New Roman", Times, serif;
 $heading-font-family: "Roboto", Arial, sans-serif;
+
+
+.is-error {
+	color: red;
+}

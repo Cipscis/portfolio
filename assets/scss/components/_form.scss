@@ -62,8 +62,18 @@
 	}
 }
 
+// Validation
 .form__status {
-	margin: 0;
+	display: none;
+}
+
+.is-validated {
+	.form__section-input:invalid {
+		background: $red--pale;
+	}
+	.form__status {
+		display: block;
+	}
 }
 
 // Fake inputs

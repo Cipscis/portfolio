@@ -93,20 +93,27 @@
 
 				<div class="panel">
 					<div class="content">
-						<p>This example uses <code><a href="https://caniuse.com/#feat=css-placeholder-shown" target="_blank">:placeholder-shown</a></code> to avoid the need for custom JavaScript for a one-off example. At the time of writing, this pseudoclass has poor browser support, so should not be relied on.</p>
+						<p>
+							<span class="tooltip" tabindex="0" role="dialog" aria-labelledby="placeholder-shown-cautionary-note-trigger" aria-describedby="placeholder-shown-cautionary-note-body">
+								<span class="tooltip__trigger" id="placeholder-shown-cautionary-note-trigger">Cautionary note</span>
+								<span class="tooltip__body" id="placeholder-shown-cautionary-note-body">
+									<span class="p">This example uses <code><a href="https://caniuse.com/#feat=css-placeholder-shown" target="_blank">:placeholder-shown</a></code> to avoid the need for custom JavaScript for a one-off example. At the time of writing, this pseudoclass has poor browser support, so should not be relied on.</span>
+
+									<style class="code code--block">.form__section-input--dynamic-label + label {
+	margin-right: 0;
+	margin-left: 10px;
+
+	animation: 0.5s becomeVisible forwards,
+	           0.5s fadein forwards;
+}
+.form__section-input--dynamic-label:placeholder-shown + label {
+	animation: 0.5s becomeHidden forwards,
+	           0.5s fadeout forwards;
+}</style>
+								</span>
+							</span>
+						</p>
 					</div>
-
-					<style class="code code--block">.form__section-input--dynamic-label + label {
-		margin-right: 0;
-		margin-left: 10px;
-
-		animation: 0.5s becomeVisible forwards,
-		           0.5s fadein forwards;
-	}
-	.form__section-input--dynamic-label:placeholder-shown + label {
-		animation: 0.5s becomeHidden forwards,
-		           0.5s fadeout forwards;
-	}</style>
 					<form>
 						<fieldset class="form__section">
 							<ol class="form__section-list">

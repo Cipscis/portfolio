@@ -1,4 +1,6 @@
 .content {
+	position: relative;
+
 	input, select, textarea {
 		line-height: 1.5;
 		padding: 3px 8px;
@@ -73,6 +75,8 @@
 	border-radius: 5px;
 	font-family: monospace;
 	white-space: pre;
+	tab-size: 4;
+	-moz-tab-size: 4;
 
 	max-width: 100%;
 	overflow: auto;

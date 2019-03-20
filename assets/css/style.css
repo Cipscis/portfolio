@@ -135,9 +135,11 @@ h1, h2, h3, h4, h5, h6 {
     content: " [" attr(href) "]";
     overflow-wrap: break-word; } }
 
-.content input, .content select, .content textarea {
-  line-height: 1.5;
-  padding: 3px 8px; }
+.content {
+  position: relative; }
+  .content input, .content select, .content textarea {
+    line-height: 1.5;
+    padding: 3px 8px; }
 
 .content p,
 .p {
@@ -196,6 +198,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 5px;
   font-family: monospace;
   white-space: pre;
+  tab-size: 4;
+  -moz-tab-size: 4;
   max-width: 100%;
   overflow: auto; }
   .content code.tag::before,
@@ -259,7 +263,7 @@ body {
   padding: 0;
   cursor: pointer;
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: middle;
   padding: 5px 10px;
   border-radius: 5px;
   color: #333;
@@ -503,6 +507,12 @@ body {
 
 .tooltip:focus-within .tooltip__body {
   display: inline-block; }
+
+.tooltip--block .tooltip__body {
+  transform: none;
+  left: 0;
+  width: 100%;
+  margin-top: 35px; }
 
 @media print {
   .tooltip__body {

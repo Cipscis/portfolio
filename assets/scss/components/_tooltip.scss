@@ -79,6 +79,16 @@ $tooltip-wiggle-room: 18px;
 	display: inline-block;
 }
 
+.tooltip--block {
+	.tooltip__body {
+		transform: none;
+		left: 0;
+		width: 100%;
+
+		margin-top: 35px;
+	}
+}
+
 @media print {
 	.tooltip__body {
 		position: static;

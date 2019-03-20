@@ -22,6 +22,15 @@
 				</span>
 			</p>
 
+			<p>It's also possible to create a
+				<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-block-example-trigger" aria-describedby="tooltip-block-example-body">
+					<span class="tooltip__trigger" id="tooltip-block-example-trigger">block tooltip</span>.
+					<span class="tooltip__body" id="tooltip-block-example-body">
+						<span class="p">Block tooltips are wider than standard tooltips, and appear beneath their trigger with the same indentation as the rest of the content.</span>
+					</span>
+				</span>
+			</p>
+
 			<p>These tooltips don't use any JavaScript. Instead, they rely on the <code>:hover</code>, <code>:focus</code>, and (where supported) <code>:focus-within</code> pseudoclasses.</p>
 
 			<p>The disadvantage of not using JavaScript is that the tooltips can't detect how close they are to the edge of the page. If they are near enough to the right hand edge of the window that they don't fit, the page width will increase to accommodate them, causing a horizontal scrollbar to appear.</p>

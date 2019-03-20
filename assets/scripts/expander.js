@@ -45,6 +45,9 @@ var expander = (function (activate) {
 		},
 
 		_toggleSection: function ($section, close) {
+			var $triggers = $section.querySelectorAll(selectors.trigger);
+			var i;
+
 			if (typeof close === 'undefined') {
 				close = $section.getAttribute('aria-expanded') === 'false';
 			}
@@ -52,9 +55,15 @@ var expander = (function (activate) {
 			if (close) {
 				// Open the expander
 				$section.setAttribute('aria-expanded', 'true');
+				for (i = 0; i < $triggers.length; i++) {
+					$triggers[i].setAttribute('aria-expanded', 'true');
+				}
 			} else {
 				// Close the expander
 				$section.setAttribute('aria-expanded', 'false');
+				for (i = 0; i < $triggers.length; i++) {
+					$triggers[i].setAttribute('aria-expanded', 'false');
+				}
 			}
 		},
 
@@ -62,9 +71,17 @@ var expander = (function (activate) {
 			var $sections;
 			var i;
 
+			var $triggers;
+			var j;
+
 			$sections = document.querySelectorAll(selectors.section);
 			for (i = 0; i < $sections.length; i++) {
 				$sections[i].setAttribute('aria-expanded', 'false');
+
+				$triggers = $sections[i].querySelectorAll(selectors.trigger);
+				for (j = 0; j < $triggers.length; j++) {
+					$triggers[j].setAttribute('aria-expanded', 'false');
+				}
 			}
 		},
 

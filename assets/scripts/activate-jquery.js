@@ -6,6 +6,8 @@
 // Example usage:
 // e.g. $(document).on(activate.event, selector, activate(callback));
 var activate = (function ($) {
+	'use strict';
+
 	var enterEvent = 'keydown';
 	var spaceEvent = 'keyup';
 

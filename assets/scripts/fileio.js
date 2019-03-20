@@ -1,4 +1,6 @@
 var fileIO = (function () {
+	'use strict';
+
 	var module;
 	var $link;
 

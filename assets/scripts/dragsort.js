@@ -1,6 +1,7 @@
 // Requires jQuery and a pubsub implementation
 
 var dragsort = (function ($, publish) {
+	'use strict';
 
 	var $draggedEl;
 	var $clone;

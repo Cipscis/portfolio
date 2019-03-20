@@ -1,4 +1,6 @@
 const { throttle, debounce } = (function () {
+	'use strict';
+
 	const throttle = function (fn, delay) {
 		// Create a version of fn that will execute only if it
 		// hasn't been called successfully within the last delay ms

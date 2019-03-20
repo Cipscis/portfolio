@@ -1,4 +1,6 @@
 var modal = (function ($, activate, keys, subscribe) {
+	'use strict';
+
 	var selectors = {
 		modal: '.js-modal',
 		body: '.js-modal-body',

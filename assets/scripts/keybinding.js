@@ -1,4 +1,6 @@
 var keys = (function () {
+	'use strict';
+
 	var bindings = {};
 	/*
 	{

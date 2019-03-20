@@ -302,7 +302,8 @@ body {
     margin-top: 10px; }
 
 .form__section-label {
-  margin-right: 10px; }
+  margin-right: 10px;
+  width: 130px; }
 
 .form__section-input {
   padding: 5px;

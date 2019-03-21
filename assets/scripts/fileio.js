@@ -58,7 +58,7 @@ var fileIO = (function () {
 					reader = new FileReader();
 
 					reader.readAsDataURL(file);
-					reader.addEventListener('load', module._saveProcessedFile(filename));
+					reader.addEventListener('load', module.save._processedFile(filename));
 				}
 			},
 
@@ -93,7 +93,7 @@ var fileIO = (function () {
 				module.save.data(rows, filename, 'text/csv');
 			},
 
-			_saveProcessedFile: function (filename) {
+			_processedFile: function (filename) {
 				// Callback for FileReader load event
 				return function () {
 					module.save._downloadDataUrl(this.result, filename);

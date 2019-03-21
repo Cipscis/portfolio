@@ -77,85 +77,74 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 			</div>
 		</section>
 
-		<section class="expander js-expander" id="initialisation">
+		<section class="expander js-expander" id="initial-state">
 			<div class="content">
-				<h2 class="expander__trigger js-expander-trigger">Initialisation</h2>
+				<h2 class="expander__trigger js-expander-trigger">Initial State</h2>
 			</div>
 
 			<div class="expander__body js-expander-body">
 				<div class="content">
 					<p>There is a drawback to using CSS animations this heavily, which is that elements will run the animation to reach their initial state when the page loads. This is often not intended, for example an element that is meant to be hidden would start visible but immediately run the animation to hide it.</p>
 
-					<p>For example, the following element will disappear when this section is initially opened:</p>
-				</div>
+					<p>There are a couple of ways to handle this. Which one works best depends on whether or not you can safely assume that the element's initial state will always be the same. This is most likely the state for elements that are always hidden by default.</p>
 
-				<div class="panel ghost">
-					<p>I'm a ghost... oooOOOOoooooOOOoooo...</p>
+					<p>In those cases, you can just not apply an animation to the element itself, but only to its various state classes, and when the page loads the element doesn't have any of those state classes.</p>
 
-					<style class="code code--block">.ghost {
-	animation: 5s fadeout forwards,
-	           5s becomeHidden forwards;
+					<p>For example, here is an element that is hidden by default, but will appear when it's given an <code>is-visible</code> state class and disappear when it's given an <code>is-hidden</code> state class:</p>
+
+					<div class="panel ghost">
+						<p>I'm a ghost... ooooOOOOOOooooOOoooo...</p>
+					</div>
+
+					<p>
+						See
+						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-css-trigger" aria-describedby="tooltip-ghost-css-body">
+							<span class="tooltip__trigger" id="tooltip-ghost-css-trigger">the CSS</span>
+							<span class="tooltip__body" id="tooltip-ghost-css-body">
+									<style class="code code--block">.ghost {
+	opacity: 0;
+	visibility: hidden;
 }
-
-.ghost--visible {
+.ghost.is-visible {
 	animation: 1s becomeVisible forwards,
 	           1s fadein forwards;
 }
-</style>
-				</div>
-
-				<div class="content">
-					<p>Spooky, right? If you didn't catch that, you can <button class="js-make-ghosts-visible">make it reappear</button> or <button class="js-make-ghosts-invisible">disappear again</button>.</p>
+.ghost.is-hidden {
+	animation: 1s fadeout forwards,
+	           1s becomeHidden forwards;
+}</style>
+							</span>
+						</span>
+						for this element.
+					</p>
 
 					<p>
-						That state change that triggers that reappearing animation is represented by
-						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-class-trigger" aria-describedby="tooltip-ghost-class-body">
-							<span class="tooltip__trigger" id="tooltip-ghost-class-trigger">adding a class</span>
-							<span class="tooltip__body" id="tooltip-ghost-class-body">
+						This button can <button class="js-toggle-ghost">toggle the element</button> by
+						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-js-trigger" aria-describedby="tooltip-ghost-js-body">
+							<span class="tooltip__trigger" id="tooltip-ghost-js-trigger">adding and removing state classes</span>.
+							<span class="tooltip__body" id="tooltip-ghost-js-body">
 								<script type="text/javascript" class="code code--block">(function (activate) {
-	activate('.js-make-ghosts-visible', () => {
-		document.querySelectorAll('.ghost').forEach(($ghost) => {
-			$ghost.classList.add('allow-animations', 'ghost--visible');
-		});
-	});
-
-	activate('.js-make-ghosts-invisible', () => {
-		document.querySelectorAll('.ghost').forEach(($ghost) => {
-			$ghost.classList.add('allow-animations');
-			$ghost.classList.remove('ghost--visible');
+	activate('.js-toggle-ghost', () => {
+		let $ghosts = document.querySelectorAll('.ghost');
+		$ghosts.forEach(($ghost) => {
+			if ($ghost.classList.contains('is-visible') === false) {
+				$ghost.classList.remove('is-hidden');
+				$ghost.classList.add('is-visible');
+			} else {
+				$ghost.classList.remove('is-visible');
+				$ghost.classList.add('is-hidden');
+			}
 		});
 	});
 })(activate);
 </script>
 							</span>
-						.
+						</span>
 					</p>
 
-					<p>One way around this is to restrict the animations to only be applied when the element to be animated also has another class to allow animations (I even like to call it <code>allow-animations</code>). When the JavaScript that changes an element's state runs, it can also add this class if it doesn't already exist.</p>
+					<p>However, you can't always safely assume the initial state of elements. For example, a button used to toggle the state of a value stored somewhere else, such as keeping a list in <code>localStorage</code> of pages a user has marked as favourites.</p>
 
-					<p>For example, this element is the same as the one above except that it also restricts its animations to only run when it has an <code>allow-animations</code> class:</p>
-				</div>
-
-				<div>
-					<div class="panel ghost ghost--no-initial-animation">
-					<p>I'm a ghost... oooOOOOoooooOOOoooo...</p>
-
-					<style class="code code--block">.ghost--no-initial-animation {
-	opacity: 0;
-	visibility: hidden;
-	animation: none;
-}
-.ghost--no-initial-animation.allow-animations {
-	animation: 5s fadeout forwards,
-	           5s becomeHidden forwards;
-}
-
-.ghost--no-initial-animation.allow-animations.ghost--visible {
-	animation: 1s becomeVisible forwards,
-	           1s fadein forwards;
-}
-</style>
-					</div>
+					<p>In these cases, an extra class can be used to specify whether or not the element is in its initial state. I prefer adding a class called <code>allow-animations</code>, which does not initially exist on the element, whenever its state is changed. The animations specified in the CSS would use selectors that check for the presence of this class.</p>
 				</div>
 			</div>
 		</section>

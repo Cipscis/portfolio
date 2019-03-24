@@ -9,11 +9,11 @@ $tooltip-wiggle-room: 18px;
 .tooltip__trigger {
 	position: relative;
 	cursor: pointer;
-	background-color: $green--pale;
+	background-color: var(--highlight-background);
 }
 
 @mixin tooltip-trigger {
-	background-color: darken($green--pale, 10%);
+	background-color: var(--highlight-background-active);
 
 	&:before {
 		content: "";
@@ -63,10 +63,10 @@ $tooltip-wiggle-room: 18px;
 
 	padding: 10px;
 	margin: 10px 0; // Makes sure there's a gap before the top or bottom of page
-	background: $white;
-	border: 1px solid $grey;
+	background: var(--background);
+	border: 1px solid var(--border);
 	border-radius: 5px;
-	box-shadow: 0 0 5px 0 rgba($black, 0.2);
+	box-shadow: 0 0 5px 0 var(--shadow);
 
 	display: none;
 }
@@ -82,8 +82,8 @@ $tooltip-wiggle-room: 18px;
 .tooltip--block {
 	.tooltip__body {
 		transform: none;
-		left: 0;
-		width: 100%;
+		left: 20px;
+		width: calc(100% - 40px);
 
 		margin-top: 35px;
 	}

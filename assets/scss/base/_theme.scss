@@ -3,11 +3,15 @@ $grey--lightest: #eee;
 $grey--lighter: #ccc;
 $grey--light: #999;
 $grey: #666;
+$grey--mid: #444;
 $grey--dark: #333;
 $black: #000;
 
 $blue--pale: darken(#def, 10%);
+$blue--pale-dark: darken($blue--pale, 10%);
+
 $green--pale: darken(#dfe, 10%);
+$green--pale-dark: darken($green--pale, 10%);
 
 $red--pale: #fee;
 
@@ -15,6 +19,78 @@ $base-font-family: "Roboto Slab", "Times New Roman", Times, serif;
 $heading-font-family: "Roboto", Arial, sans-serif;
 
 
+:root,
+.light-mode {
+	--background: #{$white};
+	--background-active: #{$grey--lightest};
+	--color: #{$grey--dark};
+	--color-low-contrast: #{$grey--light};
+
+	--shadow: #{rgba($black, 0.4)};
+	--overlay: rgba($grey--lighter, 0.7);
+
+	--offset-background: #{$grey--lightest};
+	--offset-color: var(--color);
+
+	--border: #{$black};
+
+	--clickable-background: #{$grey--lightest};
+	--clickable-background-active: #{$grey--lighter};
+	--clickable-color: var(--color);
+
+	--highlight-background: #{$green--pale};
+	--highlight-background-active: #{$green--pale-dark};
+
+	--highlight-bar: #{$blue--pale};
+	--highlight-bar-active: #{$blue--pale-dark};
+
+	--error-background: #{$red--pale};
+	--error-color: red;
+	--error-border: red;
+
+	--status-success: green;
+	--status-error: red;
+}
+
+.dark-mode {
+	--background: #{$grey--dark};
+	--background-active: #{$grey--mid};
+	--color: #{$grey--lightest};
+	--color-low-contrast: #{$grey--light};
+
+	--shadow: #{rgba($white, 0.4)};
+	--overlay: rgba(34, 34, 34, 0.7);
+
+	--offset-background: #{$grey};
+	--offset-color: var(--color);
+
+	--border: #{$grey--light};
+
+	--clickable-background: #{$grey};
+	--clickable-background-active: #{$grey--light};
+	--clickable-color: var(--color);
+
+	--highlight-background: #2c6f3d;
+	--highlight-background-active: #00924a;
+
+	--highlight-bar: #2574c1;
+	--highlight-bar-active: #3b94ea;
+
+	--error-background: #755;
+	--error-color: red;
+	--error-border: red;
+
+	--status-success: green;
+	--status-error: red;
+}
+
+body,
+.light-mode,
+.dark-mode {
+	background: var(--background);
+	color: var(--color);
+}
+
 .is-error {
-	color: red;
+	color: var(--error-color);
 }

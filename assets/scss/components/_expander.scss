@@ -21,7 +21,7 @@
 	&:focus {
 		outline: none;
 		&:before {
-			background: lighten($green--pale, 10%);
+			background: var(--highlight-background);
 		}
 	}
 }

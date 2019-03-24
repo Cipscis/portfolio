@@ -1,6 +1,6 @@
 .article-meta {
 	@include cf;
-	color: $grey;
+	color: var(--color-low-contrast);
 	font-size: 0.75em;
 }
 

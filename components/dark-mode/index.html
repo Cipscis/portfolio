@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Dark Mode</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script src="/assets/scripts/activate.js"></script>
+</head>
+<body>
+	<div class="layout">
+		<div class="content">
+			<h1>Dark Mode</h1>
+
+			<button class="button js-toggle-dark-mode">Toggle Dark Mode</button>
+
+			<script class="code code--block">(function (activate) {
+	activate('.js-toggle-dark-mode', () => {
+		var $body = document.querySelector('body');
+		if ($body.classList.contains('dark-mode')) {
+			$body.classList.remove('dark-mode');
+		} else {
+			$body.classList.add('dark-mode');
+		}
+	});
+})(activate);</script>
+
+			<p><span class="tooltip__trigger">Highlight</span> and <span class="a">link</span></p>
+		</div>
+
+		<div class="light-mode content">
+			<p>How does nesting light mode and dark mode work?</p>
+			<div class="dark-mode">
+				<p>And subsequent nesting?</p>
+			</div>
+		</div>
+
+		<div class="dark-mode content">
+			<p>How does nesting light mode and dark mode work?</p>
+			<div class="light-mode">
+				<p>And subsequent nesting?</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

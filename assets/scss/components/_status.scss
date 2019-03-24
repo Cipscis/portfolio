@@ -9,8 +9,8 @@
 	visibility: hidden;
 	opacity: 0;
 
-	background: $white;
-	box-shadow: 0 0 10px rgba($black, 0.2);
+	background: var(--background);
+	border: 1px solid var(--border);
 	padding: 10px 20px;
 
 	&::after {
@@ -39,13 +39,13 @@
 	}
 	&.success {
 		&::after {
-			background: green;
+			background: var(--status-success);
 			content: "✓";
 		}
 	}
 	&.error {
 		&::after {
-			background: red;
+			background: var(--status-error);
 			content: "❌";
 			font-size: 0.7em;
 		}

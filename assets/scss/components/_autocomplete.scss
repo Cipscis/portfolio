@@ -21,8 +21,8 @@
 	padding: 0;
 	list-style: none;
 
-	background: $white;
-	border: 1px solid $black;
+	background: var(--background);
+	border: 1px solid var(--border);
 }
 
 .autocomplete__result-item {
@@ -34,6 +34,6 @@
 	&:hover,
 	&[aria-selected="true"] {
 		outline: none;
-		background: $grey--lightest;
+		background: var(--background-active);
 	}
 }

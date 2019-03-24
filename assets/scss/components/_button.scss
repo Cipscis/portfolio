@@ -7,16 +7,16 @@
 
 	padding: 5px 10px;
 	border-radius: 5px;
-	color: $grey--dark;
 	text-decoration: none;
 	line-height: 1.5;
-	background: $grey--lightest;
 	cursor: pointer;
 
 	transition: 0.3s background;
 
+	background: var(--clickable-background);
+	color: var(--clickable-color);
 	&:hover,
 	&:focus {
-		background: $grey--lighter;
+		background: var(--clickable-background-active);
 	}
 }

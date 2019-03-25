@@ -1,6 +1,6 @@
-import activate from '/portfolio/assets/scripts/activate-jquery.js';
-import keys from '/portfolio/assets/scripts/keybinding.js';
-import { subscribe } from '/portfolio/assets/scripts/pubsub.js';
+import activate from './activate-jquery.js';
+import keys from './keybinding.js';
+import { subscribe } from './pubsub.js';
 
 const modal = (function ($, activate, keys, subscribe) {
 	'use strict';

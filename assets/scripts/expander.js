@@ -1,4 +1,4 @@
-import { activate } from '/portfolio/assets/scripts/activate.js';
+import activate from './activate.js';
 
 const expander = (function (activate) {
 	'use strict';

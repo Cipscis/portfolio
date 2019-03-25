@@ -1,4 +1,4 @@
-import { subscribe } from '/portfolio/assets/scripts/pubsub.js';
+import { subscribe } from './pubsub.js';
 
 const assist = (function (subscribe) {
 	'use strict';

@@ -1,4 +1,4 @@
-import { throttle } from '/portfolio/assets/scripts/throttle-debounce.js';
+import { throttle } from './throttle-debounce.js';
 
 const validate = (function (throttle) {
 	'use strict';

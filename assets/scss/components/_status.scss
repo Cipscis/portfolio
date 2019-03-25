@@ -9,7 +9,7 @@
 	visibility: hidden;
 	opacity: 0;
 
-	background: var(--primary-background);
+	@include contrast-primary;
 	border: 1px solid var(--border);
 	padding: 10px 20px;
 

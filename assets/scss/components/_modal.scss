@@ -40,7 +40,7 @@
 		max-height: 80%;
 		padding: 40px 20px 20px;
 	}
-	background: var(--primary-background);
+	@include contrast-primary;
 }
 
 .modal__close {

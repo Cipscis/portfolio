@@ -10,8 +10,15 @@ $black: #000;
 $blue--pale: darken(#def, 10%);
 $blue--pale-dark: darken($blue--pale, 10%);
 
+$blue--dim: darken($blue--pale, 40%);
+$blue--dim-light: darken($blue--pale, 30%);
+
+
 $green--pale: darken(#dfe, 10%);
 $green--pale-dark: darken($green--pale, 10%);
+
+$green--dim: darken($green--pale, 60%);
+$green--dim-light: darken($green--pale, 50%);
 
 $red--pale: #fee;
 
@@ -27,12 +34,13 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--primary-color-low-contrast: #{$grey--light};
 
 	--shadow: #{rgba($black, 0.4)};
-	--overlay: #{rgba($grey--lighter, 0.7)};
+	--overlay: #{rgba($black, 0.4)};
 
 	--offset-background: #{$grey--lightest};
 	--offset-color: var(--primary-color);
+	--offset-color-low-contrast: #{$grey--light};
 
-	--border: #{$black};
+	--border: #{$grey--light};
 
 	--clickable-background: #{$grey--lightest};
 	--clickable-background-active: #{$grey--lighter};
@@ -63,18 +71,19 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 
 	--offset-background: #{$grey};
 	--offset-color: var(--primary-color);
+	--offset-color-low-contrast: #{$grey--light};
 
-	--border: #{$grey--light};
+	--border: #{$grey--lighter};
 
 	--clickable-background: #{$grey};
 	--clickable-background-active: #{$grey--light};
 	--clickable-color: var(--primary-color);
 
-	--highlight-background: #2c6f3d;
-	--highlight-background-active: #00924a;
+	--highlight-background: #{$green--dim};
+	--highlight-background-active: #{$green--dim-light};
 
-	--highlight-bar: #2574c1;
-	--highlight-bar-active: #3b94ea;
+	--highlight-bar: #{$blue--dim};
+	--highlight-bar-active: #{$blue--dim-light};
 
 	--error-background: #755;
 	--error-color: red;
@@ -84,11 +93,62 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--status-error: red;
 }
 
+
+
+@mixin contrast($background, $color: null, $active: null) {
+	background: $background;
+
+	@if ($color) {
+		color: $color;
+	}
+
+	@if ($active) {
+		&:hover,
+		&:focus {
+			background: $active;
+		}
+		&:focus-within {
+			background: $active;
+		}
+	}
+}
+
+
+@mixin contrast-primary {
+	@include contrast(
+		var(--primary-background),
+		var(--primary-color)
+	);
+}
+
+@mixin contrast-primary-active {
+	@include contrast(
+		var(--primary-background),
+		var(--primary-color),
+		var(--primary-background-active)
+	);
+}
+
+@mixin contrast-offset {
+	@include contrast(
+		var(--offset-background),
+		var(--offset-color)
+	);
+}
+
+@mixin contrast-clickable {
+	@include contrast(
+		var(--clickable-background),
+		var(--clickable-color),
+		var(--clickable-background-active)
+	);
+}
+
+
 body,
 .light-mode,
 .dark-mode {
-	background: var(--primary-background);
-	color: var(--primary-color);
+	@include contrast-primary;
 }
 
 .is-error {

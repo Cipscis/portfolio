@@ -42,10 +42,10 @@
 
 	transition: 0.3s background;
 
-	color: var(--color);
-	background: var(--background);
+	color: var(--primary-color);
+	background: var(--primary-background);
 	&:hover,
 	&:focus {
-		background: var(--background-active);
+		background: var(--primary-background-active);
 	}
 }

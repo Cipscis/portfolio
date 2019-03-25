@@ -7,7 +7,7 @@
 			counter-increment: counter-items;
 			content: counter(counter-items);
 
-			color: var(--color-low-contrast);
+			color: var(--primary-color-low-contrast);
 
 			position: absolute;
 			transform: translateX(-100%);

@@ -5,8 +5,6 @@
 	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<script src="/portfolio/assets/scripts/activate.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -15,16 +13,20 @@
 
 			<button class="button js-toggle-dark-mode">Toggle Contrast Mode</button>
 
-			<script>(function (activate) {
-				activate('.js-toggle-dark-mode', () => {
-					var $body = document.querySelector('body');
-					if ($body.classList.contains('dark-mode')) {
-						$body.classList.remove('dark-mode');
-					} else {
-						$body.classList.add('dark-mode');
-					}
-				});
-			})(activate);</script>
+			<script type="module">
+				import { activate } from '/portfolio/assets/scripts/activate.js';
+
+				(function (activate) {
+					activate('.js-toggle-dark-mode', () => {
+						var $body = document.querySelector('body');
+						if ($body.classList.contains('dark-mode')) {
+							$body.classList.remove('dark-mode');
+						} else {
+							$body.classList.add('dark-mode');
+						}
+					});
+				})(activate);
+			</script>
 
 			<h2>Contrast Palette</h2>
 

@@ -8,13 +8,7 @@
 
 	<script type="text/javascript" src="/portfolio/assets/scripts/lib/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/portfolio/assets/scripts/lib/templayed.min.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/throttle-debounce.js"></script>
 	<script type="text/javascript" src="/portfolio/assets/scripts/activate-jquery.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/pubsub.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/status.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/assist.js"></script>
-
-	<script type="text/javascript" src="/portfolio/assets/scripts/autocomplete.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -69,7 +63,9 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
+	<script type="module">
+		import autocomplete from '/portfolio/assets/scripts/autocomplete.js';
+
 		(function (autocomplete) {
 			autocomplete.init();
 		})(autocomplete);

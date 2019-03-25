@@ -1,9 +1,7 @@
 input {
-	background: var(--primary-background);
-	color: var(--primary-color);
+	@include contrast-primary;
 
 	border: 1px solid var(--border);
-
 	&::placeholder {
 		color: var(--primary-color-low-contrast);
 	}
@@ -55,10 +53,14 @@ input {
 	padding: 5px;
 	min-width: 250px;
 
+
 	border: none;
 	border-bottom: 1px solid var(--border);
-	background: var(--offset-background);
-	color: var(--offset-color);
+
+	@include contrast-offset;
+	&::placeholder {
+		color: var(--offset-color-low-contrast);
+	}
 }
 
 .form__section-input--full {
@@ -131,11 +133,12 @@ input {
 			height: 100%;
 		}
 	}
-
-	&:focus + .fake-input__display {
-		outline: 1px solid blue;
-	}
-
+}
+.fake-input__input:focus + .fake-input__display,
+.fake-input__display:hover {
+	background: var(--primary-background-active);
+}
+.fake-input__input {
 	&:checked + .fake-input__display {
 		&::before {
 			content: "✓";

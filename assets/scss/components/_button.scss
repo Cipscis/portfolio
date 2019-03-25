@@ -11,11 +11,5 @@
 	cursor: pointer;
 
 	transition: 0.3s background;
-
-	background: var(--clickable-background);
-	color: var(--clickable-color);
-	&:hover,
-	&:focus {
-		background: var(--clickable-background-active);
-	}
+	@include contrast-clickable;
 }

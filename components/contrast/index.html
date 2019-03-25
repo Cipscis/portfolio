@@ -6,7 +6,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<script src="/assets/scripts/activate.js"></script>
+	<script src="/portfolio/assets/scripts/activate.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -26,8 +26,6 @@
 				});
 			})(activate);</script>
 
-			<p><span class="tooltip__trigger">Highlight</span> and <span class="a">link</span></p>
-
 			<h2>Contrast Palette</h2>
 
 			<div class="contrast-primary">
@@ -41,6 +39,8 @@
 
 				<div class="contrast-offset">
 					<p>Some areas can use an "offset" contrast group. These areas are intended to only contain text, though they can also have <span class="tooltip__trigger">background</span> or <span class="a">colour bar</span> highlighting.</p>
+
+					<p>Offset contrast areas can also have <span class="contrast-low">low contrast text</span>.</p>
 				</div>
 
 				<div class="contrast-primary--active">
@@ -75,7 +75,7 @@
 				background: var(--primary-background);
 				color: var(--primary-background-color);
 				margin: 20px 0;
-				padding: 20px;
+				padding: 10px;
 				border: 1px solid var(--border);
 			}
 			.contrast-primary--active:hover {
@@ -88,14 +88,17 @@
 
 			.contrast-offset {
 				margin: 20px 0;
-				padding: 20px;
+				padding: 10px;
 				background: var(--offset-background);
 				color: var(--offset-color);
+			}
+			.contrast-offset .contrast-low {
+				color: var(--offset-color-low-contrast);
 			}
 
 			.contrast-overlay {
 				margin: 20px 0;
-				padding: 20px;
+				padding: 10px;
 				position: relative;
 			}
 
@@ -119,8 +122,10 @@
 
 			.contrast-shadow {
 				margin: 20px 0;
-				padding: 20px;
-				box-shadow: 0 2px 5px var(--shadow);
+				padding: 10px;
+				border: 1px solid var(--border);
+				border-radius: 5px;
+				box-shadow: 0 0 5px 0 var(--shadow);
 			}</style>
 
 		<div class="content">

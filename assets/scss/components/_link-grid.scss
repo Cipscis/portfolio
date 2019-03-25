@@ -41,11 +41,5 @@
 	text-decoration: none;
 
 	transition: 0.3s background;
-
-	color: var(--primary-color);
-	background: var(--primary-background);
-	&:hover,
-	&:focus {
-		background: var(--primary-background-active);
-	}
+	@include contrast-primary-active;
 }

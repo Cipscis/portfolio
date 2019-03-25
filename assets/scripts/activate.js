@@ -1,6 +1,4 @@
 const { activate, deactivate } = (function () {
-	'use strict';
-
 	const boundEventsMap = [];
 
 	const module = {
@@ -185,3 +183,6 @@ const { activate, deactivate } = (function () {
 		deactivate: module.deactivate
 	};
 })();
+
+export default activate;
+export { activate, deactivate };

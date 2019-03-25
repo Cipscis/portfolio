@@ -53,3 +53,5 @@ const { publish, subscribe, unsubscribe } = (function () {
 		unsubscribe: module.unsubscribe
 	};
 })();
+
+export { publish, subscribe, unsubscribe };

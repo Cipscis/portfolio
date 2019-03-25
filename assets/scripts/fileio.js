@@ -1,15 +1,12 @@
-var fileIO = (function () {
-	'use strict';
-
-	var module;
+const fileIO = (function () {
 	var $link;
 
-	var ReadMethods = {
+	const ReadMethods = {
 		TEXT: 'readAsText',
 		DATA_URL: 'readAsDataURL'
 	};
 
-	module = {
+	const module = {
 		save: {
 			data: function (data, filename, type) {
 				// Construct a Blob and download it
@@ -178,3 +175,5 @@ var fileIO = (function () {
 		}
 	};
 })();
+
+export default fileIO;

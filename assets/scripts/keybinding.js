@@ -1,7 +1,5 @@
-var keys = (function () {
-	'use strict';
-
-	var bindings = {};
+const keys = (function () {
+	const bindings = {};
 	/*
 	{
 		[keyString]: [
@@ -17,7 +15,7 @@ var keys = (function () {
 	}
 	*/
 
-	var module = {
+	const module = {
 		_isFocusOnInput: function () {
 			// Check if the current active element is an input that accepts keypresses
 
@@ -188,3 +186,5 @@ var keys = (function () {
 		unbindSequence: module.unbindSequence
 	};
 })();
+
+export default keys;

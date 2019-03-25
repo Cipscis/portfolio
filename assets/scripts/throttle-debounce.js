@@ -47,3 +47,5 @@ const { throttle, debounce } = (function () {
 		debounce
 	};
 })();
+
+export { throttle, debounce };

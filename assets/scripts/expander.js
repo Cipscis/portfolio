@@ -1,3 +1,5 @@
+import { activate } from '/portfolio/assets/scripts/activate.js';
+
 const expander = (function (activate) {
 	'use strict';
 
@@ -119,3 +121,5 @@ const expander = (function (activate) {
 		init: module.init
 	};
 })(activate);
+
+export default expander;

@@ -1,3 +1,5 @@
+import { subscribe } from '/portfolio/assets/scripts/pubsub.js'
+
 const statusMessage = (function (subscribe) {
 	'use strict';
 
@@ -118,3 +120,5 @@ const statusMessage = (function (subscribe) {
 		error: module.error
 	};
 })(subscribe);
+
+export default statusMessage;

@@ -1,6 +1,7 @@
-// Requires jQuery and a pubsub implementation
+import { publish } from '/portfolio/assets/scripts/pubsub.js';
 
-var dragsort = (function ($, publish) {
+// Requires jQuery and a pubsub implementation
+const dragsort = (function ($, publish) {
 	'use strict';
 
 	var $draggedEl;
@@ -255,3 +256,5 @@ var dragsort = (function ($, publish) {
 	};
 
 })(jQuery, publish);
+
+export default dragsort;

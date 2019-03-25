@@ -5,9 +5,6 @@
 	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<script type="text/javascript" src="/portfolio/assets/scripts/activate.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/keybinding.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -46,7 +43,10 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
+	<script type="module">
+		import keys from '/portfolio/assets/scripts/keybinding.js';
+		import { activate } from '/portfolio/assets/scripts/activate.js';
+
 		(function (keys, activate) {
 			var setMessage = function (message) {
 				return function (e) {

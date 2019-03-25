@@ -5,11 +5,6 @@
 	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<script type="text/javascript" src="/portfolio/assets/scripts/pubsub.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/status.js"></script>
-
-	<script type="text/javascript" src="/portfolio/assets/scripts/activate.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -43,7 +38,10 @@
 
 	<span class="status js-status" aria-live="polite"></span>
 
-	<script type="text/javascript">
+	<script type="module">
+		import statusMessage from '/portfolio/assets/scripts/status.js';
+		import { activate } from '/portfolio/assets/scripts/activate.js';
+
 		(function (statusMessage) {
 
 			activate('.js-status-example-success', () => statusMessage.success('Success :)'));

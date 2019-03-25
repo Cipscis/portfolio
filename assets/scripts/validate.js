@@ -1,3 +1,5 @@
+import { throttle } from '/portfolio/assets/scripts/throttle-debounce.js';
+
 const validate = (function (throttle) {
 	'use strict';
 
@@ -53,3 +55,5 @@ const validate = (function (throttle) {
 
 	return module.bindValidateEvent;
 })(throttle);
+
+export default validate;

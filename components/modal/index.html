@@ -9,9 +9,6 @@
 	<script type="text/javascript" src="/portfolio/assets/scripts/lib/jquery-3.3.1.min.js"></script>
 
 	<script type="text/javascript" src="/portfolio/assets/scripts/activate-jquery.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/keybinding.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/pubsub.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/modal.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -71,7 +68,9 @@
 		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>
 	</div>
 
-	<script type="text/javascript">
+	<script type="module">
+		import modal from '/portfolio/assets/scripts/modal.js';
+
 		(function (modal) {
 			modal.init();
 		})(modal);

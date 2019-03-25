@@ -1,22 +1,25 @@
-var modal = (function ($, activate, keys, subscribe) {
+import keys from '/portfolio/assets/scripts/keybinding.js';
+import { subscribe } from '/portfolio/assets/scripts/pubsub.js';
+
+const modal = (function ($, activate, keys, subscribe) {
 	'use strict';
 
-	var selectors = {
+	const selectors = {
 		modal: '.js-modal',
 		body: '.js-modal-body',
 		trigger: '.js-modal-trigger',
 		close: '.js-modal-close'
 	};
 
-	var dataSelectors = {
+	const dataSelectors = {
 		target: 'modal-target'
 	};
 
-	var classes = {
+	const classes = {
 		open: 'c-modal__body-open'
 	};
 
-	var events = {
+	const events = {
 		show: '/modal/show',
 		resize: '/modal/resize'
 	};
@@ -25,7 +28,7 @@ var modal = (function ($, activate, keys, subscribe) {
 	var $active = undefined; // The element that had focus before opening the modal window
 
 	// Callback for passing into $().filter
-	var focusable = function (i, el) {
+	const focusable = function (i, el) {
 		var $el = $(el);
 
 		var focusIfNotDisabled = $el.is('input, select, textarea, button, object');
@@ -47,7 +50,7 @@ var modal = (function ($, activate, keys, subscribe) {
 		return isFocusable;
 	};
 
-	var tabbable = function (i, el) {
+	const tabbable = function (i, el) {
 		var $el = $(el);
 
 		var isFocusable = focusable(i, el);
@@ -56,7 +59,7 @@ var modal = (function ($, activate, keys, subscribe) {
 		return isFocusable && !untabbableTabIndex;
 	};
 
-	var module = {
+	const module = {
 		init: function (options) {
 			options = options || {};
 
@@ -265,3 +268,5 @@ var modal = (function ($, activate, keys, subscribe) {
 		init: module.init
 	};
 })(jQuery, activate, keys, subscribe);
+
+export default modal;

@@ -1,3 +1,7 @@
+import '/portfolio/assets/scripts/status.js';
+import { debounce } from '/portfolio/assets/scripts/throttle-debounce.js';
+import { publish } from '/portfolio/assets/scripts/pubsub.js';
+
 const autocomplete = (function ($, templayed, debounce, activate, publish) {
 	'use strict';
 
@@ -341,3 +345,5 @@ const autocomplete = (function ($, templayed, debounce, activate, publish) {
 		init: module.init
 	};
 })(jQuery, templayed, debounce, activate, publish);
+
+export default autocomplete;

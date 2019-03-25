@@ -1,4 +1,6 @@
-var assist = (function (subscribe) {
+import { subscribe } from '/portfolio/assets/scripts/pubsub.js';
+
+const assist = (function (subscribe) {
 	'use strict';
 
 	const $messageEl = document.createElement('span');
@@ -40,3 +42,5 @@ var assist = (function (subscribe) {
 		speak: module.speak
 	};
 })(subscribe);
+
+export default assist;

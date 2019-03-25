@@ -5,13 +5,13 @@
 
 // Example usage:
 // e.g. $(document).on(activate.event, selector, activate(callback));
-var activate = (function ($) {
+const activate = (function ($) {
 	'use strict';
 
-	var enterEvent = 'keydown';
-	var spaceEvent = 'keyup';
+	const enterEvent = 'keydown';
+	const spaceEvent = 'keyup';
 
-	var activate = function (callback) {
+	const activate = function (callback) {
 		return function (e) {
 			var eventType = e.type;
 			var isButton = e.target.nodeName.toLowerCase() === 'button';
@@ -41,3 +41,5 @@ var activate = (function ($) {
 
 	return activate;
 })(jQuery);
+
+export default activate;

@@ -1,3 +1,4 @@
+import activate from '/portfolio/assets/scripts/activate-jquery.js';
 import keys from '/portfolio/assets/scripts/keybinding.js';
 import { subscribe } from '/portfolio/assets/scripts/pubsub.js';
 

@@ -1,4 +1,4 @@
-import { publish } from '/portfolio/assets/scripts/pubsub.js';
+import { publish } from './pubsub.js';
 
 // Requires jQuery and a pubsub implementation
 const dragsort = (function ($, publish) {

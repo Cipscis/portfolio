@@ -1,4 +1,4 @@
-import { subscribe } from '/portfolio/assets/scripts/pubsub.js'
+import { subscribe } from './pubsub.js'
 
 const statusMessage = (function (subscribe) {
 	'use strict';

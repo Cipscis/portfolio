@@ -1,7 +1,7 @@
-import '/portfolio/assets/scripts/status.js';
-import { debounce } from '/portfolio/assets/scripts/throttle-debounce.js';
-import activate from '/portfolio/assets/scripts/activate-jquery.js';
-import { publish } from '/portfolio/assets/scripts/pubsub.js';
+import './status.js';
+import { debounce } from './throttle-debounce.js';
+import activate from './activate-jquery.js';
+import { publish } from './pubsub.js';
 
 const autocomplete = (function ($, templayed, debounce, activate, publish) {
 	'use strict';

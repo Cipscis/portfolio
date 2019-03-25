@@ -21,22 +21,22 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 
 :root,
 .light-mode {
-	--background: #{$white};
-	--background-active: #{$grey--lightest};
-	--color: #{$grey--dark};
-	--color-low-contrast: #{$grey--light};
+	--primary-background: #{$white};
+	--primary-background-active: #{$grey--lightest};
+	--primary-color: #{$grey--dark};
+	--primary-color-low-contrast: #{$grey--light};
 
 	--shadow: #{rgba($black, 0.4)};
-	--overlay: rgba($grey--lighter, 0.7);
+	--overlay: #{rgba($grey--lighter, 0.7)};
 
 	--offset-background: #{$grey--lightest};
-	--offset-color: var(--color);
+	--offset-color: var(--primary-color);
 
 	--border: #{$black};
 
 	--clickable-background: #{$grey--lightest};
 	--clickable-background-active: #{$grey--lighter};
-	--clickable-color: var(--color);
+	--clickable-color: var(--primary-color);
 
 	--highlight-background: #{$green--pale};
 	--highlight-background-active: #{$green--pale-dark};
@@ -53,22 +53,22 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 }
 
 .dark-mode {
-	--background: #{$grey--dark};
-	--background-active: #{$grey--mid};
-	--color: #{$grey--lightest};
-	--color-low-contrast: #{$grey--light};
+	--primary-background: #{$grey--dark};
+	--primary-background-active: #{$grey--mid};
+	--primary-color: #{$grey--lightest};
+	--primary-color-low-contrast: #{$grey--light};
 
 	--shadow: #{rgba($white, 0.4)};
 	--overlay: rgba(34, 34, 34, 0.7);
 
 	--offset-background: #{$grey};
-	--offset-color: var(--color);
+	--offset-color: var(--primary-color);
 
 	--border: #{$grey--light};
 
 	--clickable-background: #{$grey};
 	--clickable-background-active: #{$grey--light};
-	--clickable-color: var(--color);
+	--clickable-color: var(--primary-color);
 
 	--highlight-background: #2c6f3d;
 	--highlight-background-active: #00924a;
@@ -87,8 +87,8 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 body,
 .light-mode,
 .dark-mode {
-	background: var(--background);
-	color: var(--color);
+	background: var(--primary-background);
+	color: var(--primary-color);
 }
 
 .is-error {

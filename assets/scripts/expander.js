@@ -40,7 +40,7 @@ const expander = (function (activate) {
 
 			$section = e.target;
 
-			while (Array.prototype.indexOf.call($section.classList || [], classes.section) === -1) {
+			while ($section && ($section.classList.contains(classes.section) === false)) {
 				$section = $section.parentElement;
 			}
 

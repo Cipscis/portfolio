@@ -23,12 +23,12 @@ const keys = (function () {
 			var nodeName = $activeEl.nodeName.toLowerCase();
 			var inputType;
 
-			var isInput = (['input', 'textarea', 'select'].indexOf(nodeName) !== -1);
+			var isInput = (['input', 'textarea', 'select'].includes(nodeName));
 
 			if (nodeName === 'input') {
 				inputType = $activeEl.attributes.type.value.toLowerCase();
 
-				if (['color', 'radio', 'checkbox'].indexOf(inputType) !== -1) {
+				if (['color', 'radio', 'checkbox'].includes(inputType)) {
 					isInput = false;
 				}
 			} else if ($activeEl.isContentEditable) {

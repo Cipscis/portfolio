@@ -26,7 +26,7 @@ const { publish, subscribe, unsubscribe } = (function () {
 			callbacks = subscriptions[event];
 
 			// Don't bind a particular function to an event more than once
-			if (callbacks.indexOf(callback) === -1) {
+			if (callbacks.includes(callback) === false) {
 				callbacks.push(callback);
 			}
 		},

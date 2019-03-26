@@ -171,7 +171,7 @@ const { activate, deactivate } = (function () {
 
 		_makeKeySpecificEvent: function (fn, ...keys) {
 			return function (event) {
-				if (keys.indexOf(event.key.toLowerCase()) !== -1) {
+				if (keys.includes(event.key.toLowerCase())) {
 					fn.apply(this, arguments);
 				}
 			};

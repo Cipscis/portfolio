@@ -5,9 +5,6 @@
 	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<script type="text/javascript" src="/portfolio/assets/scripts/activate.js"></script>
-	<script type="text/javascript" src="/portfolio/assets/scripts/expander.js"></script>
 </head>
 <body>
 	<div class="layout">
@@ -123,7 +120,8 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-js-trigger" aria-describedby="tooltip-ghost-js-body">
 							<span class="tooltip__trigger" id="tooltip-ghost-js-trigger">adding and removing state classes</span>.
 							<span class="tooltip__body" id="tooltip-ghost-js-body">
-								<script type="text/javascript" class="code code--block">(function (activate) {
+								<script type="module" class="code code--block">import activate from '/portfolio/assets/scripts/activate.js';
+(function (activate) {
 	activate('.js-toggle-ghost', () => {
 		let $ghosts = document.querySelectorAll('.ghost');
 		$ghosts.forEach(($ghost) => {
@@ -150,7 +148,9 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 		</section>
 	</div>
 
-	<script type="text/javascript">
+	<script type="module">
+		import expander from '/portfolio/assets/scripts/expander.js';
+
 		(function (expander) {
 			expander.init();
 		})(expander);

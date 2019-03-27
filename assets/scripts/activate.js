@@ -17,7 +17,9 @@ const { activate, deactivate } = (function () {
 
 			if (module._isButton(el) === false) {
 				module._bind(el, 'keydown', fn);
-				module._bind(el, 'keyup', fn);
+				if (module._isInput(el) === false) {
+					module._bind(el, 'keyup', fn);
+				}
 			}
 		},
 
@@ -38,7 +40,9 @@ const { activate, deactivate } = (function () {
 
 			if (module._isButton(el) === false) {
 				module._unbind(el, 'keydown', fn);
-				module._unbind(el, 'keyup', fn);
+				if (module._isInput(el) === false) {
+					module._unbind(el, 'keyup', fn);
+				}
 			}
 
 			if (binding.click.length === 0) {
@@ -50,6 +54,12 @@ const { activate, deactivate } = (function () {
 			var isButton = el.nodeName.toLowerCase() === 'button';
 
 			return isButton;
+		},
+
+		_isInput: function (el) {
+			var isInput = el.matches('input, textarea, [contenteditable], select');
+
+			return isInput;
 		},
 
 		_bind: function (el, eventType, fn) {
@@ -68,7 +78,7 @@ const { activate, deactivate } = (function () {
 			}
 
 			if (eventType === 'keydown') {
-				fnWrapper = module._makeKeydownEvent(fn);
+				fnWrapper = module._makeKeydownEvent(fn, module._isInput(el));
 			} else if (eventType === 'keyup') {
 				fnWrapper = module._makeKeyupEvent(fn);
 			} else {
@@ -155,13 +165,17 @@ const { activate, deactivate } = (function () {
 			};
 		},
 
-		_makeKeydownEvent: function (fn) {
+		_makeKeydownEvent: function (fn, isInput) {
 			return function () {
 				var enterEvent = module._makeKeySpecificEvent(fn, 'enter');
-				var spaceEvent = module._makeKeySpecificEvent(e => e.preventDefault(), ' ');
+				var spaceEvent;
 
 				enterEvent.apply(this, arguments);
-				spaceEvent.apply(this, arguments);
+
+				if (isInput === false) {
+					spaceEvent = module._makeKeySpecificEvent(e => e.preventDefault(), ' ');
+					spaceEvent.apply(this, arguments);
+				}
 			}
 		},
 

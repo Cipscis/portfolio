@@ -1,8 +1,6 @@
 import activate from './activate.js';
 
 const expander = (function (activate) {
-	'use strict';
-
 	const selectors = {
 		section: '.js-expander',
 		trigger: '.js-expander-trigger',

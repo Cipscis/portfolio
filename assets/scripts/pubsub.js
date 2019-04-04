@@ -1,6 +1,4 @@
 const { publish, subscribe, unsubscribe } = (function () {
-	'use strict';
-
 	const subscriptions = {};
 
 	const module = {

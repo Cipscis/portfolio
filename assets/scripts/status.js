@@ -1,8 +1,6 @@
 import { subscribe } from './pubsub.js'
 
 const statusMessage = (function (subscribe) {
-	'use strict';
-
 	const selectors = {
 		status: '.js-status'
 	};

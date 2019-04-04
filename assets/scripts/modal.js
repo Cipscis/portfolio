@@ -3,8 +3,6 @@ import keys from './keybinding.js';
 import { subscribe } from './pubsub.js';
 
 const modal = (function ($, activate, keys, subscribe) {
-	'use strict';
-
 	const selectors = {
 		modal: '.js-modal',
 		body: '.js-modal-body',

@@ -2,8 +2,6 @@ import { publish } from './pubsub.js';
 
 // Requires jQuery and a pubsub implementation
 const dragsort = (function ($, publish) {
-	'use strict';
-
 	var $draggedEl;
 	var $clone;
 

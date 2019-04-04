@@ -1,8 +1,6 @@
 import { throttle } from './throttle-debounce.js';
 
 const validate = (function (throttle) {
-	'use strict';
-
 	const selectors = {
 		invalid: 'input:invalid, select:invalid, textarea:invalid',
 		status: '.js-validate-status'

@@ -13,6 +13,7 @@ const activate = (function ($) {
 		return function (e) {
 			var eventType = e.type;
 			var isButton = e.target.nodeName.toLowerCase() === 'button';
+			var isInput = e.target.matches('input, textarea') || e.target.isContentEditable;
 
 			var isEnter = e.key && (e.key.toLowerCase() === 'enter');
 			// Need to check for 'spacebar' because of IE11
@@ -23,7 +24,7 @@ const activate = (function ($) {
 			var otherTrigger = eventType !== enterEvent && eventType !== spaceEvent;
 
 			// Prevent space from scrolling the page down
-			if (!isButton && eventType === 'keydown' && isSpace) {
+			if (!isButton && !isInput && eventType === 'keydown' && isSpace) {
 				e.preventDefault(e);
 			}
 

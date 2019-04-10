@@ -51,7 +51,7 @@ const { activate, deactivate } = (function () {
 		},
 
 		_isButton: function (el) {
-			var isButton = el.nodeName.toLowerCase() === 'button';
+			var isButton = el.matches('button, input[type="button"], input[type="submit"]');
 
 			return isButton;
 		},

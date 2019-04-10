@@ -242,7 +242,9 @@ h1, h2, h3, h4, h5, h6 {
     content: "― "; }
 
 .content code,
-.code {
+.code,
+.content var,
+.var {
   display: inline-block;
   vertical-align: middle;
   background: var(--offset-background);
@@ -256,17 +258,24 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
   overflow: auto; }
   .content code.tag::before,
-  .code.tag::before {
+  .code.tag::before,
+  .content var.tag::before,
+  .tag.var::before {
     content: "<"; }
   .content code.tag::after,
-  .code.tag::after {
+  .code.tag::after,
+  .content var.tag::after,
+  .tag.var::after {
     content: ">"; }
 
+.content .code--block,
 .code--block {
   display: block;
   margin: 20px 0; }
+  .content .code--block:first-child,
   .code--block:first-child {
     margin-top: 0; }
+  .content .code--block:last-child,
   .code--block:last-child {
     margin-bottom: 0; }
 

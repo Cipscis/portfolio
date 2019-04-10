@@ -90,6 +90,7 @@
 		}
 	}
 }
+.content .code--block,
 .code--block {
 	display: block;
 	margin: 20px 0;
@@ -99,6 +100,11 @@
 	&:last-child {
 		margin-bottom: 0;
 	}
+}
+
+.content var,
+.var {
+	@extend .code;
 }
 
 .content kbd,

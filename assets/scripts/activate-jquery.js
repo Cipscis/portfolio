@@ -13,7 +13,7 @@ const activate = (function ($) {
 		return function (e) {
 			var eventType = e.type;
 			var isButton = e.target.nodeName.toLowerCase() === 'button';
-			var isInput = e.target.matches('input, textarea') || e.target.isContentEditable;
+			var isInput = e.target.matches('input, textarea, select') || e.target.isContentEditable;
 
 			var isEnter = e.key && (e.key.toLowerCase() === 'enter');
 			// Need to check for 'spacebar' because of IE11

@@ -1,5 +1,5 @@
-const { activate, deactivate } = (function () {
-	const boundEventsMap = [];
+const { activate } = (function () {
+	const bindings = [];
 
 	const module = {
 		activate: function (el, fn) {
@@ -13,173 +13,73 @@ const { activate, deactivate } = (function () {
 				return;
 			}
 
-			module._bind(el, 'click', fn);
+			module._bind(el, fn);
+		},
 
-			if (module._isButton(el) === false) {
-				module._bind(el, 'keydown', fn);
-				if (module._isInput(el) === false) {
-					module._bind(el, 'keyup', fn);
+		_bind: function (el, fn) {
+			// Don't bind a function to an element more than once
+			// (i.e. behave like addEventListener)
+			if (module._isBound(el, fn) === false) {
+				bindings.push({el, fn});
+
+				// Click event always activates an element
+				// Keydown on "enter" key activates an element unless it's a button
+				// Keyup on "spacebar" key activates an element unless it's a button or an input
+
+				el.addEventListener('click', fn);
+
+				if (module._isButton(el) === false) {
+					let fnKeydown = module._makeKeydownEvent(fn, module._isInput(el));
+					el.addEventListener('keydown', fnKeydown);
+
+					if (module._isInput(el) === false) {
+						let fnKeyup = module._makeKeyupEvent(fn);
+						el.addEventListener('keyup', fnKeyup);
+					}
 				}
 			}
 		},
 
-		deactivate: function (el, fn) {
-			var binding;
-
-			if (el.length && el.forEach) {
-				// el is Array-like, so iterate over its elements
-				el.forEach(function (innerEl) {
-					module.activate(innerEl, fn);
-				});
-				return;
-			}
-
-			binding = module._getElBinding(el);
-
-			module._unbind(el, 'click', fn);
-
-			if (module._isButton(el) === false) {
-				module._unbind(el, 'keydown', fn);
-				if (module._isInput(el) === false) {
-					module._unbind(el, 'keyup', fn);
+		_isBound: function (el, fn) {
+			for (let i = 0; i < bindings.length; i++) {
+				let binding = bindings[i];
+				if (binding[el] === el && binding[fn] === fn) {
+					return true;
 				}
 			}
 
-			if (binding.click.length === 0) {
-				module._removeElBinding(el);
-			}
+			return false;
 		},
 
 		_isButton: function (el) {
-			var isButton = el.matches('button, input[type="button"], input[type="submit"]');
-
+			let isButton = el.matches('button, input[type="button"], input[type="submit"]');
 			return isButton;
 		},
 
 		_isInput: function (el) {
-			var isInput = el.matches('input, textarea, select') || el.isContentEditable;
-
+			let isInput = el.matches('input, textarea, select') || el.isContentEditable;
 			return isInput;
 		},
 
-		_bind: function (el, eventType, fn) {
-			var fnWrapper;
-			var binding = module._getElBinding(el);
-			var fnBinding;
-
-			if (!binding) {
-				binding = module._createElBinding(el);
-			}
-
-			fnBinding = module._getFnBinding(el, eventType, fn);
-			if (fnBinding) {
-				// addEventListener won't bind duplicate events, so don't register it as bound again
-				return;
-			}
-
-			if (eventType === 'keydown') {
-				fnWrapper = module._makeKeydownEvent(fn, module._isInput(el));
-			} else if (eventType === 'keyup') {
-				fnWrapper = module._makeKeyupEvent(fn);
-			} else {
-				fnWrapper = fn;
-			}
-
-			el.addEventListener(eventType, fnWrapper);
-			binding[eventType].push({
-				fn: fn,
-				fnWrapper: fnWrapper
-			});
-		},
-
-		_getFnBinding: function (el, eventType, fn) {
-			var binding = module._getElBinding(el);
-
-			if (!binding) {
-				return;
-			}
-
-			for (let i = 0 ; i < binding[eventType].length; i++) {
-				let fnBinding = binding[eventType][i];
-
-				if (fnBinding.fn === fn) {
-					return fnBinding;
-				}
-			}
-		},
-
-		_getElBinding: function (el) {
-			var binding;
-
-			for (let i = 0; i < boundEventsMap.length; i++) {
-				binding = boundEventsMap[i];
-
-				if (binding.el === el) {
-					return binding;
-				}
-			}
-		},
-
-		_createElBinding: function (el) {
-			var binding = module._makeNewBinding(el);
-
-			boundEventsMap.push(binding);
-			return binding;
-		},
-
-		_removeElBinding: function (el) {
-			var binding;
-
-			for (let i = 0; i < boundEventsMap.length; i++) {
-				binding = boundEventsMap[i];
-
-				if (binding.el === el) {
-					boundEventsMap.splice(i, 1);
-					return;
-				}
-			}
-		},
-
-		_unbind: function (el, eventType, fn) {
-			var binding = module._getElBinding(el);
-			var fnBinding;
-			var index;
-
-			if (!binding) {
-				return;
-			}
-
-			fnBinding = module._getFnBinding(el, eventType, fn);
-			index = binding[eventType].indexOf(fnBinding);
-
-			el.removeEventListener(eventType, fnBinding.fnWrapper);
-			binding[eventType].splice(index, 1);
-		},
-
-		_makeNewBinding: function (el) {
-			return {
-				el,
-				click: [],
-				keydown: [],
-				keyup: []
-			};
-		},
-
 		_makeKeydownEvent: function (fn, isInput) {
+			// Keydown on "enter" key activates an element
+			// Keydown on "spacebar" key on an activateable element should not scroll the page
 			return function () {
-				var enterEvent = module._makeKeySpecificEvent(fn, 'enter');
-				var spaceEvent;
+				let enterEvent = module._makeKeySpecificEvent(fn, 'enter');
+				let spaceEvent;
 
 				enterEvent.apply(this, arguments);
 
 				if (isInput === false) {
-					spaceEvent = module._makeKeySpecificEvent(e => e.preventDefault(), ' ');
+					// Prevent default action of spacebar to prevent scrolling on activation
+					spaceEvent = module._makeKeySpecificEvent(e => e.preventDefault(), ' ', 'spacebar');
 					spaceEvent.apply(this, arguments);
 				}
 			}
 		},
 
 		_makeKeyupEvent: function (fn) {
+			// Keydown on "spacebar" key activates an element
 			return module._makeKeySpecificEvent(fn, ' ', 'spacebar');
 		},
 
@@ -193,10 +93,8 @@ const { activate, deactivate } = (function () {
 	};
 
 	return {
-		activate: module.activate,
-		deactivate: module.deactivate
+		activate: module.activate
 	};
 })();
 
 export default activate;
-export { activate, deactivate };

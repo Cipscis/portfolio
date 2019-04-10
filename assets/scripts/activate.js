@@ -1,4 +1,4 @@
-const { activate } = (function () {
+const activate = (function () {
 	const bindings = [];
 
 	const module = {
@@ -92,9 +92,7 @@ const { activate } = (function () {
 		}
 	};
 
-	return {
-		activate: module.activate
-	};
+	return module.activate;
 })();
 
 export default activate;

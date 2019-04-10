@@ -57,7 +57,7 @@ const { activate, deactivate } = (function () {
 		},
 
 		_isInput: function (el) {
-			var isInput = el.matches('input, textarea, [contenteditable], select');
+			var isInput = el.matches('input, textarea, select') || el.isContentEditable;
 
 			return isInput;
 		},

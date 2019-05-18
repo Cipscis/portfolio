@@ -3,6 +3,11 @@ const activate = (function () {
 
 	const module = {
 		activate: function (el, fn) {
+			if (!el) {
+				// el is falsey, so do nothing
+				return;
+			}
+
 			if (typeof el === 'string') {
 				el = document.querySelectorAll(el);
 			}

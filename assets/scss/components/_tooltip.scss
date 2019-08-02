@@ -78,6 +78,11 @@ $tooltip-wiggle-room: 18px;
 .tooltip:focus-within .tooltip__body {
 	display: inline-block;
 }
+.tooltip.tooltip--hidden {
+	.tooltip__body {
+		display: none;
+	}
+}
 
 .tooltip--block {
 	.tooltip__body {

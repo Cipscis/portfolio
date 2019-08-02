@@ -581,6 +581,9 @@ input {
 .tooltip:focus-within .tooltip__body {
   display: inline-block; }
 
+.tooltip.tooltip--hidden .tooltip__body {
+  display: none; }
+
 .tooltip--block .tooltip__body {
   transform: none;
   left: 20px;

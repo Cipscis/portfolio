@@ -99,6 +99,11 @@ const keys = (function () {
 			}
 		},
 
+		rebind: function (oldKey, fn, newKey, allowInInput, requireCtrl) {
+			module.unbind(oldKey, fn);
+			module.bind(newKey, fn, allowInInput, requireCtrl);
+		},
+
 		_getSequenceArgs: function (keyA, keyB, keyC, fn) {
 			var args = Array.prototype.splice.call(arguments, 0);
 			var keys = args[0];
@@ -176,14 +181,22 @@ const keys = (function () {
 			fn = args.fn;
 
 			module.unbind(keyString, fn);
-		}
+		},
+
+		rebindSequence: function (oldSequence, fn, newSequence) {
+			module.unbindSequence(oldSequence, fn);
+			module.bindSequence(newSequence, fn);
+		},
 	};
 
 	return {
 		bind: module.bind,
 		unbind: module.unbind,
+		rebind: module.rebind,
+
 		bindSequence: module.bindSequence,
-		unbindSequence: module.unbindSequence
+		unbindSequence: module.unbindSequence,
+		rebindSequence: module.rebindSequence
 	};
 })();
 

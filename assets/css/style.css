@@ -659,6 +659,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
+    pointer-events: none;
     background: var(--overlay);
     animation: 0.2s fadein forwards; }
   .draggable__item.is-clone {
@@ -667,12 +668,6 @@ input {
     pointer-events: none;
     transition: none;
     opacity: 0.7; }
-
-.is-dragging .draggable__item.is-dragging * {
-  pointer-events: auto; }
-
-.dragsort-full .is-dragging .draggable__item * {
-  pointer-events: none; }
 
 .demo .draggable {
   list-style: none;
@@ -685,7 +680,15 @@ input {
 
 .demo__draggable-item {
   border: 1px solid var(--border);
-  padding: 10px; }
+  padding: 10px;
+  display: flex;
+  align-items: center; }
+
+.demo__draggable-handle {
+  width: 20px;
+  height: 30px;
+  margin-right: 20px;
+  background: grey; }
 
 .modal {
   display: none;

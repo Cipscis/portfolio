@@ -4,6 +4,8 @@ import { publish } from './pubsub.js';
 const dragsort = (function ($, publish) {
 	var $draggedEl;
 	var $clone;
+	var $dropTarget;
+	var dropDepth = 0;
 
 	var cloneOffsetX;
 	var cloneOffsetY;
@@ -20,7 +22,8 @@ const dragsort = (function ($, publish) {
 	var selectors = {
 		list: '.js-dragsort-list',
 		wrap: '.js-dragsort-wrap',
-		item: '.js-dragsort-item'
+		item: '.js-dragsort-item',
+		handle: '.js-dragsort-handle'
 	};
 
 	var classes = {
@@ -48,7 +51,7 @@ const dragsort = (function ($, publish) {
 
 		_initEvents: function () {
 			$(document)
-				.on('dragstart', selectors.item, module._processDragStart)
+				.on('dragstart', selectors.handle, module._processDragStart)
 				.on('dragenter', selectors.item, module._processDragEnter)
 				.on('dragleave', selectors.item, module._processDragLeave)
 				.on('dragover', selectors.item, module._processDragOver)
@@ -93,17 +96,25 @@ const dragsort = (function ($, publish) {
 			}
 			padding = $wrap.outerHeight();
 
-			if (
-				!$target.is($draggedEl) &&
+			if ($target.is($dropTarget)) {
+				dropDepth += 1;
+			} else if (
+				// If it's another element in the list and isn't marked as "droppable"
 				$target.closest(selectors.list).is($draggedEl.closest(selectors.list)) &&
-				$target.is(selectors.item) &&
-				!$target.hasClass(classes.droppable)
+				$target.hasClass(classes.droppable) === false
 			) {
-				$target.addClass(classes.droppable);
-				if ($draggedEl[0].compareDocumentPosition($target[0]) === 4) { // DOCUMENT_POSITION_FOLLOWING
-					$target.css('padding-bottom', padding);
+				if ($target.is($draggedEl)) {
+					module._clearDropTarget();
 				} else {
-					$target.css('padding-top', padding);
+					$target.addClass(classes.droppable);
+
+					module._setDropTarget($target);
+
+					if ($draggedEl[0].compareDocumentPosition($target[0]) === 4) { // DOCUMENT_POSITION_FOLLOWING
+						$target.css('padding-bottom', padding);
+					} else {
+						$target.css('padding-top', padding);
+					}
 				}
 			}
 		},
@@ -111,9 +122,12 @@ const dragsort = (function ($, publish) {
 		_processDragLeave: function (e) {
 			var $target = $(e.target);
 
-			if ($target.is(selectors.item) && $target.hasClass(classes.droppable)) {
-				$target.removeClass(classes.droppable);
-				$target.css('padding', 0);
+			if ($target.is($dropTarget)) {
+				dropDepth -= 1;
+
+				if (dropDepth <= 0) {
+					module._clearDropTarget();
+				}
 			}
 		},
 
@@ -182,12 +196,28 @@ const dragsort = (function ($, publish) {
 			$draggedEl = undefined;
 
 			module._destroyClone();
-
-			$('.' + classes.droppable).removeClass(classes.droppable).css('padding', 0);
+			module._clearDropTarget();
 
 			if (publish) {
 				publish(events.dragStop, $list);
 			}
+		},
+
+		_clearDropTarget: function () {
+			var $droppable = $('.' + classes.droppable);
+
+			$droppable.removeClass(classes.droppable).css('padding', 0);
+
+			$dropTarget = undefined;
+			dropDepth = 0;
+		},
+
+		_setDropTarget: function ($target) {
+			module._clearDropTarget();
+
+			$dropTarget = $target;
+			dropDepth = 1;
+			$dropTarget.addClass(classes.droppable);
 		},
 
 		// Clone
@@ -208,6 +238,9 @@ const dragsort = (function ($, publish) {
 
 				$clone.width(width);
 				$clone.height(height);
+
+				// Prevent issues with moving elements containing selected radio buttons
+				$clone.find('[type="radio"][name]').removeAttr('name');
 
 				$clone.appendTo($('body'));
 				$clone.addClass(classes.clone);

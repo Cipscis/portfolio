@@ -45,7 +45,9 @@ const tooltip = (function () {
 
 		_removeHiddenClassEvent: function ($tooltip) {
 			return e => {
-				module._removeHiddenClass($tooltip);
+				if (document.activeElement !== $tooltip) {
+					module._removeHiddenClass($tooltip);
+				}
 			};
 		},
 

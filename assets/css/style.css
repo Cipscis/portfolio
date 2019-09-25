@@ -245,7 +245,8 @@ h1, h2, h3, h4, h5, h6 {
 .content var,
 .var {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: bottom;
+  line-height: 1.5;
   background: var(--offset-background);
   color: var(--offset-color);
   padding: 0 7px;
@@ -588,7 +589,7 @@ input {
   transform: none;
   left: 20px;
   width: calc(100% - 40px);
-  margin-top: 35px; }
+  margin-top: 44px; }
 
 @media print {
   .tooltip__body {

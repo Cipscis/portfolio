@@ -54,19 +54,11 @@ const fileIO = (function () {
 			},
 
 			csv: function (data, filename, transpose) {
-				let rows = [];
-
+				let rows;
 				if (transpose) {
-					// Flip rows and columns
-					for (let i = 0; i < data[0].length; i++) {
-						let row = [];
-						for (let j = 0; j < data.length; j++) {
-							row.push(data[j][i]);
-						}
-						rows.push(row);
-					}
+					rows = module.save._csvTranspose(data);
 				} else {
-					rows = data;
+					rows = module.save._csvPad(data);
 				}
 
 				rows = module.save._csvEscape(rows);
@@ -78,6 +70,60 @@ const fileIO = (function () {
 
 				filename = module.save._extendFilename(filename, 'csv');
 				module.save.data(rows, filename, 'text/csv');
+			},
+
+			_csvTranspose: function (data) {
+				let maxLength = 0;
+				for (let i = 0; i < data.length; i++) {
+					let row = data[i];
+
+					maxLength = Math.max(maxLength, row.length);
+				}
+
+				// Flip rows and columns
+				let rows = [];
+				for (let i = 0; i < maxLength; i++) {
+					let row = [];
+					for (let j = 0; j < data.length; j++) {
+						let cellValue = data[j][i];
+
+						if (typeof cellValue === 'undefined') {
+							cellValue = '';
+						}
+
+						row.push(cellValue);
+					}
+					rows.push(row);
+				}
+
+				return rows;
+			},
+
+			_csvPad: function (data) {
+				let maxLength = 0;
+				for (let i = 0; i < data.length; i++) {
+					let row = data[i];
+
+					maxLength = Math.max(maxLength, row.length);
+				}
+
+				// Flip rows and columns
+				let rows = [];
+				for (let i = 0; i < data.length; i++) {
+					let row = [];
+					for (let j = 0; j < maxLength; j++) {
+						let cellValue = data[i][j];
+
+						if (typeof cellValue === 'undefined') {
+							cellValue = '';
+						}
+
+						row.push(cellValue);
+					}
+					rows.push(row);
+				}
+
+				return rows;
 			},
 
 			_csvEscape: function (rows) {

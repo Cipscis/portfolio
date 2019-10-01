@@ -1,5 +1,5 @@
 const fileIO = (function () {
-	var $link;
+	let $link;
 
 	const ReadMethods = {
 		TEXT: 'readAsText',
@@ -10,9 +10,7 @@ const fileIO = (function () {
 		save: {
 			data: function (data, filename, type) {
 				// Construct a Blob and download it
-				var blob;
-
-				blob = new Blob(
+				let blob = new Blob(
 					[data],
 					{
 						type: type || 'text/plain'
@@ -36,23 +34,19 @@ const fileIO = (function () {
 			},
 
 			blob: function (blob, filename) {
-				var url;
-
 				if (navigator.msSaveBlob) {
 					navigator.msSaveBlob(blob, filename);
 				} else {
-					url = URL.createObjectURL(blob);
+					let url = URL.createObjectURL(blob);
 					module.save._downloadDataUrl(url, filename);
 				}
 			},
 
 			file: function (file, filename) {
-				var reader;
-
 				if (navigator.msSaveBlob) {
 					navigator.msSaveBlob(file, filename);
 				} else {
-					reader = new FileReader();
+					let reader = new FileReader();
 
 					reader.readAsDataURL(file);
 					reader.addEventListener('load', module.save._processedFile(filename));
@@ -60,19 +54,13 @@ const fileIO = (function () {
 			},
 
 			csv: function (data, filename, transpose) {
-				var rows = [];
-				var row;
-
-				var fileString;
-
-				var i;
-				var j;
+				let rows = [];
 
 				if (transpose) {
 					// Flip rows and columns
-					for (i = 0; i < data[0].length; i++) {
-						row = [];
-						for (j = 0; j < data.length; j++) {
+					for (let i = 0; i < data[0].length; i++) {
+						let row = [];
+						for (let j = 0; j < data.length; j++) {
 							row.push(data[j][i]);
 						}
 						rows.push(row);
@@ -81,13 +69,41 @@ const fileIO = (function () {
 					rows = data;
 				}
 
-				for (i = 0; i < rows.length; i++) {
+				rows = module.save._csvEscape(rows);
+
+				for (let i = 0; i < rows.length; i++) {
 					rows[i] = rows[i].join(',');
 				}
 				rows = rows.join('\n');
 
 				filename = module.save._extendFilename(filename, 'csv');
 				module.save.data(rows, filename, 'text/csv');
+			},
+
+			_csvEscape: function (rows) {
+				for (let i = 0; i < rows.length; i++) {
+					let row = rows[i];
+
+					for (let j = 0; j < row.length; j++) {
+						if (typeof row[j] === 'undefined') {
+							row[j] = '';
+						} else if (typeof row[j] !== 'string') {
+							// Convert to string
+							row[j] = '' + row[j];
+						}
+
+						if (row[j].match(/,|"/)) {
+
+							// Turn any double quotes into escaped double quites
+							row[j] = row[j].replace(/"/g, '""');
+
+							// Wrap cell in double quotes
+							row[j] = '"' + row[j] + '"';
+						}
+					}
+				}
+
+				return rows;
 			},
 
 			_processedFile: function (filename) {
@@ -107,7 +123,7 @@ const fileIO = (function () {
 			},
 
 			_extendFilename: function (filename, extension) {
-				var testPattern = new RegExp('\\.' + extension + '$');
+				let testPattern = new RegExp('\\.' + extension + '$');
 
 				if (!testPattern.test(filename)) {
 					filename += '.' + extension;
@@ -130,7 +146,7 @@ const fileIO = (function () {
 				// Create a file input, and use it to prompt the user to select a file.
 				// Once a file is selected, pass it to fileLoadedCallback
 
-				var $fileInput = document.createElement('input');
+				let $fileInput = document.createElement('input');
 
 				$fileInput.type = 'file';
 				$fileInput.addEventListener('change', module.load._loadSelectedFile($fileInput, fileLoadedCallback, readMethod));
@@ -140,8 +156,8 @@ const fileIO = (function () {
 
 			_loadSelectedFile: function ($fileInput, fileLoadedCallback, readMethod) {
 				return function (e) {
-					var file = $fileInput.files[0];
-					var reader = new FileReader();
+					let file = $fileInput.files[0];
+					let reader = new FileReader();
 
 					reader.onload = module.load._fileLoaded(fileLoadedCallback);
 					reader[readMethod](file);
@@ -150,7 +166,7 @@ const fileIO = (function () {
 
 			_fileLoaded: function (fileLoadedCallback) {
 				return function (e) {
-					var reader = e.target;
+					let reader = e.target;
 
 					if (reader.readyState === 2) {
 						// DONE

@@ -54,52 +54,28 @@ const fileIO = (function () {
 			},
 
 			csv: function (data, filename, transpose) {
-				let rows;
-				if (transpose) {
-					rows = module.save._csvTranspose(data);
-				} else {
-					rows = module.save._csvPad(data);
-				}
+				let rows = module.save._csvPrepareData(data, transpose);
 
-				rows = module.save._csvEscape(rows);
+				filename = module.save._extendFilename(filename, 'csv');
+				module.save.data(rows, filename, 'text/csv');
+			},
+
+			_csvPrepareData: function (data, transpose) {
+				let rows = module._csvShapeData(data, transpose);
+				rows = module._csvEscape(data);
 
 				for (let i = 0; i < rows.length; i++) {
 					rows[i] = rows[i].join(',');
 				}
 				rows = rows.join('\n');
 
-				filename = module.save._extendFilename(filename, 'csv');
-				module.save.data(rows, filename, 'text/csv');
-			},
-
-			_csvTranspose: function (data) {
-				let maxLength = 0;
-				for (let i = 0; i < data.length; i++) {
-					let row = data[i];
-
-					maxLength = Math.max(maxLength, row.length);
-				}
-
-				// Flip rows and columns
-				let rows = [];
-				for (let i = 0; i < maxLength; i++) {
-					let row = [];
-					for (let j = 0; j < data.length; j++) {
-						let cellValue = data[j][i];
-
-						if (typeof cellValue === 'undefined') {
-							cellValue = '';
-						}
-
-						row.push(cellValue);
-					}
-					rows.push(row);
-				}
-
 				return rows;
-			},
+			};
 
-			_csvPad: function (data) {
+			_csvShapeData: function (data, transpose) {
+				// Pad empty cells with empty strings and,
+				// if necessary, transpose the data
+
 				let maxLength = 0;
 				for (let i = 0; i < data.length; i++) {
 					let row = data[i];
@@ -107,12 +83,15 @@ const fileIO = (function () {
 					maxLength = Math.max(maxLength, row.length);
 				}
 
-				// Flip rows and columns
+				// Flip rows and columns if transposing data
+				let iMax = transpose ? maxLength : data.length;
+				let jMax = transpose ? data.length : maxLength;
+
 				let rows = [];
-				for (let i = 0; i < data.length; i++) {
+				for (let i = 0; i < iMax; i++) {
 					let row = [];
-					for (let j = 0; j < maxLength; j++) {
-						let cellValue = data[i][j];
+					for (let j = 0; j < jMax; j++) {
+						let cellValue = transpose ? data[j][i] : data[i][j];
 
 						if (typeof cellValue === 'undefined') {
 							cellValue = '';
@@ -127,6 +106,8 @@ const fileIO = (function () {
 			},
 
 			_csvEscape: function (rows) {
+				// Make sure any cells containing " or , are escaped appropriately
+
 				for (let i = 0; i < rows.length; i++) {
 					let row = rows[i];
 

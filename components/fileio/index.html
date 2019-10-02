@@ -93,7 +93,6 @@
 			// The third parameter tells fileIO to transpose the data before saving it,
 			// so it can be passed through at this point as columns instead of rows
 			fileIO.save.csv(data, filename, true);
-			fileIO.save.csv(data, filename);
 		};
 		activate('.js-save-csv', saveCsv);
 	</script>

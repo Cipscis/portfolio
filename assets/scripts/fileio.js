@@ -61,8 +61,8 @@ const fileIO = (function () {
 			},
 
 			_csvPrepareData: function (data, transpose) {
-				let rows = module._csvShapeData(data, transpose);
-				rows = module._csvEscape(data);
+				let rows = module.save._csvShapeData(data, transpose);
+				rows = module.save._csvEscape(rows);
 
 				for (let i = 0; i < rows.length; i++) {
 					rows[i] = rows[i].join(',');
@@ -70,7 +70,7 @@ const fileIO = (function () {
 				rows = rows.join('\n');
 
 				return rows;
-			};
+			},
 
 			_csvShapeData: function (data, transpose) {
 				// Pad empty cells with empty strings and,

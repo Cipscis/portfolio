@@ -66,7 +66,9 @@ const keys = (function () {
 					return;
 				}
 
-				if (event.key.toLowerCase() === key) {
+				// Some behaviour, like selecting an autocomplete result, can
+				// fire a keydown event with no key
+				if (event.key && event.key.toLowerCase() === key) {
 					if (!requireCtrl || event.ctrlKey) {
 						if (fn.apply(this, arguments) === false) {
 							// Implement jQuery-like shorthand of return false;

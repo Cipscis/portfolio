@@ -68,7 +68,7 @@ const statusMessage = (function (subscribe) {
 
 			// Asynchronous so the class gets added back even if it was
 			// just removed, ensuring any CSS animation is triggered
-			window.setTimeout(() => $status.classList.add(cssClass), 1);
+			window.setTimeout(() => $status.classList.add(cssClass), 10);
 		},
 
 		_clearMessage: function ($status) {

@@ -21,6 +21,7 @@
 	&:focus {
 		outline: none;
 		&:before {
+			@include focus-outline;
 			background: var(--highlight-background);
 		}
 	}

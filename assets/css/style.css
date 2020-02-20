@@ -616,7 +616,14 @@ input {
   .expander__trigger:focus {
     outline: none; }
     .expander__trigger:focus:before {
+      outline-color: #4d90fe;
+      outline-offset: -2px;
+      outline-style: solid;
+      outline-width: 2px;
       background: var(--highlight-background); }
+      @supports (outline-style: auto) {
+        .expander__trigger:focus:before {
+          outline-style: auto; } }
 
 .expander__body {
   display: block;

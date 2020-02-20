@@ -536,8 +536,21 @@ input {
     top: -18px;
     bottom: -18px; }
 
+.tooltip:focus .tooltip__trigger {
+  outline-color: #4d90fe;
+  outline-offset: -2px;
+  outline-style: solid;
+  outline-width: 2px; }
+  @supports (outline-style: auto) {
+    .tooltip:focus .tooltip__trigger {
+      outline-style: auto; } }
+
 .tooltip:focus-within .tooltip__trigger {
-  background-color: var(--highlight-background-active); }
+  background-color: var(--highlight-background-active);
+  outline-color: #4d90fe;
+  outline-offset: -2px;
+  outline-style: solid;
+  outline-width: 2px; }
   .tooltip:focus-within .tooltip__trigger:before {
     content: "";
     position: absolute;
@@ -545,6 +558,9 @@ input {
     right: 0;
     top: -18px;
     bottom: -18px; }
+  @supports (outline-style: auto) {
+    .tooltip:focus-within .tooltip__trigger {
+      outline-style: auto; } }
 
 .tooltip__body {
   position: absolute;

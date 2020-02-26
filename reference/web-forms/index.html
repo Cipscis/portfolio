@@ -137,17 +137,17 @@
 					<p>To achieve this, the following CSS rules are used on the <code class="tag">input</code>:</p>
 
 					<pre class="code code--block">position: absolute;
-	display: block;
-	width: 1px;
-	height: 1px;
-	opacity: 0;
-	pointer-events: none;</pre>
+display: block;
+width: 1px;
+height: 1px;
+opacity: 0;
+pointer-events: none;</pre>
 
 					<p>The visible element in this example is a <code class="tag">span</code> tag (though various other tags could be used instead), which can be styled much more freely. It uses the adjacent sibling selector to change its appearance based on the state of the semi-hidden <code class="tag">input</code> element, using the <code>:focus</code> and <code>:checked</code> pseudoclasses. For example:</p>
 
 					<pre class="code code--block">.fake-input__input[type="radio"]:checked + .fake-input__display::before {
-		content: "✓"
-	}</pre>
+	content: "✓"
+}</pre>
 
 					<p>Though the <code class="tag">input</code> element itself has <code>pointer-events: none;</code> on it, the whole group is wrapped in a <code class="tag">label</code> tag. This causes the click to be delegated to the <code class="tag">input</code> element, so it still behaves like a normal radio button or checkbox in this respect.</p>
 				</div>

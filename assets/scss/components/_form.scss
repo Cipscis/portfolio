@@ -136,6 +136,7 @@ input {
 }
 .fake-input__input:focus + .fake-input__display,
 .fake-input__display:hover {
+	@include focus-outline;
 	background: var(--primary-background-active);
 }
 .fake-input__input {

@@ -439,7 +439,15 @@ input {
 
 .fake-input__input:focus + .fake-input__display,
 .fake-input__display:hover {
+  outline-color: #4d90fe;
+  outline-offset: -2px;
+  outline-style: solid;
+  outline-width: 2px;
   background: var(--primary-background-active); }
+  @supports (outline-style: auto) {
+    .fake-input__input:focus + .fake-input__display,
+    .fake-input__display:hover {
+      outline-style: auto; } }
 
 .fake-input__input:checked + .fake-input__display::before {
   content: "✓"; }

@@ -216,20 +216,21 @@ const modal = (function ($, activate, keys, subscribe) {
 				$body[0].style.height = '';
 				$body[0].style.width = '';
 
-				width = $body.outerWidth();
-				height = $body.outerHeight();
+				width = Math.ceil($body.outerWidth());
+				height = Math.ceil($body.outerHeight());
 
 				// Round up to the nearest 2, so centring won't cause blur
 				// when running animations or using 3D transforms
 
 				if (width % 2) {
 					width += 1;
-					$body.outerWidth(width);
 				}
+				$body.css('width', width + 'px');
+
 				if (height % 2) {
 					height += 1;
-					$body.outerHeight(height);
 				}
+				$body.css('height', height + 'px');
 			}
 		},
 

@@ -53,16 +53,16 @@ const fileIO = (function () {
 				}
 			},
 
-			csv: function (data, filename, transpose) {
-				let rows = module.save._csvPrepareData(data, transpose);
+			csv: function (data, filename, transpose, sanitise) {
+				let rows = module.save._csvPrepareData(data, transpose, sanitise);
 
 				filename = module.save._extendFilename(filename, 'csv');
 				module.save.data(rows, filename, 'text/csv');
 			},
 
-			_csvPrepareData: function (data, transpose) {
+			_csvPrepareData: function (data, transpose, sanitise) {
 				let rows = module.save._csvShapeData(data, transpose);
-				rows = module.save._csvEscape(rows);
+				rows = module.save._csvEscape(rows, sanitise);
 
 				for (let i = 0; i < rows.length; i++) {
 					rows[i] = rows[i].join(',');
@@ -105,7 +105,7 @@ const fileIO = (function () {
 				return rows;
 			},
 
-			_csvEscape: function (rows) {
+			_csvEscape: function (rows, sanitise) {
 				// Make sure any cells containing " or , are escaped appropriately
 
 				for (let i = 0; i < rows.length; i++) {
@@ -117,6 +117,14 @@ const fileIO = (function () {
 						} else if (typeof row[j] !== 'string') {
 							// Convert to string
 							row[j] = '' + row[j];
+						}
+
+						if (sanitise) {
+							// Prevent spreadsheet software like
+							// Excel from trying to execute code
+							if (row[j].match(/^[=\-+@]/)) {
+								row[j] = '\t' + row[j];
+							}
 						}
 
 						if (row[j].match(/,|"/)) {

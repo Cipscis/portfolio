@@ -1,32 +1,32 @@
 import { publish } from './pubsub.js';
 
 // Requires jQuery and a pubsub implementation
-const dragsort = (function ($, publish) {
-	var $draggedEl;
-	var $clone;
-	var $dropTarget;
-	var dropDepth = 0;
+const dragsort = (function (publish) {
+	let $draggedEl;
+	let $clone;
+	let $dropTarget;
+	let dropDepth = 0;
 
-	var cloneOffsetX;
-	var cloneOffsetY;
+	let cloneOffsetX;
+	let cloneOffsetY;
 
 	// https://stackoverflow.com/questions/21825157/internet-explorer-11-detection
-	var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-	var isSafari = (navigator.userAgent.indexOf('Safari') !== -1) && (navigator.userAgent.indexOf('Chrome') === -1);
+	const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+	const isSafari = (navigator.userAgent.indexOf('Safari') !== -1) && (navigator.userAgent.indexOf('Chrome') === -1);
 
 	// IE11 basically just breaks if you try to do anything fancy
 	// Safari breaks if you try to set a drag image
-	var fullSupport = !(isIE11 || isSafari);
-	var useClone = fullSupport;
+	const fullSupport = !(isIE11 || isSafari);
+	const useClone = fullSupport;
 
-	var selectors = {
+	const selectors = {
 		list: '.js-dragsort__list',
 		wrap: '.js-dragsort__wrap',
 		item: '.js-dragsort__item',
 		handle: '.js-dragsort__handle'
 	};
 
-	var classes = {
+	const classes = {
 		dragging: 'is-dragging',
 		droppable: 'is-droppable',
 
@@ -35,37 +35,36 @@ const dragsort = (function ($, publish) {
 		fullSupport: 'dragsort-full'
 	};
 
-	var events = {
+	const events = {
 		dragStart: '/dragsort/start',
 		dragStop: '/dragsort/stop'
 	};
 
-	var module = {
+	const module = {
 		init: function () {
 			module._initEvents();
 
 			if (fullSupport) {
-				$('html').addClass(classes.fullSupport);
+				document.querySelector('html').classList.add(classes.fullSupport);
 			}
 		},
 
 		_initEvents: function () {
-			$(document)
-				.on('dragstart', selectors.handle, module._processDragStart)
-				.on('dragenter', selectors.item, module._processDragEnter)
-				.on('dragleave', selectors.item, module._processDragLeave)
-				.on('dragover', selectors.item, module._processDragOver)
-				.on('drop', selectors.item, module._processDrop)
-				.on('dragend', selectors.item, module._processDragEnd);
+			document.querySelectorAll(selectors.handle).forEach(el => el.addEventListener('dragstart', module._processDragStart));
+			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragenter', module._processDragEnter));
+			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragleave', module._processDragLeave));
+			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragover', module._processDragOver));
+			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('drop', module._processDrop));
+			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragend', module._processDragEnd));
 		},
 
 		_processDragStart: function (e) {
-			var $target = $(e.target);
-			var $item = $target.closest(selectors.item);
-			var dataTransfer = e.originalEvent.dataTransfer;
-			var dragImage = new Image();
+			let $target = e.target;
+			let $item = $target.closest(selectors.item);
+			let dataTransfer = e.dataTransfer;
+			let dragImage = new Image();
 
-			if (!($target.is('[draggable="true"]') || $target.closest('[draggable="true"]').closest(selectors.item).is($item))) {
+			if (!($target.matches('[draggable="true"]') || $target.closest('[draggable="true"]').closest(selectors.item) === $item)) {
 				// Only start dragging draggable items
 				return;
 			}
@@ -87,42 +86,48 @@ const dragsort = (function ($, publish) {
 		},
 
 		_processDragEnter: function (e) {
-			var $target = $(e.target).closest(selectors.item);
-			var $wrap = $draggedEl.closest(selectors.wrap);
-			var padding;
+			let $target = e.target;
+
+			if ($target instanceof Text) {
+				// Ignore text nodes
+				return;
+			}
+
+			let $item = e.target.closest(selectors.item);
+			let $wrap = $draggedEl.closest(selectors.wrap);
 
 			if ($wrap.length === 0) {
-				$wrap = $target;
+				$wrap = $item;
 			}
-			padding = $wrap.outerHeight();
+			let padding = getComputedStyle($wrap).height;
 
-			if ($target.is($dropTarget)) {
+			if ($item === $dropTarget) {
 				dropDepth += 1;
 			} else if (
 				// If it's another element in the list and isn't marked as "droppable"
-				$target.closest(selectors.list).is($draggedEl.closest(selectors.list)) &&
-				$target.hasClass(classes.droppable) === false
+				($item.closest(selectors.list) === $draggedEl.closest(selectors.list)) &&
+				($item.classList.contains(classes.droppable) === false)
 			) {
-				if ($target.is($draggedEl)) {
+				if ($item === $draggedEl) {
 					module._clearDropTarget();
 				} else {
-					$target.addClass(classes.droppable);
+					$item.classList.add(classes.droppable);
 
-					module._setDropTarget($target);
+					module._setDropTarget($item);
 
-					if ($draggedEl[0].compareDocumentPosition($target[0]) === 4) { // DOCUMENT_POSITION_FOLLOWING
-						$target.css('padding-bottom', padding);
+					if ($draggedEl.compareDocumentPosition($item) === 4) { // DOCUMENT_POSITION_FOLLOWING
+						$item.style.paddingBottom = padding;
 					} else {
-						$target.css('padding-top', padding);
+						$item.style.paddingTop = padding;
 					}
 				}
 			}
 		},
 
 		_processDragLeave: function (e) {
-			var $target = $(e.target);
+			let $target = e.target;
 
-			if ($target.is($dropTarget)) {
+			if ($target === $dropTarget) {
 				dropDepth -= 1;
 
 				if (dropDepth <= 0) {
@@ -133,40 +138,40 @@ const dragsort = (function ($, publish) {
 
 		_processDragOver: function (e) {
 			// Prevent default in this event to allow drag and drop
+			e.dataTransfer.dropEffect = 'move';
 
-			var $target = $(e.target).closest(selectors.item);
+			let $target = e.target.closest(selectors.item);
 
 			// Can't drag an element onto itself
-			if (!$target.is($draggedEl)) {
+			if ($target !== $draggedEl) {
 				// Can't drag an element outside its list
-				if ($target.closest(selectors.list).is($draggedEl.closest(selectors.list))) {
+				if ($target.closest(selectors.list) === $draggedEl.closest(selectors.list)) {
 					e.preventDefault();
 				}
 			}
 		},
 
 		_processDrop: function (e) {
-			var $list = $(e.target).closest(selectors.list);
-			var $items = $list.find(selectors.item);
+			let $list = e.target.closest(selectors.list);
 
-			var $drop = $(e.target).closest(selectors.item);
-			var $dropWrap = $drop.closest(selectors.wrap);
+			let $drop = e.target.closest(selectors.item);
+			let $dropWrap = $drop.closest(selectors.wrap);
 
-			var $drag = $draggedEl;
-			var $dragWrap = $drag.closest(selectors.wrap);
+			let $drag = $draggedEl;
+			let $dragWrap = $drag.closest(selectors.wrap);
 
 			// Allow wrapping elements to be moved, for layout purposes
-			if ($dropWrap.length) {
+			if ($dropWrap) {
 				$drop = $dropWrap;
 			}
-			if ($dragWrap.length) {
+			if ($dragWrap) {
 				$drag = $dragWrap;
 			}
 
-			if ($drag[0].compareDocumentPosition($drop[0]) === 4) { // DOCUMENT_POSITION_FOLLOWING
-				$drag.insertAfter($drop);
+			if ($drag.compareDocumentPosition($drop) === 4) { // DOCUMENT_POSITION_FOLLOWING
+				$drop.parentNode.insertBefore($drag, $drop.nextSibling);
 			} else {
-				$drag.insertBefore($drop);
+				$drop.parentNode.insertBefore($drag, $drop);
 			}
 		},
 
@@ -175,7 +180,7 @@ const dragsort = (function ($, publish) {
 		},
 
 		_startDragging: function ($el, e) {
-			var $list = $el.closest(selectors.list);
+			let $list = $el.closest(selectors.list);
 
 			if (publish) {
 				publish(events.dragStart, $list);
@@ -184,15 +189,15 @@ const dragsort = (function ($, publish) {
 			$draggedEl = $el;
 			module._createClone($el, e);
 
-			$el.addClass(classes.dragging);
-			$list.addClass(classes.dragging);
+			$el.classList.add(classes.dragging);
+			$list.classList.add(classes.dragging);
 		},
 
 		_stopDragging: function () {
-			var $list = $draggedEl.closest(selectors.list);
+			let $list = $draggedEl.closest(selectors.list);
 
-			$draggedEl.removeClass(classes.dragging);
-			$list.removeClass(classes.dragging);
+			$draggedEl.classList.remove(classes.dragging);
+			$list.classList.remove(classes.dragging);
 			$draggedEl = undefined;
 
 			module._destroyClone();
@@ -204,9 +209,12 @@ const dragsort = (function ($, publish) {
 		},
 
 		_clearDropTarget: function () {
-			var $droppable = $('.' + classes.droppable);
+			let $droppable = document.querySelectorAll('.' + classes.droppable);
 
-			$droppable.removeClass(classes.droppable).css('padding', 0);
+			$droppable.forEach(el => {
+				el.classList.remove(classes.droppable);
+				el.style.padding = 0
+			});
 
 			$dropTarget = undefined;
 			dropDepth = 0;
@@ -217,33 +225,34 @@ const dragsort = (function ($, publish) {
 
 			$dropTarget = $target;
 			dropDepth = 1;
-			$dropTarget.addClass(classes.droppable);
+			$dropTarget.classList.add(classes.droppable);
 		},
 
 		// Clone
 		_createClone: function ($el, e) {
-			var width;
-			var height;
-			var pos;
-
 			if (useClone) {
-				$clone = $el.clone();
+				$clone = $el.cloneNode(true);
 
-				width = $el.width();
-				height = $el.height();
-				pos = $el[0].getBoundingClientRect();
+				let style = getComputedStyle($el);
 
-				cloneOffsetX = e.originalEvent.clientX - pos.x;
-				cloneOffsetY = e.originalEvent.clientY - pos.y;
+				let width = style.width;
+				let height = style.height;
 
-				$clone.width(width);
-				$clone.height(height);
+				let pos = $el.getBoundingClientRect();
+				let x = pos.x || pos.left;
+				let y = pos.y || pos.top;
+
+				cloneOffsetX = e.clientX - x;
+				cloneOffsetY = e.clientY - y;
+
+				$clone.style.width = width;
+				$clone.style.height = height;
 
 				// Prevent issues with moving elements containing selected radio buttons
-				$clone.find('[type="radio"][name]').removeAttr('name');
+				$clone.querySelectorAll('[type="radio"][name]').forEach(el => el.removeAttribute('name'));
 
-				$clone.appendTo($('body'));
-				$clone.addClass(classes.clone);
+				document.querySelector('body').appendChild($clone);
+				$clone.classList.add(classes.clone);
 
 				module._initCloneEvents();
 
@@ -265,20 +274,18 @@ const dragsort = (function ($, publish) {
 		},
 
 		_initCloneEvents: function () {
-			$('body').on('dragover', module._updateClonePosition);
+			document.querySelector('body').addEventListener('dragover', module._updateClonePosition);
 		},
 		_uninitCloneEvents: function () {
-			$('body').off('dragover', module._updateClonePosition);
+			document.querySelector('body').removeEventListener('dragover', module._updateClonePosition);
 		},
 
 		_updateClonePosition: function (e) {
-			var x = e.originalEvent.clientX - cloneOffsetX;
-			var y = e.originalEvent.clientY - cloneOffsetY;
+			let x = e.clientX - cloneOffsetX;
+			let y = e.clientY - cloneOffsetY;
 
-			$clone.css({
-				left: x,
-				top: y
-			});
+			$clone.style.left = x;
+			$clone.style.top = y;
 		}
 	};
 
@@ -286,6 +293,9 @@ const dragsort = (function ($, publish) {
 		init: module.init
 	};
 
-})(jQuery, publish);
+})(publish);
+
+// Self-initialise
+dragsort.init();
 
 export default dragsort;

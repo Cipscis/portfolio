@@ -5,6 +5,12 @@
 	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<style type="text/css">
+		.activate-button::after {
+			content: " " attr(data-activate-count);
+		}
+	</style>
 </head>
 <body>
 	<div class="layout">
@@ -14,30 +20,34 @@
 			<p>This is a method for binding accessible activation events, for elements that should act like buttons. These events will be fired when an element is clicked (or tapped, on touch devices), or when the <kbd>enter</kbd> key is pressed down or the <kbd>space</kbd> key is released while the element has focus.</p>
 
 			<p>This emulates how browsers natively apply click events to <code class="tag">button</code> elements.</p>
+		</div>
 
-			<span class="button js-activate-example" tabindex="0">Activate 0</span>
+		<span class="button activate-button js-activate-example" tabindex="0" data-activate-count="0">span</span>
 
+		<a href="#" class="button activate-button js-activate-example" tabindex="0" data-activate-count="0">a</a>
+
+		<button class="button activate-button js-activate-example" tabindex="0" data-activate-count="0">button</button>
+
+		<div class="content">
 			<p>For elements that cannot receive text input, <code>activate</code> will also prevent the default action of the spacebar in order to stop the page scrolling.</p>
 		</div>
 	</div>
 
 	<script type="module">
-		import activate from '/portfolio/assets/scripts/activate.js';
+		import { activate } from '/portfolio/assets/scripts/activate.js';
 
-		(function (activate) {
-			var activateEvent = function (e) {
-				e.preventDefault();
+		const activateEvent = function (e) {
+			e.preventDefault();
 
-				var el = e.target;
-				var activateNum = parseInt(el.textContent.match(/\d+/), 10);
+			let el = e.target;
+			let activateNum = parseInt(el.getAttribute('data-activate-count'));
 
-				activateNum += 1;
+			activateNum += 1;
 
-				el.textContent = 'Activate ' + activateNum;
-			};
+			el.setAttribute('data-activate-count', activateNum);
+		};
 
-			activate('.js-activate-example', activateEvent);
-		})(activate);
+		activate('.js-activate-example', activateEvent);
 	</script>
 
 	<div class="layout">

@@ -21,7 +21,7 @@
 
 			<p>A throttled function is created like this, where <code>delay</code> is a number of milliseconds:</p>
 
-			<code class="code--block">var throttledFn = throttle(fn, delay);</code>
+			<code class="code--block">let throttledFn = throttle(fn, delay);</code>
 
 			<h2>Debounce</h2>
 
@@ -31,7 +31,7 @@
 
 			<p>A debounced function is created similarly to a throttled function, with <code>delay</code> being a number of milliseconds:</p>
 
-			<code class="code--block">var debouncedFn = debounce(fn, delay);</code>
+			<code class="code--block">let debouncedFn = debounce(fn, delay);</code>
 
 			<p>Debounced functions are useful in cases such as retrieving autocomplete suggestions after a user has stopped typing, instead of calling the event on every keypress.</p>
 
@@ -43,22 +43,20 @@
 		import { throttle, debounce } from '/portfolio/assets/scripts/throttle-debounce.js';
 		import activate from '/portfolio/assets/scripts/activate.js';
 
-		(function (throttle, debounce, activate) {
-			var $throttle = document.querySelectorAll('.js-throttle');
-			var $debounce = document.querySelectorAll('.js-debounce');
+		let $throttle = document.querySelectorAll('.js-throttle');
+		let $debounce = document.querySelectorAll('.js-debounce');
 
-			var callback = function (e) {
-				var el = e.target;
-				var activateNum = parseInt(el.textContent.match(/\d+/), 10);
+		const callback = function (e) {
+			let el = e.target;
+			let activateNum = parseInt(el.textContent.match(/\d+/), 10);
 
-				activateNum += 1;
+			activateNum += 1;
 
-				el.textContent = `Activated ${activateNum} times`;
-			};
+			el.textContent = `Activated ${activateNum} times`;
+		};
 
-			activate($throttle, throttle(callback, 500));
-			activate($debounce, debounce(callback, 500));
-		})(throttle, debounce, activate);
+		activate($throttle, throttle(callback, 500));
+		activate($debounce, debounce(callback, 500));
 	</script>
 </body>
 </html>

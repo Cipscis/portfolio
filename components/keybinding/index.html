@@ -48,19 +48,17 @@
 		import activate from '/portfolio/assets/scripts/activate.js';
 
 		(function (keys, activate) {
-			var setMessage = function (message) {
+			const setMessage = function (message) {
 				return function (e) {
-					var $el;
-
 					e.preventDefault();
 
-					$el = document.querySelectorAll('.js-text-message')[0];
+					let $el = document.querySelectorAll('.js-text-message')[0];
 					$el.textContent = message;
 				};
 			};
 
-			var konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a' ,'enter'];
-			var cheat = setMessage('Hey, stop cheating!');
+			const konamiCode = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a' ,'enter'];
+			const cheat = setMessage('Hey, stop cheating!');
 
 			keys.bind('a', setMessage('You pressed the \'a\' key'));
 			keys.bind('m', setMessage('You pressed Ctrl + \'m\''), true, true);
@@ -71,7 +69,7 @@
 				keys.unbindSequence(konamiCode, cheat);
 			});
 
-			var kPress = setMessage('You pressed the \'k\' key');
+			const kPress = setMessage('You pressed the \'k\' key');
 			activate(document.querySelectorAll('.js-bind')[0], function (e) {
 				keys.bind('k', kPress);
 			});

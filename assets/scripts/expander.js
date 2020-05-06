@@ -120,4 +120,7 @@ const expander = (function (activate) {
 	};
 })(activate);
 
+// Self-initialise
+expander.init();
+
 export default expander;

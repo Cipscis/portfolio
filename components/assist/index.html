@@ -19,8 +19,10 @@
 
 			<pre>assist.speak('4 Results');</pre>
 
-			<input class="js-message" type="text "/>
-			<button class="button js-read-message">Read the message</button>
+			<form class="js-message-form">
+				<input class="js-message" type="text "/>
+				<button class="button">Read the message</button>
+			</form>
 
 			<p>For testing, you can try the free screen reader <a href="https://www.nvaccess.org/download/" target="_blank">NVDA</a>.</p>
 
@@ -45,16 +47,14 @@
 
 	<script type="module">
 		import assist from '/portfolio/assets/scripts/assist.js';
-		import activate from '/portfolio/assets/scripts/activate.js';
 
-		(function (assist, activate) {
-			activate('.js-read-message', () => {
-				var $message = document.querySelectorAll('.js-message')[0];
-				var message = $message.value;
+		document.querySelector('.js-message-form').addEventListener('submit', e => {
+			e.preventDefault();
+			let $message = document.querySelector('.js-message');
+			let message = $message.value;
 
-				assist.speak(message);
-			});
-		})(assist, activate);
+			assist.speak(message);
+		});
 	</script>
 </body>
 </html>

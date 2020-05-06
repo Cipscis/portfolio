@@ -16,16 +16,14 @@
 			<script type="module">
 				import activate from '/portfolio/assets/scripts/activate.js';
 
-				(function (activate) {
-					activate('.js-toggle-dark-mode', () => {
-						var $body = document.querySelector('body');
-						if ($body.classList.contains('dark-mode')) {
-							$body.classList.remove('dark-mode');
-						} else {
-							$body.classList.add('dark-mode');
-						}
-					});
-				})(activate);
+				activate('.js-toggle-dark-mode', () => {
+					let $body = document.querySelector('body');
+					if ($body.classList.contains('dark-mode')) {
+						$body.classList.remove('dark-mode');
+					} else {
+						$body.classList.add('dark-mode');
+					}
+				});
 			</script>
 
 			<h2>Contrast Palette</h2>

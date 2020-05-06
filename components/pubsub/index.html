@@ -41,14 +41,12 @@ subscribe('event name', logSum);</pre>
 	<script type="module">
 		import { publish, subscribe, unsubscribe } from '/portfolio/assets/scripts/pubsub.js';
 
-		(function (publish, subscribe, unsubscribe) {
-			let logSum = (a, b) => console.log(a + b);
-			subscribe('event name', logSum);
+		let logSum = (a, b) => console.log(a + b);
+		subscribe('event name', logSum);
 
-			publish('event name', 3, 4);
+		publish('event name', 3, 4);
 
-			unsubscribe('event name', logSum);
-		})(publish, subscribe, unsubscribe);
+		unsubscribe('event name', logSum);
 	</script>
 </body>
 </html>

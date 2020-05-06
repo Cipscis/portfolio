@@ -53,42 +53,42 @@
 		import fileIO from '/portfolio/assets/scripts/fileio.js';
 		import activate from '/portfolio/assets/scripts/activate.js';
 
-		var loadImage = (fileUrl) => {
-			var $image = document.querySelectorAll('.js-fileio-image');
+		const loadImage = (fileUrl) => {
+			let $image = document.querySelectorAll('.js-fileio-image');
 			$image.forEach(($image) => $image.src = fileUrl);
 		};
 		activate('.js-load-image', () => fileIO.load.image(loadImage));
 
-		var loadText = (fileText) => console.log(fileText);
+		const loadText = (fileText) => console.log(fileText);
 		activate('.js-load-text', () => fileIO.load.text(loadText));
 
-		var saveData = () => {
-			var data = 'Hey look, the file has some content!';
-			var filename = 'test file.txt';
-			var type = 'text/plain';
+		const saveData = () => {
+			let data = 'Hey look, the file has some content!';
+			let filename = 'test file.txt';
+			let type = 'text/plain';
 
 			fileIO.save.data(data, filename, type);
 		};
 		activate('.js-save-data', saveData);
 
-		var saveJson = () => {
-			var data = {
+		const saveJson = () => {
+			let data = {
 				text: 1,
 				foo: 'bar'
 			};
-			var filename = 'test json';
+			let filename = 'test json';
 
 			fileIO.save.json(data, filename);
 		};
 		activate('.js-save-json', saveJson);
 
-		var saveCsv = () => {
-			var data = [
+		const saveCsv = () => {
+			let data = [
 				['even numbers', 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24],
 				['odd numbers', 1, 3, 5, 7, 9],
 				['prime numbers, up to ten', 2, 3, 5, 7]
 			];
-			var filename = 'test csv';
+			let filename = 'test csv';
 
 			// The third parameter tells fileIO to transpose the data before saving it,
 			// so it can be passed through at this point as columns instead of rows

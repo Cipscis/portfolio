@@ -42,13 +42,9 @@
 		import statusMessage from '/portfolio/assets/scripts/status.js';
 		import activate from '/portfolio/assets/scripts/activate.js';
 
-		(function (statusMessage) {
-
-			activate('.js-status-example-success', () => statusMessage.success('Success :)'));
-			activate('.js-status-example-error', () => statusMessage.error('Error :('));
-			activate('.js-status-example-custom', () => statusMessage.success('Custom success :)', '.js-status-custom'));
-
-		})(statusMessage);
+		activate('.js-status-example-success', () => statusMessage.success('Success :)'));
+		activate('.js-status-example-error', () => statusMessage.error('Error :('));
+		activate('.js-status-example-custom', () => statusMessage.success('Custom success :)', '.js-status-custom'));
 	</script>
 </body>
 

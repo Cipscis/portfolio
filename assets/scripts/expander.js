@@ -3,8 +3,8 @@ import { activate } from './activate.js';
 const expander = (function (activate) {
 	const selectors = {
 		section: '.js-expander',
-		trigger: '.js-expander-trigger',
-		body: '.js-expander-body'
+		trigger: '.js-expander__trigger',
+		body: '.js-expander__body'
 	};
 
 	const classes = {

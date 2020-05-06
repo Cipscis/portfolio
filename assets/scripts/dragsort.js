@@ -20,10 +20,10 @@ const dragsort = (function ($, publish) {
 	var useClone = fullSupport;
 
 	var selectors = {
-		list: '.js-dragsort-list',
-		wrap: '.js-dragsort-wrap',
-		item: '.js-dragsort-item',
-		handle: '.js-dragsort-handle'
+		list: '.js-dragsort__list',
+		wrap: '.js-dragsort__wrap',
+		item: '.js-dragsort__item',
+		handle: '.js-dragsort__handle'
 	};
 
 	var classes = {

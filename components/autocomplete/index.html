@@ -24,17 +24,17 @@
 						<li class="form__section-item">
 							<label class="form__section-label">Autocomplete</label>
 							<div class="autocomplete js-autocomplete" data-autocomplete-source="data/search-static.json" role="combobox">
-								<input type="text" class="autocomplete__input js-autocomplete-input" role="textbox" aria-controls="autocomplete-results" aria-autocomplete="list" />
+								<input type="text" class="autocomplete__input js-autocomplete__input" role="textbox" aria-controls="autocomplete-results" aria-autocomplete="list" />
 
-								<div class="autocomplete__results js-autocomplete-result-list">
+								<div class="autocomplete__results js-autocomplete__result-list">
 								</div>
 
-								<span class="status status--absolute js-autocomplete-status"></span>
+								<span class="status status--absolute js-autocomplete__status"></span>
 
-								<script type="text/template" class="js-autocomplete-template">
+								<script type="text/template" class="js-autocomplete__template">
 									<ol class="autocomplete__result-list" role="listbox" id="autocomplete-results">
 										{{#results}}
-											<li class="autocomplete__result-item js-autocomplete-result-item" tabindex="-1" data-autocomplete-value="{{value}}" id="autocomplete-results-{{id}}" aria-labelledby="autocomplete-results-text-{{id}}">
+											<li class="autocomplete__result-item js-autocomplete__result-item" tabindex="-1" data-autocomplete-value="{{value}}" id="autocomplete-results-{{id}}" aria-labelledby="autocomplete-results-text-{{id}}">
 												<div id="autocomplete-results-text-{{id}}">
 													{{value}}
 												</div>
@@ -54,7 +54,7 @@
 
 			<p>When a user enters text into the autocomplete's input, so long as the value of the input reaches a minimum length (configured to 3 by default), after a 500 ms delay a query will be sent to the server based on a URL specified in the <code>data-autocomplete-source</code> attribute on the main autocomplete element.</p>
 
-			<p>When results are returned, they will be used to build the results via a templayed template. This template can be specified via id using a <code>data-autocomplete-template-id</code> attribute on the main autocomplete element, or by placing a <code class="tag">script</code> template with class <code>js-autocomplete-template</code> inside the autocomplete element.</p>
+			<p>When results are returned, they will be used to build the results via a templayed template. This template can be specified via id using a <code>data-autocomplete-template-id</code> attribute on the main autocomplete element, or by placing a <code class="tag">script</code> template with class <code>js-autocomplete__template</code> inside the autocomplete element.</p>
 
 			<p>Though the data returned by the server can vary, each item needs to have at least a <code>value</code> and an <code>id</code>. If these change, the corresponding keys used in the template will also need to be updated.</p>
 

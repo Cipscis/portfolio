@@ -8,13 +8,13 @@ const autocomplete = (function ($, templayed, debounce, activate, publish) {
 
 	const selectors = {
 		wrapper: '.js-autocomplete',
-		input: '.js-autocomplete-input',
+		input: '.js-autocomplete__input',
 
-		results: '.js-autocomplete-result-list',
-		resultItem: '.js-autocomplete-result-item',
+		results: '.js-autocomplete__result-list',
+		resultItem: '.js-autocomplete__result-item',
 
-		template: '.js-autocomplete-template',
-		status: '.js-autocomplete-status'
+		template: '.js-autocomplete__template',
+		status: '.js-autocomplete__status'
 	};
 
 	const dataSelectors = {

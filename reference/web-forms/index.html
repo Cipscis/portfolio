@@ -23,10 +23,10 @@
 
 		<section class="expander js-expander" id="accessible-design">
 			<div class="content">
-				<h2 class="expander__trigger js-expander-trigger">Accessible design</h2>
+				<h2 class="expander__trigger js-expander__trigger">Accessible design</h2>
 			</div>
 
-			<div class="expander__body js-expander-body">
+			<div class="expander__body js-expander__body">
 				<div class="content">
 					<p>It's important that disabled users are able to fill in your web forms. This means they have to be usable with screen readers, and navigable via the keyboard.</p>
 
@@ -204,10 +204,10 @@ pointer-events: none;</pre>
 
 		<section class="expander js-expander" id="validation">
 			<div class="content">
-				<h2 class="expander__trigger js-expander-trigger">Validation</h2>
+				<h2 class="expander__trigger js-expander__trigger">Validation</h2>
 			</div>
 
-			<div class="expander__body js-expander-body">
+			<div class="expander__body js-expander__body">
 				<div class="content">
 					<p>Modern browsers support <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation" target="_blank">native form validation</a> that allows the browser to handle validation rules and reporting errors to the user. However, these error messages are not always reported to users who use screen readers.</p>
 
@@ -243,8 +243,8 @@ pointer-events: none;</pre>
 									<input id="number-range-example" type="number" class="form__section-input" min="1" step="1" max="10" />
 								</li>
 								<li class="form__section-item">
-									<label for="number-range-example" class="form__section-label">Text length range</label>
-									<input id="number-range-example" type="text" class="form__section-input" minlength="2" maxlength="10" />
+									<label for="text-range-example" class="form__section-label">Text length range</label>
+									<input id="text-range-example" type="text" class="form__section-input" minlength="5" maxlength="10" />
 								</li>
 							</ol>
 						</fieldset>
@@ -252,7 +252,7 @@ pointer-events: none;</pre>
 						<div class="form__controls">
 							<button type="submit" class="button">Submit</button>
 
-							<p class="form__status js-validate-status" aria-live="polite"></p>
+							<p class="form__status js-validate__status" aria-live="polite"></p>
 						</div>
 					</form>
 
@@ -275,10 +275,10 @@ validate('.js-validate-form');</script>
 
 		<section class="expander js-expander" id="non-exclusionary-design">
 			<div class="content">
-				<h2 class="expander__trigger js-expander-trigger">Non-exclusionary design</h2>
+				<h2 class="expander__trigger js-expander__trigger">Non-exclusionary design</h2>
 			</div>
 
-			<div class="expander__body js-expander-body">
+			<div class="expander__body js-expander__body">
 				<div class="content">
 					<p>It's common for web forms to be designed in a way that is unnecessarily exclusionary. This may be because it's been made impossible for someone to fill out a form without lying, or because the form requires them to provide personal information that shouldn't be necessary for the purpose of the form.</p>
 

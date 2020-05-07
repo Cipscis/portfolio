@@ -23,20 +23,16 @@ const expander = (function (activate) {
 		},
 
 		_initEvents: function () {
-			var $triggers;
-
-			$triggers = document.querySelectorAll(selectors.trigger);
+			let $triggers = document.querySelectorAll(selectors.trigger);
 			activate($triggers, module._activateTrigger);
 
 			window.addEventListener('hashchange', module._openByHash);
 		},
 
 		_activateTrigger: function (e) {
-			var $section;
-
 			e.preventDefault();
 
-			$section = e.target;
+			let $section = e.target;
 
 			while ($section && ($section.classList.contains(classes.section) === false)) {
 				$section = $section.parentElement;
@@ -46,7 +42,7 @@ const expander = (function (activate) {
 		},
 
 		_toggleSection: function ($section, close) {
-			var $triggers = $section.querySelectorAll(selectors.trigger);
+			let $triggers = $section.querySelectorAll(selectors.trigger);
 
 			if (typeof close === 'undefined') {
 				close = $section.getAttribute('aria-expanded') === 'false';
@@ -64,9 +60,7 @@ const expander = (function (activate) {
 		},
 
 		_closeByDefault: function () {
-			var $sections;
-
-			$sections = document.querySelectorAll(selectors.section);
+			let $sections = document.querySelectorAll(selectors.section);
 
 			$sections.forEach(($section) => {
 				$section.setAttribute('aria-expanded', 'false');
@@ -80,17 +74,15 @@ const expander = (function (activate) {
 			// If URL contains a hash to an element within a collapsed section,
 			// expand that section then scroll to the element
 
-			var hash = document.location.hash;
-			var $hash;
-			var $expander;
+			let hash = document.location.hash;
 
 			if (hash.length) {
-				$hash = document.querySelectorAll(hash);
+				let $hash = document.querySelectorAll(hash);
 				if ($hash.length) {
 
 					// Expand the containing section
 					$hash = $hash[0];
-					$expander = $hash;
+					let $expander = $hash;
 
 					while ($expander.parentElement && ($expander.classList.contains(classes.section) === false)) {
 						$expander = $expander.parentElement;
@@ -108,9 +100,7 @@ const expander = (function (activate) {
 		},
 
 		_addTabIndex: function () {
-			var $triggers;
-
-			$triggers = document.querySelectorAll(selectors.trigger);
+			let $triggers = document.querySelectorAll(selectors.trigger);
 			$triggers.forEach(($trigger) => $trigger.setAttribute('tabindex', '0'));
 		}
 	};

@@ -29,9 +29,9 @@ const validate = (function (throttle) {
 		},
 
 		_invalidEvent: function (e) {
-			var $form = e.target.form;
-			var $invalidInputs = $form.querySelectorAll(selectors.invalid);
-			var $status = $form.querySelectorAll(selectors.status);
+			let $form = e.target.form;
+			let $invalidInputs = $form.querySelectorAll(selectors.invalid);
+			let $status = $form.querySelectorAll(selectors.status);
 
 			$form.classList.add(classes.validated);
 
@@ -45,7 +45,7 @@ const validate = (function (throttle) {
 		},
 
 		_clearStatusClass: function ($form) {
-			var $status = $form.querySelectorAll(selectors.status);
+			let $status = $form.querySelectorAll(selectors.status);
 
 			$status.foreach(($status) => $status.classList.remove(classes.error));
 		}

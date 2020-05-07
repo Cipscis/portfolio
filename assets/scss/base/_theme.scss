@@ -8,17 +8,10 @@ $grey--dark: #333;
 $black: #000;
 
 $blue--pale: darken(#def, 10%);
-$blue--pale-dark: darken($blue--pale, 10%);
-
 $blue--dim: darken($blue--pale, 40%);
-$blue--dim-light: darken($blue--pale, 30%);
-
 
 $green--pale: darken(#dfe, 10%);
-$green--pale-dark: darken($green--pale, 10%);
-
 $green--dim: darken($green--pale, 60%);
-$green--dim-light: darken($green--pale, 50%);
 
 $red--pale: #fee;
 
@@ -29,61 +22,61 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 :root,
 .light-mode {
 	--primary-background: #{$white};
-	--primary-background-active: #{$grey--lightest};
+	--primary-background-active: #{darken($white, 5)};
 	--primary-color: #{$grey--dark};
-	--primary-color-low-contrast: #{$grey--light};
+	--primary-color-low-contrast: #767676; // Brightest grey with sufficient contrast against $white
 
 	--shadow: #{rgba($black, 0.4)};
 	--overlay: #{rgba($black, 0.4)};
 
 	--offset-background: #{$grey--lightest};
 	--offset-color: var(--primary-color);
-	--offset-color-low-contrast: #{$grey--light};
+	--offset-color-low-contrast: #6c6c6c; // Brightest grey with sufficient contrast against $grey--lightest
 
 	--border: #{$grey--light};
 
 	--clickable-background: #{$grey--lightest};
-	--clickable-background-active: #{$grey--lighter};
+	--clickable-background-active: #{darken($grey--lightest, 10)};
 	--clickable-color: var(--primary-color);
 
 	--highlight-background: #{$green--pale};
-	--highlight-background-active: #{$green--pale-dark};
+	--highlight-background-active: #{darken($green--pale, 10)};
 
 	--highlight-bar: #{$blue--pale};
-	--highlight-bar-active: #{$blue--pale-dark};
+	--highlight-bar-active: #{darken($blue--pale, 10)};
 
 	--error-background: #{$red--pale};
-	--error-color: red;
-	--error-border: red;
+	--error-color: #e00;
+	--error-border: #e00;
 
 	--status-success: green;
-	--status-error: red;
+	--status-error: #e00;
 }
 
 .dark-mode {
 	--primary-background: #{$grey--dark};
-	--primary-background-active: #{$grey--mid};
+	--primary-background-active: #{lighten($grey--dark, 5)};
 	--primary-color: #{$grey--lightest};
-	--primary-color-low-contrast: #{$grey--light};
+	--primary-color-low-contrast: #9b9b9b; // Darkest grey with sufficient contrast against $grey--dark;
 
 	--shadow: #{rgba($white, 0.4)};
 	--overlay: rgba(34, 34, 34, 0.7);
 
 	--offset-background: #{$grey};
 	--offset-color: var(--primary-color);
-	--offset-color-low-contrast: #{$grey--light};
+	--offset-color-low-contrast: #e4e4e4; // Darkest grey with sufficient contrast against $grey;
 
 	--border: #{$grey--lighter};
 
 	--clickable-background: #{$grey};
-	--clickable-background-active: #{$grey--light};
+	--clickable-background-active: #{lighten($grey, 10)};
 	--clickable-color: var(--primary-color);
 
 	--highlight-background: #{$green--dim};
-	--highlight-background-active: #{$green--dim-light};
+	--highlight-background-active: #{lighten($green--dim, 10)};
 
 	--highlight-bar: #{$blue--dim};
-	--highlight-bar-active: #{$blue--dim-light};
+	--highlight-bar-active: #{lighten($blue--dim, 10)};
 
 	--error-background: #755;
 	--error-color: red;

@@ -136,14 +136,21 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			let $results = $wrapper.querySelector(selectors.results);
 			let $template = module._getTemplate($wrapper);
 
-			// Templayed has trouble with carriage returns
-			let template = $template.innerHTML.replace(/\r/g, '');
-
-			let resultsHtml = templayed(template)(data);
+			let template = $template.innerHTML;
+			let resultsHtml = module._buildResultsHtml(template, data);
 
 			$results.innerHTML = resultsHtml;
 
 			module._bindResultEvents($results);
+		},
+
+		_buildResultsHtml: function (template, data) {
+			// Templayed has trouble with carriage returns
+			template = template.replace(/\r/g, '');
+
+			let resultsHtml = templayed(template)(data);
+
+			return resultsHtml;
 		},
 
 		_bindResultEvents: function ($results) {

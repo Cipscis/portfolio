@@ -1,4 +1,4 @@
-import { activate } from './activate.js';
+import activate from './activate.js';
 
 const expander = (function (activate) {
 	const selectors = {

@@ -1,6 +1,6 @@
 import { publish } from './pubsub.js';
 
-// Requires jQuery and a pubsub implementation
+// Can work with or without a pubsub implementation
 const dragsort = (function (publish) {
 	let $draggedEl;
 	let $clone;

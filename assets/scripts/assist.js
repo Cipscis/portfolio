@@ -2,7 +2,7 @@ import { subscribe } from './pubsub.js';
 
 const assist = (function (subscribe) {
 	const $messageEl = document.createElement('span');
-	var messageElInit = false;
+	let messageElInit = false;
 
 	const classes = {
 		visuallyhidden: 'u-visuallyhidden'
@@ -12,7 +12,7 @@ const assist = (function (subscribe) {
 		speak: '/assist/speak'
 	};
 
-	var module = {
+	const module = {
 		speak: function (message) {
 			if (messageElInit === false) {
 				module._initMessageEl();

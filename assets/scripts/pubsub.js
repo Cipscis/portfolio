@@ -3,10 +3,8 @@ const { publish, subscribe, unsubscribe } = (function () {
 
 	const module = {
 		publish: function (event, ...args) {
-			var callbacks;
-
 			if (event in subscriptions) {
-				callbacks = subscriptions[event];
+				let callbacks = subscriptions[event];
 
 				callbacks.forEach((callback) => {
 					callback.apply(null, args);
@@ -15,13 +13,11 @@ const { publish, subscribe, unsubscribe } = (function () {
 		},
 
 		subscribe: function (event, callback) {
-			var callbacks;
-
 			if (!(event in subscriptions)) {
 				subscriptions[event] = [];
 			}
 
-			callbacks = subscriptions[event];
+			let callbacks = subscriptions[event];
 
 			// Don't bind a particular function to an event more than once
 			if (callbacks.includes(callback) === false) {
@@ -30,12 +26,9 @@ const { publish, subscribe, unsubscribe } = (function () {
 		},
 
 		unsubscribe: function (event, callback) {
-			var callbacks;
-			var index;
-
 			if (event in subscriptions) {
-				callbacks = subscriptions[event];
-				index = callbacks.indexOf(callback);
+				let callbacks = subscriptions[event];
+				let index = callbacks.indexOf(callback);
 
 				if (index !== -1) {
 					callbacks.splice(index, 1);

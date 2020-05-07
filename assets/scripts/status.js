@@ -59,7 +59,7 @@ const statusMessage = (function (subscribe) {
 		},
 
 		_setType: function (type, $status) {
-			var cssClass = classes[type];
+			let cssClass = classes[type];
 
 			if (!cssClass) {
 				console.error('No CSS class is defined for status type ' + type);

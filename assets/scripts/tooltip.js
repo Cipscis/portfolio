@@ -23,7 +23,7 @@ const tooltip = (function () {
 		},
 
 		_initEvents: function () {
-			var $tooltips = document.querySelectorAll(selectors.tooltip);
+			let $tooltips = document.querySelectorAll(selectors.tooltip);
 
 			$tooltips.forEach($tooltip => {
 				$tooltip.addEventListener('mouseleave', module._removeHiddenClassEvent($tooltip));

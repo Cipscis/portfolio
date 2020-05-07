@@ -3,7 +3,7 @@ const { throttle, debounce } = (function () {
 		// Create a version of fn that will execute only if it
 		// hasn't been called successfully within the last delay ms
 
-		var timeout;
+		let timeout;
 
 		return function () {
 			if (!timeout) {
@@ -26,7 +26,7 @@ const { throttle, debounce } = (function () {
 		// This throttling is useful, for example, for waiting until
 		// the user has stopped typing before executing a keyup callback
 
-		var timeout;
+		let timeout;
 
 		return function () {
 			if (timeout) {

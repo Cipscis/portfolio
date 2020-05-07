@@ -1,4 +1,4 @@
-import keys from '/portfolio/assets/scripts/keybinding.js';
+import keys from './keybinding.js';
 
 const tooltip = (function () {
 	const selectors = {

@@ -34,16 +34,18 @@ const statusMessage = (function (subscribe) {
 
 		_getEl: function ($status) {
 			if (typeof $status === 'string') {
-				$status = document.querySelectorAll($status);
+				$status = document.querySelector($status);
 			} else if (typeof $status === 'undefined') {
-				$status = document.querySelectorAll(selectors.status);
+				$status = document.querySelector(selectors.status);
+			} else if ($status instanceof NodeList) {
+				$status = $status[0];
 			}
 
-			if ($status.length === 0) {
+			if (!$status) {
 				console.error('No status element could be found');
 			}
 
-			return $status[0];
+			return $status;
 		},
 
 		_clearType: function ($status) {

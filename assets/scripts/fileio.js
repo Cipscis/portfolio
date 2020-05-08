@@ -106,7 +106,7 @@ const fileIO = (function () {
 			},
 
 			_csvEscape: function (rows, sanitise) {
-				// Make sure any cells containing " or , are escaped appropriately
+				// Make sure any cells containing " or , or a newline are escaped appropriately
 
 				for (let i = 0; i < rows.length; i++) {
 					let row = rows[i];

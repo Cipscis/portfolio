@@ -127,7 +127,7 @@ const fileIO = (function () {
 							}
 						}
 
-						if (row[j].match(/,|"/)) {
+						if (row[j].match(/,|"|\n/)) {
 
 							// Turn any double quotes into escaped double quites
 							row[j] = row[j].replace(/"/g, '""');

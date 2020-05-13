@@ -17,7 +17,7 @@
 				<h2 class="expander__trigger js-expander__trigger">Hiding and Showing</h2>
 			</div>
 
-			<div class="expander__body js-expander__body">
+			<div class="expander__body">
 				<div class="content">
 					<p>Through the use of <code>animation-fill-mode: forwards;</code> it's possible to animate CSS properties permanently. Thanks to the fact that the <code>visibility</code> property can be animated, this can make it much easier to handle all animation via CSS, instead of having animation code in JavaScript.</p>
 
@@ -79,7 +79,7 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 				<h2 class="expander__trigger js-expander__trigger">Initial State</h2>
 			</div>
 
-			<div class="expander__body js-expander__body">
+			<div class="expander__body">
 				<div class="content">
 					<p>There is a drawback to using CSS animations this heavily, which is that elements will run the animation to reach their initial state when the page loads. This is often not intended, for example an element that is meant to be hidden would start visible but immediately run the animation to hide it.</p>
 

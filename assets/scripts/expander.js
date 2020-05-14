@@ -6,10 +6,6 @@ const expander = (function (activate) {
 		trigger: '.js-expander__trigger'
 	};
 
-	const classes = {
-		section: 'js-expander'
-	};
-
 	const module = {
 		init: function () {
 			module._initEvents();
@@ -31,12 +27,7 @@ const expander = (function (activate) {
 		_activateTrigger: function (e) {
 			e.preventDefault();
 
-			let $section = e.target;
-
-			while ($section && ($section.classList.contains(classes.section) === false)) {
-				$section = $section.parentElement;
-			}
-
+			let $section = e.target.closest(selectors.section);
 			module._toggleSection($section);
 		},
 
@@ -81,13 +72,9 @@ const expander = (function (activate) {
 
 					// Expand the containing section
 					$hash = $hash[0];
-					let $expander = $hash;
+					let $expander = $hash.closest(selectors.section);
 
-					while ($expander.parentElement && ($expander.classList.contains(classes.section) === false)) {
-						$expander = $expander.parentElement;
-					}
-
-					if ($expander.classList.contains(classes.section)) {
+					if ($expander) {
 						module._toggleSection($expander, true);
 					}
 

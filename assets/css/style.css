@@ -731,8 +731,21 @@ input {
   right: 0;
   bottom: 0;
   background: var(--overlay); }
+  .modal[aria-hidden="false"] {
+    display: block; }
   .modal:target {
     display: block; }
+
+.modal--full {
+  background: #fff; }
+  .modal--full .modal__body {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%; }
+
+.modal__body-open--full {
+  overflow: hidden; }
 
 .modal__body {
   position: absolute;
@@ -763,10 +776,12 @@ input {
   border-radius: 0;
   padding: 0;
   cursor: pointer;
-  display: block;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   font-size: 15px;
-  line-height: 1;
   color: var(--clickable-background); }
   .modal__close:hover, .modal__close:focus {
     color: var(--clickable-background-active); }

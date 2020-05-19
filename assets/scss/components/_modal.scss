@@ -1,5 +1,8 @@
 .modal {
 	display: none;
+	&[aria-hidden="false"] {
+		display: block;
+	}
 
 	position: fixed;
 	z-index: 10;
@@ -14,12 +17,25 @@
 	}
 }
 
+.modal--full {
+	.modal__body {
+		max-width: none;
+		max-height: none;
+		width: 100%;
+		height: 100%;
+	}
+	background: $white;
+}
+
 .modal__body-open {
 	// To be placed on the <body> tag when a modal is open
 
 	// Uncomment this rule to prevent background scrolling
 	// while a modal window is open:
 	// overflow: hidden;
+}
+.modal__body-open--full {
+	overflow: hidden;
 }
 
 .modal__body {
@@ -51,10 +67,14 @@
 	text-decoration: none;
 	@include button-reset;
 
-	display: block;
-	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 44px;
+	height: 44px;
+
 	font-size: 15px;
-	line-height: 1;
 
 	color: var(--clickable-background);
 	&:hover,

@@ -11,11 +11,12 @@ const modal = (function (activate, keys, subscribe) {
 	};
 
 	const dataSelectors = {
-		target: 'modal-target'
+		target: 'modal-target',
+		bodyOpenClass: 'modal-body-open-class'
 	};
 
 	const classes = {
-		open: 'c-modal__body-open'
+		bodyOpen: 'modal__body-open'
 	};
 
 	const events = {
@@ -172,16 +173,17 @@ const modal = (function (activate, keys, subscribe) {
 			if ($active) {
 				// If there's already an active modal window,
 				// keep remembering the same $focus element
-				$active.style.display = 'none';
+				$active.setAttribute('aria-hidden', true);
 			} else {
 				$focus = document.activeElement;
 			}
 			$active = $modal;
 
-			$modal.style.display = 'block';
-			document.querySelector('body').classList.add(classes.open);
+			$modal.setAttribute('aria-hidden', false);
+			let bodyOpenClass = module._getBodyOpenClass($modal);
+			document.querySelector('body').classList.add(bodyOpenClass);
 
-			module._onShow();
+			module._onShow($modal);
 
 			// Move focus within modal window
 			let $focusable = module._getFocusable();
@@ -200,8 +202,9 @@ const modal = (function (activate, keys, subscribe) {
 
 		_hide: function () {
 			if ($active) {
-				$active.style.display = 'none';
-				document.querySelector('body').classList.remove(classes.open);
+				$active.setAttribute('aria-hidden', true);
+				let bodyOpenClass = module._getBodyOpenClass($active);
+				document.querySelector('body').classList.remove(bodyOpenClass);
 
 				module._unbindModalActiveEvents();
 
@@ -244,6 +247,12 @@ const modal = (function (activate, keys, subscribe) {
 				}
 				$body.style.height = height + 'px';
 			}
+		},
+
+		_getBodyOpenClass: function ($modal) {
+			let bodyOpenClass = $modal.getAttribute(`data-${dataSelectors.bodyOpenClass}`) || classes.bodyOpen;
+
+			return bodyOpenClass;
 		},
 
 		// Focus management

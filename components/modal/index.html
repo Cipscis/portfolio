@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
 	<title>Modal</title>
@@ -37,9 +38,15 @@
 
 			<p>If there is no JavaScript, the <code>:target</code> attribute is used to show and hide modal windows depending on the current hash. Using <code class="tag">a</code> tags with appropriate <code>href</code> attributes for both trigger and clode button is necessary to support this. Otherwise, they can use <code class="tag">button</code> tags if support for no JavaScrpit is not necessary.</p>
 
+
+
 			<h2>onShow callback</h2>
 
-			<p>A function to be called when a modal window is shown can be passed in via an options object to the <code>init</code> method.
+			<p>A function to be called when a modal window is shown can be passed in via an options object to the <code>init</code> method.</p>
+
+			<p>The onShow callback receives the modal <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element" target="_blank">Element</a> being shown as an argument.</p>
+
+
 
 			<h2>Pubsub events</h2>
 
@@ -48,6 +55,18 @@
 			<p><code>/modal/show</code> can be published to show a modal window of a specified ID.</p>
 
 			<p><code>/modal/resize</code> can be published to force a modal window to recalculate its size. This is not necessary to trigger on page resize, as that detection is automatic, but it may be necessary if the content of a modal window is changed.</p>
+
+
+
+			<h2>Body open class</h2>
+
+			<p>When a modal is open, a class is applied to the <code>&lt;body&gt;</code> tag, which can be used to apply CSS for purposes like hiding the main scrollbar when a full screen modal is open.</p>
+
+			<p>By default, this class is <code>modal__body-open</code>, but it can be customised for a specific modal via the data attribute <code>data-modal-body-open-class</code> on the <code>js-modal</code> element.</p>
+
+			<p>
+				<button class="button js-modal__trigger" data-modal-target="modal-full-example">Show full modal</button>
+			</p>
 		</div>
 	</div>
 
@@ -56,9 +75,24 @@
 			<a href="#" class="modal__close js-modal__close" aria-label="Close" role="button"></a>
 
 			<div class="content">
+				<h2 id="modal-example-name">Modal Example</h2>
+
 				<p>You can put any markup within the body of a modal.</p>
 
 				<p>See <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank">the WAI-ARIA specification</a> for how an accessible modal window should be implemented.</p>
+			</div>
+		</div>
+		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>
+	</div>
+
+	<div class="modal modal--full js-modal" id="modal-full-example" aria-modal="true" role="dialog" aria-live="polite" aria-labelledby="modal-full example-name" data-modal-body-open-class="modal__body-open--full">
+		<div class="modal__body js-modal__body">
+			<a href="#" class="modal__close js-modal__close" aria-label="Close" role="button"></a>
+
+			<div class="content">
+				<h2 id="modal-full-example-name">Full screen modal</h2>
+
+				<p>This modal uses variant CSS and a custom class applied to the <code>&lt;body&gt;</code> to take over the full screen, including hiding the scrollbar for the body.</p>
 			</div>
 		</div>
 		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>

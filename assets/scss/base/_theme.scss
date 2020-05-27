@@ -138,9 +138,15 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 }
 
 
-@mixin focus-outline($color: #4d90fe) {
+$outline-default: #4d90fe;
+@mixin focus-outline($color: $outline-default) {
 	// Replicate Chrome's default focus style
 	outline-color: $color;
+	@if ($color == $outline-default) {
+		@supports (outline-color: -webkit-focus-ring-color) {
+			outline-color: -webkit-focus-ring-color;
+		}
+	}
 	outline-offset: -2px;
 
 	// IE11 and Edge don't support outline-style: auto

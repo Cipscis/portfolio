@@ -1,3 +1,5 @@
+/* Autocomplete 1.0 */
+
 import './status.js';
 import { debounce } from './throttle-debounce.js';
 import activate from './activate.js';

@@ -1,3 +1,5 @@
+/* Pubsub 1.0 */
+
 const { publish, subscribe, unsubscribe } = (function () {
 	const subscriptions = {};
 

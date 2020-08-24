@@ -1,3 +1,5 @@
+/* Throttle/Debounce 1.0 */
+
 const { throttle, debounce } = (function () {
 	const throttle = function (fn, delay) {
 		// Create a version of fn that will execute only if it

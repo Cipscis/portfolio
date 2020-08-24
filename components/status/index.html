@@ -7,9 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-	<div class="layout">
+	<main class="layout">
 		<div class="content">
-			<h1>Status</h1>
+			<h1>Status 1.0</h1>
+
+			<p><a href="changelog">Changelog</a></p>
 
 			<p>This can be used to show global success or error messages, relying on the presence of an element on the page that should be using <code>position: fixed;</code>. Default styles can be found in <a href="https://github.com/Cipscis/portfolio/blob/master/assets/scss/components/_status.scss" target="_blank">status.scss</a>.</p>
 
@@ -34,7 +36,7 @@
 		<div class="content">
 			<p>Status message can be invoked either via the <code>success</code> or <code>error</code> methods on the <code>statusMessage</code> function, or by <a href="/portfolio/components/pubsub">publishing</a> the <code>/status/success</code> or <code>/status/error</code> events.</p>
 		</div>
-	</div>
+	</main>
 
 	<span class="status js-status" aria-live="polite"></span>
 

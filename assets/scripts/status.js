@@ -1,3 +1,5 @@
+/* Status 1.0 */
+
 import { subscribe } from './pubsub.js'
 
 const statusMessage = (function (subscribe) {

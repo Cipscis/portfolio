@@ -1,4 +1,4 @@
-/* Modal v1.0 */
+/* Modal 1.0 */
 
 import activate from './activate.js';
 import keys from './keybinding.js';

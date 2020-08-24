@@ -1,3 +1,5 @@
+/* Drag/Sort 1.0 */
+
 import { publish } from './pubsub.js';
 
 // Can work with or without a pubsub implementation

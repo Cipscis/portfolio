@@ -1,3 +1,5 @@
+/* FileIO 1.0 */
+
 const fileIO = (function () {
 	let $link;
 

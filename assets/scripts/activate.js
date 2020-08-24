@@ -1,3 +1,5 @@
+/* Activate 1.0 */
+
 // Binds event listeners to one or more elements that makes them behave
 // like buttons, detecting both "click" events and also keydown for
 // the "Enter" key and keyup for the "Space" key.

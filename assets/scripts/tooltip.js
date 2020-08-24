@@ -1,3 +1,5 @@
+/* Tooltip 1.0 */
+
 import keys from './keybinding.js';
 
 const tooltip = (function () {

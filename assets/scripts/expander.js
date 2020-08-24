@@ -1,3 +1,5 @@
+/* Expander 1.0 */
+
 import activate from './activate.js';
 
 const expander = (function (activate) {

@@ -1,3 +1,5 @@
+/* Assist 1.0 */
+
 import { subscribe } from './pubsub.js';
 
 const assist = (function (subscribe) {

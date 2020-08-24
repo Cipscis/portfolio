@@ -41,11 +41,11 @@ const expander = (function (activate) {
 			if (close) {
 				// Open the expander
 				$section.setAttribute('aria-expanded', 'true');
-				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'true'));
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'true'));
 			} else {
 				// Close the expander
 				$section.setAttribute('aria-expanded', 'false');
-				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'false'));
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'false'));
 			}
 		},
 
@@ -56,7 +56,7 @@ const expander = (function (activate) {
 				$section.setAttribute('aria-expanded', 'false');
 
 				let $triggers = $section.querySelectorAll(selectors.trigger);
-				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expander', 'false'));
+				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'false'));
 			});
 		},
 

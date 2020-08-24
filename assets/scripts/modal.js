@@ -1,3 +1,5 @@
+/* Modal v1.0 */
+
 import activate from './activate.js';
 import keys from './keybinding.js';
 import { subscribe } from './pubsub.js';
@@ -11,7 +13,6 @@ const modal = (function (activate, keys, subscribe) {
 	};
 
 	const dataSelectors = {
-		target: 'modal-target',
 		bodyOpenClass: 'modal-body-open-class'
 	};
 
@@ -120,7 +121,7 @@ const modal = (function (activate, keys, subscribe) {
 			if (/^#/.test(targetId) === true) {
 				targetId = targetId.substring(1);
 			} else {
-				targetId = $trigger.getAttribute(`data-${dataSelectors.target}`);
+				targetId = $trigger.getAttribute('aria-controls');
 			}
 
 			module._showById(targetId);

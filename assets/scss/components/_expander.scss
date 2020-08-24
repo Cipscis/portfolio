@@ -14,7 +14,7 @@
 
 		border-radius: 50%;
 	}
-	.expander[aria-expanded="false"] &:before {
+	&[aria-expanded="false"]::before {
 		content: "+";
 	}
 

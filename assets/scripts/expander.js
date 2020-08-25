@@ -1,4 +1,4 @@
-/* Expander 1.0 */
+/* Expander 1.1 */
 
 import activate from './activate.js';
 
@@ -8,59 +8,134 @@ const expander = (function (activate) {
 		trigger: '.js-expander__trigger'
 	};
 
+	const States = {
+		OPENED: 'Opened',
+		CLOSED: 'Closed'
+	};
+
 	const module = {
 		init: function () {
 			module._initEvents();
 
-			// If no JS, expanders will be open and non-interactable
+			// If no JS, expanders will be open
 			module._closeByDefault();
-			module._addTabIndex();
 
 			window.addEventListener('load', module._openByHash);
 		},
 
 		_initEvents: function () {
 			let $triggers = document.querySelectorAll(selectors.trigger);
-			activate($triggers, module._activateTrigger);
+
+			activate($triggers, module._toggleEvent);
 
 			window.addEventListener('hashchange', module._openByHash);
 		},
 
-		_activateTrigger: function (e) {
+
+		_toggleEvent: function (e) {
 			e.preventDefault();
 
-			let $section = e.target.closest(selectors.section);
+			let $trigger = e.target.closest(selectors.trigger);
+
+			let $section = module._getTriggerSection($trigger);
 			module._toggleSection($section);
 		},
 
-		_toggleSection: function ($section, close) {
+		_getTriggerSection: function ($trigger) {
+			// 1. If a trigger has an aria-controls attribute, its section is
+			// the section with the matching id attribute.
+
+			// 2. If there is no matching section, or if the trigger has no
+			// aria-controls attribute, its section is the most recent
+			// ancestor that is an expandable section
+
+			// 3. Otherwise, the trigger has no matching section
+
+			let $section;
+
+			let controls = $trigger.getAttribute('aria-controls');
+
+			if (controls) {
+				$section = document.getElementById(controls);
+				if (!$section) {
+					console.warn(`Could not find expander section with ID '${controls}'`);
+				}
+			} else if (!$section) {
+				$section = $trigger.closest(selectors.section);
+			}
+
+			return $section;
+		},
+
+		_getSectionTriggers: function ($section) {
+			// Inverse of _getTriggerSection
+
+			let $allTriggers = Array.from(document.querySelectorAll(selectors.trigger));
+			let $matchingTriggers = $allTriggers.filter($trigger => module._getTriggerSection($trigger) === $section);
+
+			return $matchingTriggers;
+		},
+
+
+		_toggleSection: function ($section, desiredState) {
 			let $triggers = $section.querySelectorAll(selectors.trigger);
 
-			if (typeof close === 'undefined') {
-				close = $section.getAttribute('aria-expanded') === 'false';
+			if (typeof action === 'undefined') {
+				let state = module._getSectionState($section);
+
+				if (state === States.CLOSED) {
+					desiredState = States.OPENED;
+				} else if (state === States.OPENED) {
+					desiredState = States.CLOSED;
+				}
 			}
 
-			if (close) {
-				// Open the expander
+			module._setSectionState($section, desiredState);
+		},
+
+
+		_getSectionState: function ($section ) {
+			let ariaExpanded = $section.getAttribute('aria-expanded');
+
+			let state = States.UNDEFINED;
+			if (ariaExpanded === 'true') {
+				state = States.OPENED;
+			} else if (ariaExpanded === 'false') {
+				state = States.CLOSED;
+			}
+
+			return state;
+		},
+
+		_setSectionState: function ($section, state) {
+			let $triggers = module._getSectionTriggers($section);
+
+			if (state === States.OPENED) {
+
 				$section.setAttribute('aria-expanded', 'true');
 				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'true'));
-			} else {
-				// Close the expander
+
+			} else if (state === States.CLOSED) {
+
 				$section.setAttribute('aria-expanded', 'false');
 				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'false'));
+
+			} else {
+
+				console.error(`Unrecognised state '${state}'`);
+
 			}
 		},
+
 
 		_closeByDefault: function () {
 			let $sections = document.querySelectorAll(selectors.section);
 
 			$sections.forEach(($section) => {
-				$section.setAttribute('aria-expanded', 'false');
-
-				let $triggers = $section.querySelectorAll(selectors.trigger);
-				$triggers.forEach(($trigger) => $trigger.setAttribute('aria-expanded', 'false'));
+				module._setSectionState($section, States.CLOSED);
 			});
 		},
+
 
 		_openByHash: function () {
 			// If URL contains a hash to an element within a collapsed section,
@@ -74,10 +149,10 @@ const expander = (function (activate) {
 
 					// Expand the containing section
 					$hash = $hash[0];
-					let $expander = $hash.closest(selectors.section);
+					let $section = $hash.closest(selectors.section);
 
-					if ($expander) {
-						module._toggleSection($expander, true);
+					if ($section) {
+						module._setSectionState($section, States.OPENED);
 					}
 
 					// Scroll to the given element
@@ -85,11 +160,6 @@ const expander = (function (activate) {
 					window.setTimeout(() => $hash.scrollIntoView(), 0);
 				}
 			}
-		},
-
-		_addTabIndex: function () {
-			let $triggers = document.querySelectorAll(selectors.trigger);
-			$triggers.forEach(($trigger) => $trigger.setAttribute('tabindex', '0'));
 		}
 	};
 

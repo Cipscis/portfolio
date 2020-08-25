@@ -9,31 +9,51 @@
 <body>
 	<main class="layout">
 		<div class="content">
-			<h1>Expander 1.0</h1>
+			<h1>Expander 1.1</h1>
 
 			<p><a href="changelog">Changelog</a></p>
 
-			<p>These expandable sections use the <code>aria-expanded</code> attribute to control whether or not their content is visible. Their triggers are bound with accessible activation events using <a href="/portfolio/components/activate">activate</a>.</p>
+			<section id="basic-functionality">
+				<h2>Basic functionality</h2>
 
-			<p>When the page loads, the expanders are all closed via JavaScript. This ensures they will be open if the page is loaded without JavaScript. They are also forced to be open when printing a page.</p>
+				<p>These expandable sections use the <code>aria-expanded</code> attribute to control whether or not their content is visible. Their triggers are bound with accessible activation events using <a href="/portfolio/components/activate">activate</a>.</p>
 
-			<p>If the page is loaded with a hash, or an anchor link is clicked, and the page's hash aligns with the <code>id</code> attribute of an expander, that section will be expanded when the page is loaded. To see an example of this, load this page with <a href="#expander-demo">#expander-demo</a>.</p>
+				<p>If the page is loaded with a hash, or an anchor link is clicked, and the page's hash aligns with the <code>id</code> attribute of either an expander or the descendent of an expander, that section will be expanded when the page is loaded. To see an example of this, load this page with <a href="#expander-demo">#expander-demo</a>. or <a href="#expander-demo-inner">#expander-demo-inner</a></p>
+			</section>
 
 			<div class="expander js-expander" id="expander-demo">
-				<h3 class="expander__trigger js-expander__trigger">Expander Trigger</h3>
+				<h3 class="expander__trigger js-expander__trigger" tabindex="0" role="button" aria-expanded="false">Trigger expander A</h3>
 
 				<div class="expander__body">
-					<p>This is an expander.</p>
+					<p id="expander-demo-inner">This is expander A.</p>
 				</div>
 			</div>
 
 			<div class="expander js-expander" id="expander-demo-2">
-				<h3 class="expander__trigger js-expander__trigger">Second Expander Trigger</h3>
+				<h3 class="expander__trigger js-expander__trigger" tabindex="0" role="button" aria-expanded="false">Trigger expander B</h3>
 
 				<div class="expander__body">
-					<p>This is another expander.</p>
+					<p>This is expander B.</p>
 				</div>
 			</div>
+
+			<h3 class="expander__trigger js-expander__trigger" tabindex="0" role="button" aria-expanded="false" aria-controls="expander-demo">Trigger expander A (external)</h3>
+
+			<section id="accessibility">
+				<h2>Accessibility</h2>
+
+				<p>Expander triggers should be tabbable, either due to the type of element used for them or by having <code>tabindex="0"</code>. If an element other than <code>&lt;button&gt;</code> is used for them, it should typically have <code>role="button"</code> added to it.</p>
+
+				<p>Where a trigger controls an expander that is not its ancestor, it should use the <code>aria-controls</code> attribute to create a link.</p>
+
+				<p>For more information, see the <a href="https://www.w3.org/TR/wai-aria-practices/#disclosure" target="_blank">WAI-ARIA Authoring Practices page's "disclosure" section</a>.</p>
+			</section>
+
+			<section id="no-javascript-support">
+				<h2>No JavaScript support</h2>
+
+				<p>When the page loads, the expanders are all closed via JavaScript. This ensures they will be open if the page is loaded without JavaScript. They are also forced to be open when printing a page.</p>
+			</section>
 		</div>
 	</main>
 

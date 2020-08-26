@@ -32,10 +32,7 @@
 	&.error {
 		animation: 0.5s becomeVisible forwards,
 		           // Make sure the delay here matches the delay in status.js
-		           0.5s 0.1s fadein forwards,
-
-		           0.5s 3.6s fadeout forwards,
-		           0.5s 3.6s becomeHidden forwards;
+		           0.5s 0.1s fadein forwards;
 	}
 	&.success {
 		&::after {
@@ -49,6 +46,11 @@
 			content: "❌";
 			font-size: 0.7em;
 		}
+	}
+
+	&.hidden {
+		animation: 0.5s becomeHidden forwards,
+		           0.5s fadeout forwards;
 	}
 }
 

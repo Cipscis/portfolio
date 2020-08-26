@@ -1,4 +1,4 @@
-/* Status 1.0 */
+/* Status 1.1 */
 
 import { subscribe } from './pubsub.js'
 
@@ -7,9 +7,14 @@ const statusMessage = (function (subscribe) {
 		status: '.js-status'
 	};
 
+	const dataAttributes = {
+		autohide: 'data-autohide-timeout'
+	};
+
 	const events = {
 		success: '/status/success',
-		error: '/status/error'
+		error: '/status/error',
+		hide: '/status/hide'
 	};
 
 	const Types = {
@@ -19,7 +24,9 @@ const statusMessage = (function (subscribe) {
 
 	const classes = {
 		[Types.SUCCESS]: 'success',
-		[Types.ERROR]: 'error'
+		[Types.ERROR]: 'error',
+
+		hidden: 'hidden'
 	};
 
 	// Delay is used for screen reader accessibility.
@@ -31,16 +38,17 @@ const statusMessage = (function (subscribe) {
 			if (subscribe) {
 				subscribe(events.success, module.success);
 				subscribe(events.error, module.error);
+				subscribe(events.hide, module.hide);
 			}
 		},
 
 		_getEl: function ($status) {
 			if (typeof $status === 'string') {
 				$status = document.querySelector($status);
-			} else if (typeof $status === 'undefined') {
-				$status = document.querySelector(selectors.status);
 			} else if ($status instanceof NodeList) {
 				$status = $status[0];
+			} else if (typeof $status === 'undefined') {
+				$status = document.querySelector(selectors.status);
 			}
 
 			if (!$status) {
@@ -89,35 +97,57 @@ const statusMessage = (function (subscribe) {
 			window.setTimeout(() => $status.textContent = message, delay);
 		},
 
-		_show: function (message, type, $status) {
+		_show: function (message, type, $status, autohideDelay) {
 			module._setType(type, $status);
 			module._setMessage(message, $status);
+
+			$status.classList.remove(classes.hidden);
+
+			module._setAutohide($status, autohideDelay);
 		},
 
-		clear: function ($status) {
-			$status = module._getEl($status);
+		_setAutohide: function ($status, autohideDelay) {
+			module._clearAutohide($status);
 
-			module._clearType($status);
-			module._clearMessage();
+			if (autohideDelay && autohideDelay > 0) {
+				let autohideTimeout = window.setTimeout(() => module.hide($status), autohideDelay);
+				$status.setAttribute(dataAttributes.autohide, autohideTimeout);
+			}
 		},
 
-		success: function (message, $status) {
-			$status = module._getEl($status);
+		_clearAutohide: function ($status) {
+			let autohideTimeout = $status.getAttribute(dataAttributes.autohide);
 
-			module._show(message, Types.SUCCESS, $status);
+			if (autohideTimeout) {
+				window.clearTimeout(autohideTimeout);
+				$status.removeAttribute(dataAttributes.autohide);
+			}
 		},
 
-		error: function (message, $status) {
+		hide: function ($status) {
 			$status = module._getEl($status);
 
-			module._show(message, Types.ERROR, $status);
+			$status.classList.add(classes.hidden);
+			module._clearAutohide($status);
+		},
+
+		success: function (message, $status, autohideDelay) {
+			$status = module._getEl($status);
+
+			module._show(message, Types.SUCCESS, $status, autohideDelay);
+		},
+
+		error: function (message, $status, autohideDelay) {
+			$status = module._getEl($status);
+
+			module._show(message, Types.ERROR, $status, autohideDelay);
 		}
 	};
 
 	module._initSubscriptions();
 
 	return {
-		clear: module.clear,
+		hide: module.hide,
 		success: module.success,
 		error: module.error
 	};

@@ -835,7 +835,7 @@ input {
     font-size: 10px;
     color: #fff; }
   .status.success, .status.error {
-    animation: 0.5s becomeVisible forwards, 0.5s 0.1s fadein forwards, 0.5s 3.6s fadeout forwards, 0.5s 3.6s becomeHidden forwards; }
+    animation: 0.5s becomeVisible forwards, 0.5s 0.1s fadein forwards; }
   .status.success::after {
     background: var(--status-success);
     content: "✓"; }
@@ -843,6 +843,8 @@ input {
     background: var(--status-error);
     content: "❌";
     font-size: 0.7em; }
+  .status.hidden {
+    animation: 0.5s becomeHidden forwards, 0.5s fadeout forwards; }
 
 .status--static {
   position: static; }

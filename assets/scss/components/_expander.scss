@@ -2,14 +2,17 @@
 
 .expander__trigger {
 	cursor: pointer;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
 
-	&:before {
+	&::before {
 		content: "-";
 		display: inline-block;
 		text-align: center;
-		width: 30px;
-		height: 30px;
-		line-height: 30px;
+		width: 32px;
+		height: 32px;
+		line-height: 32px;
 		margin-right: 10px;
 
 		border-radius: 50%;
@@ -18,11 +21,24 @@
 		content: "+";
 	}
 
+	&::after {
+		content: "";
+		position: absolute;
+		left: 16px;
+		top: 50%;
+		transform: translate(-50%, -50%);
+
+		width: 44px;
+		height: 44px;
+	}
+
 	&:focus {
 		outline: none;
-		&:before {
-			@include focus-outline;
+		&::before {
 			background: var(--highlight-background);
+		}
+		&::after {
+			@include focus-outline;
 		}
 	}
 }
@@ -33,10 +49,14 @@
 	.expander[aria-expanded="false"] & {
 		display: none;
 	}
+
+	.expander:last-child > .expander__body {
+		padding-bottom: 0;
+	}
 }
 
 @media print {
-	.expander__trigger:before {
+	.expander__trigger::before {
 		display: none;
 	}
 

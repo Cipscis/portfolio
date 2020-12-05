@@ -1,4 +1,4 @@
-/* Expander 1.1 */
+/* Expander 1.2 */
 
 import activate from './activate.js';
 
@@ -80,7 +80,7 @@ const expander = (function (activate) {
 		_toggleSection: function ($section, desiredState) {
 			let $triggers = $section.querySelectorAll(selectors.trigger);
 
-			if (typeof action === 'undefined') {
+			if (typeof desiredState === 'undefined') {
 				let state = module._getSectionState($section);
 
 				if (state === States.CLOSED) {
@@ -141,18 +141,33 @@ const expander = (function (activate) {
 			// If URL contains a hash to an element within a collapsed section,
 			// expand that section then scroll to the element
 
+			// TODO: Allow clicking an anchor link to the current hash to
+			// force relevant expanders to open again, if they've been closed
+
 			let hash = document.location.hash;
 
 			if (hash.length) {
-				let $hash = document.querySelectorAll(hash);
-				if ($hash.length) {
+				let $hash = document.querySelector(hash);
 
+				if ($hash) {
 					// Expand the containing section
-					$hash = $hash[0];
-					let $section = $hash.closest(selectors.section);
+					let $expander = $hash.closest(selectors.section);
 
-					if ($section) {
-						module._setSectionState($section, States.OPENED);
+					if ($expander) {
+						module._setSectionState($expander, States.OPENED);
+					}
+
+					// If there are higher levels of expanders, expand them too
+					while ($expander) {
+						$expander = $expander.parentElement;
+
+						if ($expander) {
+							$expander = $expander.closest(selectors.section);
+
+							if ($expander) {
+								module._setSectionState($expander, States.OPENED);
+							}
+						}
 					}
 
 					// Scroll to the given element

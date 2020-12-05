@@ -9,7 +9,7 @@
 <body>
 	<main class="layout">
 		<div class="content">
-			<h1>Expander 1.1</h1>
+			<h1>Expander 1.2</h1>
 
 			<p><a href="changelog">Changelog</a></p>
 
@@ -18,14 +18,22 @@
 
 				<p>These expandable sections use the <code>aria-expanded</code> attribute to control whether or not their content is visible. Their triggers are bound with accessible activation events using <a href="/portfolio/components/activate">activate</a>.</p>
 
-				<p>If the page is loaded with a hash, or an anchor link is clicked, and the page's hash aligns with the <code>id</code> attribute of either an expander or the descendent of an expander, that section will be expanded when the page is loaded. To see an example of this, load this page with <a href="#expander-demo">#expander-demo</a>. or <a href="#expander-demo-inner">#expander-demo-inner</a></p>
+				<p>If the page is loaded with a hash, or an anchor link is clicked, and the page's hash aligns with the <code>id</code> attribute of either an expander or the descendent of an expander, that section and any expanders wrapping it will be expanded when the page is loaded. To see an example of this, load this page with <a href="#expander-demo">#expander-demo</a>. or <a href="#expander-demo-nested">#expander-demo-nested</a></p>
 			</section>
 
 			<div class="expander js-expander" id="expander-demo">
 				<h3 class="expander__trigger js-expander__trigger" tabindex="0" role="button" aria-expanded="false">Trigger expander A</h3>
 
 				<div class="expander__body">
-					<p id="expander-demo-inner">This is expander A.</p>
+					<p id="expander-demo-inner">This is expander A. It has a nested expander:</p>
+
+					<div class="expander js-expander" id="expander-demo-nested">
+						<h4 class="expander__trigger js-expander__trigger" tabindex="0" role="button" aria-expanded="false">Trigger nested expander</h4>
+
+						<div class="expander__body">
+							<p>This is the content of the nested expander.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 

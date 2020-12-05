@@ -11,6 +11,9 @@
   border: 0;
   margin: -1px; }
 
+.nowrap {
+  white-space: nowrap; }
+
 @keyframes becomeVisible {
   0% {
     visibility: visible; }
@@ -440,7 +443,6 @@ input {
 .fake-input__input:focus + .fake-input__display,
 .fake-input__display:hover {
   outline-color: #4d90fe;
-  outline-offset: -2px;
   outline-style: solid;
   outline-width: 2px;
   background: var(--primary-background-active); }
@@ -521,8 +523,13 @@ input {
 .article-meta__author {
   float: left; }
 
+.article-meta__codebook {
+  float: left;
+  clear: left; }
+
 .article-meta__date {
-  float: right; }
+  float: right;
+  clear: right; }
 
 .panel {
   border: 1px solid var(--border);
@@ -550,7 +557,6 @@ input {
 
 .tooltip:focus .tooltip__trigger {
   outline-color: #4d90fe;
-  outline-offset: -2px;
   outline-style: solid;
   outline-width: 2px; }
   @supports (outline-color: -webkit-focus-ring-color) {
@@ -563,7 +569,6 @@ input {
 .tooltip:focus-within .tooltip__trigger {
   background-color: var(--highlight-background-active);
   outline-color: #4d90fe;
-  outline-offset: -2px;
   outline-style: solid;
   outline-width: 2px; }
   .tooltip:focus-within .tooltip__trigger:before {
@@ -582,7 +587,7 @@ input {
 
 .tooltip__body {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   padding: 10px;
   margin: 10px 0;
   background: var(--primary-background);
@@ -664,7 +669,6 @@ input {
       background: var(--highlight-background); }
     .expander__trigger:focus::after {
       outline-color: #4d90fe;
-      outline-offset: -2px;
       outline-style: solid;
       outline-width: 2px; }
       @supports (outline-color: -webkit-focus-ring-color) {

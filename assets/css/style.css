@@ -643,7 +643,8 @@ input {
   cursor: pointer;
   position: relative;
   display: inline-flex;
-  align-items: center; }
+  align-items: center;
+  min-height: 44px; }
   .expander__trigger::before {
     content: "-";
     display: inline-block;

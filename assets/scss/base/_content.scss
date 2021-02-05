@@ -29,7 +29,7 @@
 	color: var(--primary-color);
 	text-decoration: none;
 
-	$link-bg-height: 20%;
+	$link-bg-height: 12%;
 
 	background: linear-gradient(to top, var(--highlight-bar) 0%, var(--highlight-bar) $link-bg-height, transparent ($link-bg-height + 0.1%), transparent 100%);
 	&:hover,

@@ -218,11 +218,11 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   color: var(--primary-color);
   text-decoration: none;
-  background: linear-gradient(to top, var(--highlight-bar) 0%, var(--highlight-bar) 20%, transparent 20.1%, transparent 100%); }
+  background: linear-gradient(to top, var(--highlight-bar) 0%, var(--highlight-bar) 12%, transparent 12.1%, transparent 100%); }
   .content a:hover, .content a:focus,
   .a:hover,
   .a:focus {
-    background: linear-gradient(to top, var(--highlight-bar-active) 0%, var(--highlight-bar-active) 20%, transparent 20.1%, transparent 100%); }
+    background: linear-gradient(to top, var(--highlight-bar-active) 0%, var(--highlight-bar-active) 12%, transparent 12.1%, transparent 100%); }
 
 .content blockquote,
 .blockquote {

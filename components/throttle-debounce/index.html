@@ -21,9 +21,11 @@
 
 			<button class="js-throttle">Activated 0 times</button>
 
-			<p>A throttled function is created like this, where <code>delay</code> is a number of milliseconds:</p>
+			<p>A throttled function is created like this, where <code>fn</code> is the function that you would like to be throttled and <code>delay</code> is a number of milliseconds:</p>
 
 			<code class="code--block">let throttledFn = throttle(fn, delay);</code>
+
+			<p>You can then use the new <code>throttledFn</code>, returned by <code>throttle</code>, where you would have used <code>fn</code>.</p>
 
 			<h2>Debounce</h2>
 
@@ -31,7 +33,7 @@
 
 			<button class="js-debounce">Activated 0 times</button>
 
-			<p>A debounced function is created similarly to a throttled function, with <code>delay</code> being a number of milliseconds:</p>
+			<p>A debounced function is created similarly to a throttled function, with <code>fn</code> being the function you would like to create a debounced version of and <code>delay</code> being a number of milliseconds:</p>
 
 			<code class="code--block">let debouncedFn = debounce(fn, delay);</code>
 

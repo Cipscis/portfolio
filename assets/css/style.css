@@ -763,10 +763,10 @@ input {
   right: 0;
   bottom: 0;
   background: var(--overlay); }
-  .modal[aria-hidden="false"] {
-    display: block; }
-  .modal:target {
-    display: block; }
+  .modal[aria-hidden="false"], .modal:target {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 .modal--full {
   background: #fff; }
@@ -780,10 +780,7 @@ input {
   overflow: hidden; }
 
 .modal__body {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%) scaleZ(1);
+  position: relative;
   overflow: auto;
   width: 100%;
   height: 100%;

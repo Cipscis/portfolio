@@ -1,4 +1,4 @@
-/* Modal 1.0 */
+/* Modal 1.1 */
 
 import activate from './activate.js';
 import keys from './keybinding.js';
@@ -22,8 +22,7 @@ const modal = (function (activate, keys, subscribe) {
 
 	const events = {
 		show: '/modal/show',
-		hide: '/modal/hide',
-		resize: '/modal/resize'
+		hide: '/modal/hide'
 	};
 
 	let $focus = undefined; // The active modal window
@@ -89,7 +88,6 @@ const modal = (function (activate, keys, subscribe) {
 			if (subscribe) {
 				subscribe(events.show, module._showById);
 				subscribe(events.hide, module._hide);
-				subscribe(events.resize, module._resizeBody);
 			}
 		},
 
@@ -98,8 +96,6 @@ const modal = (function (activate, keys, subscribe) {
 
 			document.addEventListener('click', module._hideIfBackgroundClick);
 			document.querySelectorAll('*').forEach(el => el.addEventListener('focus', module._wrapTab));
-
-			window.addEventListener('resize', module._resizeBody);
 		},
 
 		_unbindModalActiveEvents: function () {
@@ -107,8 +103,6 @@ const modal = (function (activate, keys, subscribe) {
 
 			document.removeEventListener('click', module._hideIfBackgroundClick);
 			document.querySelectorAll('*').forEach(el => el.removeEventListener('focus', module._wrapTab));
-
-			window.removeEventListener('resize', module._resizeBody);
 		},
 
 		// Event callbacks
@@ -193,7 +187,6 @@ const modal = (function (activate, keys, subscribe) {
 			}
 
 			module._bindModalActiveEvents();
-			module._resizeBody();
 		},
 
 		_hideEvent: function (e) {
@@ -216,37 +209,6 @@ const modal = (function (activate, keys, subscribe) {
 
 				$active = undefined;
 				$focus = undefined;
-			}
-		},
-
-		_resizeBody: function () {
-			if ($active) {
-				let $body = $active.querySelector(selectors.body);
-
-				$body.style.height = '';
-				$body.style.width = '';
-
-				let width = Math.ceil($body.offsetWidth);
-				let height = Math.ceil($body.offsetHeight);
-
-				// Round up to the nearest 2, so centring won't cause blur
-				// when running animations or using 3D transforms
-
-				if (width % 2) {
-					width = Math.round(width);
-					if (width % 2) {
-						width += 1;
-					}
-				}
-				$body.style.width = width + 'px';
-
-				if (height % 2) {
-					height = Math.round(height);
-					if (height % 2) {
-						height += 1;
-					}
-				}
-				$body.style.height = height + 'px';
 			}
 		},
 

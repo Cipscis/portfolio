@@ -1,7 +1,10 @@
 .modal {
 	display: none;
-	&[aria-hidden="false"] {
-		display: block;
+	&[aria-hidden="false"],
+	&:target {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	position: fixed;
@@ -12,9 +15,6 @@
 	bottom: 0;
 
 	background: var(--overlay);
-	&:target {
-		display: block;
-	}
 }
 
 .modal--full {
@@ -39,10 +39,7 @@
 }
 
 .modal__body {
-	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, -50%) scaleZ(1);
+	position: relative;
 
 	overflow: auto;
 

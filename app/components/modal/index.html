@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+	<title>Modal</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Modal 1.1</h1>
+
+			<p><a href="changelog">Changelog</a></p>
+
+			<p>This allows us to show an accessible and customisable modal window.</p>
+		</div>
+
+		<p>
+			<a href="#modal-example" class="button js-modal__trigger" role="button">Show modal (href)</a>
+		</p>
+
+		<p>
+			<button class="button js-modal__trigger" aria-controls="modal-example">Show modal (aria-controls)</button>
+		</p>
+
+		<div class="content">
+			<section id="basic-functionality">
+				<h2>Basic functionality</h2>
+
+				<p>Modal windows are shown when an element with the class <code>js-modal__trigger</code> is clicked. Each of these triggers is tied to a particular modal window via one of two ways:</p>
+
+				<p>1. View an <code>href</code> attribute, assuming it is pointing to the id of a modal window (e.g. <code>href="#modal-example"</code>).</p>
+
+				<p>2. If no appropriate <code>href</code> attribute is present, via an <code>aria-controls</code> attribute that contains the value of the modal window's <code>id</code> attribute.</p>
+
+				<p>Modal windows can be closed by clicking outside the window (i.e. on the overlay between it and the content), by clicking the "close button", or by pressing the "escape" key.</p>
+
+				<p>Focus is automatically moved inside the modal window when it is opened, kept inside it while it is opened (tabbing through elements wraps within the modal window), and returned to the appropriate element when the modal window is closed.</p>
+			</section>
+
+
+			<section id="accessibility">
+				<h2>Accessibility</h2>
+
+				<p>Please note several attributes in the example markup are <em>necessary</em> for the modal window to be accessible, such as the <code>role</code> and <code>aria-labelledby</code> attributes. For more information, see the <a href="https://www.w3.org/TR/wai-aria/#dialog" target="_blank">WAI-ARIA Authoring Practices page's "dialog" section</a>.</p>
+			</section>
+
+
+			<section id="onshow-callback">
+				<h2>onShow callback</h2>
+
+				<p>A function to be called when a modal window is shown can be passed in via an options object to the <code>init</code> method.</p>
+
+				<p>The onShow callback receives the modal <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element" target="_blank">Element</a> being shown as an argument.</p>
+			</section>
+
+
+			<section id="pubsub-events">
+				<h2>Pubsub events</h2>
+
+				<p>This code also uses a pubsub implementation to subscribe to two events:</p>
+
+				<p><code>/modal/show</code> can be published to show a modal window of a specified ID.</p>
+			</section>
+
+
+			<section id="body-open-class">
+				<h2>Body open class</h2>
+
+				<p>When a modal is open, a class is applied to the <code>&lt;body&gt;</code> tag, which can be used to apply CSS for purposes like hiding the main scrollbar when a full screen modal is open.</p>
+
+				<p>By default, this class is <code>modal__body-open</code>, but it can be customised for a specific modal via the data attribute <code>data-modal-body-open-class</code> on the <code>js-modal</code> element.</p>
+
+				<p>
+					<button class="button js-modal__trigger" aria-controls="modal-full-example">Show full modal</button>
+				</p>
+			</section>
+
+
+			<section id="dependencies">
+				<h2>Dependencies</h2>
+
+				<h3><a href="/portfolio/components/activate">Activate</a></h3>
+
+				<p><strong>Required.</strong> Activate is used for accessible event binding, so elements other than <code>&lt;button&gt;</code> can be used as modal triggers.</p>
+
+				<h3><a href="/portfolio/components/pubsub">Pubsub</a></h3>
+
+				<p><strong>Optional.</strong> If present, adds support for <a href="#pubsub-events">pubsub events</a>.</p>
+			</section>
+
+
+			<section>
+				<h2>Size</h2>
+
+				<p>To support using <code>position: fixed;</code> alongside CSS transforms to centre a modal window, the size of the body is set explicitly to be an even number of pixels. This prevents CSS transforms moving the element by a fractional number of pixels, causing it to become blurry.</p>
+			</section>
+
+
+			<section id="no-javascript-support">
+				<h2>No JavaScript support</h2>
+
+				<p>If there is no JavaScript, the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:target"><code>:target</code> CSS pseudo-class</a> is used to show and hide modal windows depending on the current hash. Using <code class="tag">a</code> tags with <code>role="button"</code> and appropriate <code>href</code> attributes for both trigger and close button is necessary to support this. Otherwise, they can use <code class="tag">button</code> tags if support for no JavaScript is not necessary.</p>
+			</section>
+		</div>
+	</main>
+
+	<div class="modal js-modal" id="modal-example" aria-modal="true" role="dialog" aria-labelledby="modal-example-name">
+		<div class="modal__body js-modal__body">
+			<a href="#" class="modal__close js-modal__close" aria-label="Close" role="button"></a>
+
+			<div class="content">
+				<h2 id="modal-example-name">Modal Example</h2>
+
+				<p>You can put any markup within the body of a modal.</p>
+
+				<p>See <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank">the WAI-ARIA specification</a> for how an accessible modal window should be implemented.</p>
+			</div>
+		</div>
+		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>
+	</div>
+
+	<div class="modal modal--full js-modal" id="modal-full-example" aria-modal="true" role="dialog" aria-labelledby="modal-full-example-name" data-modal-body-open-class="modal__body-open--full">
+		<div class="modal__body js-modal__body">
+			<a href="#" class="modal__close js-modal__close" aria-label="Close" role="button"></a>
+
+			<div class="content">
+				<h2 id="modal-full-example-name">Full screen modal</h2>
+
+				<p>This modal uses variant CSS and a custom class applied to the <code>&lt;body&gt;</code> to take over the full screen, including hiding the scrollbar for the body.</p>
+			</div>
+		</div>
+		<span class="modal__dummy" tabindex="0"><!-- Dummy focusable element --></span>
+	</div>
+
+	<script type="module">
+		import modal from '/portfolio/assets/scripts/modal.js';
+
+		modal.init();
+	</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<html>
+<head>
+	<title>Contrast</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Contrast</h1>
+
+			<button class="button js-toggle-dark-mode">Toggle Contrast Mode</button>
+
+			<script type="module">
+				import activate from '/portfolio/assets/scripts/activate.js';
+
+				activate('.js-toggle-dark-mode', () => {
+					let $body = document.querySelector('body');
+					if ($body.classList.contains('dark-mode')) {
+						$body.classList.remove('dark-mode');
+					} else {
+						$body.classList.add('dark-mode');
+					}
+				});
+			</script>
+
+			<h2>Contrast Palette</h2>
+
+			<div class="contrast-primary">
+				<p>This is what content looks like in the primary contrast group.</p>
+
+				<p class="contrast-low">Low contrast text is available.</p>
+
+				<p>Highlighting the <span class="tooltip__trigger">background</span> of text, with an active colour, is possible. As is highlighting a <span class="a">bar of colour</span> at the bottom of text, with an active colour.</p>
+
+				<p>Interactive elements in this group can use the <span class="button">clickable</span> contrast group, with an active background colour.</p>
+
+				<div class="contrast-offset">
+					<p>Some areas can use an "offset" contrast group. These areas are intended to only contain text, though they can also have <span class="tooltip__trigger">background</span> or <span class="a">colour bar</span> highlighting.</p>
+
+					<p>Offset contrast areas can also have <span class="contrast-low">low contrast text</span>.</p>
+				</div>
+
+				<div class="contrast-primary--active">
+					<p>Some of these groups can have an "active" background, for example on hover, to indicate interactivity. They should also use a border or some other way to set them apart prior to becoming active.</p>
+
+					<p>These active areas can have <span class="tooltip__trigger">background</span> or <span class="a">colour bar</span> highlighting.</p>
+
+					<p>They should avoid including <span class="contrast-low">low contrast text</span> or <span class="button">clickable</span> elements due to insufficient contrast (and general UI issues with nesting clickable elements within other clickable elements).</p>
+				</div>
+
+				<p>Hover over this next area, or focus on it, to remove the overlay.</p>
+
+				<div class="contrast-overlay" tabindex="0">
+
+					<p>An overlay can be used to reduce contrast on areas that are still present but cannot currently be interacted with. This overlay can appear over the top of any other element, so is applied with transparency.</p>
+
+					<p>This is used by the <a href="/portfolio/components/modal/">modal</a> component, for example.</p>
+				</div>
+
+				<div class="contrast-shadow">
+					<p>Some elements can have shadows. This is used by the <a href="/portfolio/components/tooltip/">tooltip</a> component, for example.</p>
+				</div>
+			</div>
+		</div>
+
+		<style>
+			.contrast-primary {
+				background: var(--primary-background);
+				color: var(--primary-background-color);
+			}
+
+			.contrast-primary--active {
+				background: var(--primary-background);
+				color: var(--primary-background-color);
+				margin: 20px 0;
+				padding: 10px;
+				border: 1px solid var(--border);
+			}
+			.contrast-primary--active:hover {
+				background: var(--primary-background-active);
+			}
+
+			.contrast-low {
+				color: var(--primary-color-low-contrast);
+			}
+
+			.contrast-offset {
+				margin: 20px 0;
+				padding: 10px;
+				background: var(--offset-background);
+				color: var(--offset-color);
+			}
+			.contrast-offset .contrast-low {
+				color: var(--offset-color-low-contrast);
+			}
+
+			.contrast-overlay {
+				margin: 20px 0;
+				padding: 10px;
+				position: relative;
+			}
+
+			.contrast-overlay::before {
+				content: "";
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+
+				background: var(--overlay);
+			}
+
+			.contrast-overlay:hover::before,
+			.contrast-overlay:focus::before,
+			.contrast-overlay:focus-within::before {
+				display: none;
+			}
+
+			.contrast-shadow {
+				margin: 20px 0;
+				padding: 10px;
+				border: 1px solid var(--border);
+				border-radius: 5px;
+				box-shadow: 0 0 5px 0 var(--shadow);
+			}</style>
+
+		<div class="content">
+			<h2>Nesting containers:</h2>
+		</div>
+
+		<div class="light-mode content">
+			<p>This is a light mode container, which will stay in light mode even when the main document is in dark mode.</p>
+			<div class="dark-mode">
+				<p>Subsequent nesting of a dark mode container within a light mode container still works.</p>
+			</div>
+		</div>
+
+		<div class="dark-mode content">
+			<p>This is a dark mode container, which will always remain in dark mode.</p>
+			<div class="light-mode">
+				<p>This is a light mode container inside a dark mode container, which will always remain in light mode.</p>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

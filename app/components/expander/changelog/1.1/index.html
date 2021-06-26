@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<title>Expander Changelog - 1.1</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Expander 1.1 - External triggers</h1>
+
+			<p><a href="../">Back to changelog</a></p>
+
+			<p>This update refactors Expander and adds the capability for triggers to toggle expandable sections that are not their ancestors, by using the <code>aria-controls</code> attribute.</p>
+
+			<p>As part of this refactor, the JavaScript that added <code>tabindex="0"</code> to each trigger has been removed. This was in place so that triggers may not be focusable if there is no JavaScript on the page, but I decided it was better to keep the triggers focusable in that case as well instead of encourage leaving it off elements when writing HTML.</p>
+
+			<section class="c-docs__section" id="breaking">
+				<h2 class="c-docs__section-title">Breaking changes</h2>
+				<ul>
+					<li>Triggers no longer have a <code>tabindex</code> attribute added via JavaScript. If they are not using a natively focusable element, they should have <code>tabindex="0"</code>.</li>
+				</ul>
+			</section>
+
+			<section class="c-docs__section" id="non-breaking">
+				<h2 class="c-docs__section-title">Non-breaking changes</h2>
+
+				<ul>
+					<li>Triggers can sit outside the expandable section they control, if they have an <code>aria-controls</code> attribute matching the expandable section's <code>id</code> attribute.</li>
+				</ul>
+			</section>
+		</div>
+	</main>
+</body>
+
+</html>

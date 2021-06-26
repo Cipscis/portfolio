@@ -1,0 +1,39 @@
+.autocomplete {
+	position: relative;
+	flex-grow: 1;
+}
+
+.autocomplete__input {
+	display: block;
+	width: 100%;
+	padding: 5px;
+}
+
+.autocomplete__results {
+	display: none;
+	position: absolute;
+
+	width: 100%;
+}
+
+.autocomplete__result-list {
+	margin: -1px 0 0;
+	padding: 0;
+	list-style: none;
+
+	background: var(--primary-background);
+	border: 1px solid var(--border);
+}
+
+.autocomplete__result-item {
+	display: block;
+	padding: 5px;
+
+	cursor: pointer;
+
+	&:hover,
+	&[aria-selected="true"] {
+		outline: none;
+		background: var(--primary-background-active);
+	}
+}

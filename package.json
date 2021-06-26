@@ -1,28 +1,35 @@
 {
-  "name": "Portfolio",
-  "author": {
-    "name": "Mark Hanna",
-    "email": "mark@honestuniverse.com",
-    "url": "https://honestuniverse.com"
-  },
-  "version": "0.0.1",
-  "description": "Portfolio",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server/server.js | node server/build.js"
-  },
-  "dependencies": {
-    "express": "^4.16.4"
-  },
-  "engines": {
-    "node": "8.x"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Cipscis/portfolio.git"
-  },
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-sass": "^4.1.0"
-  }
+	"name": "Portfolio",
+	"author": {
+		"name": "Mark Hanna",
+		"email": "mark@honestuniverse.com",
+		"url": "https://honestuniverse.com"
+	},
+	"version": "0.1.0",
+	"description": "Mark Hanna's web development portfolio",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"server": "node server/server.js",
+		"build": "gulp build",
+		"watch": "gulp",
+		"start": "concurrently --kill-others \"npm run server\" \"npm run watch\""
+	},
+	"engines": {
+		"node": "14.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Cipscis/portfolio.git"
+	},
+	"license": "Hippocratic-2.1",
+	"devDependencies": {
+		"concurrently": "^6.1.0",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"gulp": "^4.0.2",
+		"gulp-sass": "^4.1.0",
+		"sass": "^1.34.1",
+		"webpack": "^5.40.0"
+	}
 }

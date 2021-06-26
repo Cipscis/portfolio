@@ -1,8 +1,8 @@
 /* Modal 1.1 */
 
-import activate from './activate.js';
-import keys from './keybinding.js';
-import { subscribe } from './pubsub.js';
+import { activate } from 'activate';
+import { keys } from '../keybinding/keybinding.js';
+import { subscribe } from 'pubsub';
 
 const modal = (function (activate, keys, subscribe) {
 	const selectors = {
@@ -245,4 +245,5 @@ const modal = (function (activate, keys, subscribe) {
 	};
 })(activate, keys, subscribe);
 
+export { modal };
 export default modal;

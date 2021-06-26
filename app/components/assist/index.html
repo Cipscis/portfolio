@@ -47,16 +47,6 @@
 		</div>
 	</main>
 
-	<script type="module">
-		import assist from '/portfolio/assets/scripts/assist.js';
-
-		document.querySelector('.js-message-form').addEventListener('submit', e => {
-			e.preventDefault();
-			let $message = document.querySelector('.js-message');
-			let message = $message.value;
-
-			assist.speak(message);
-		});
-	</script>
+	<script type="module" src="/portfolio/assets/js/dist/assist.bundle.js"></script>
 </body>
 </html>

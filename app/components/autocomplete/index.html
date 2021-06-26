@@ -6,7 +6,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<script type="text/javascript" src="/portfolio/assets/scripts/lib/templayed.min.js"></script>
+	<script type="text/javascript" src="/portfolio/assets/js/src/lib/templayed.min.js"></script>
 </head>
 <body>
 	<main class="layout">
@@ -63,12 +63,6 @@
 		</div>
 	</main>
 
-	<script type="module">
-		import autocomplete from '/portfolio/assets/scripts/autocomplete.js';
-
-		(function (autocomplete) {
-			autocomplete.init();
-		})(autocomplete);
-	</script>
+	<script type="module" src="/portfolio/assets/js/dist/autocomplete.bundle.js"></script>
 </body>
 </html>

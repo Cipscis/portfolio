@@ -115,29 +115,7 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 						for this element.
 					</p>
 
-					<p>
-						This button can <button class="js-toggle-ghost">toggle the element</button> by
-						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-js-trigger" aria-describedby="tooltip-ghost-js-body">
-							<span class="tooltip__trigger" id="tooltip-ghost-js-trigger">adding and removing state classes</span>.
-							<span class="tooltip__body" id="tooltip-ghost-js-body">
-								<script type="module" class="code code--block">import activate from '/portfolio/assets/scripts/activate.js';
-
-activate('.js-toggle-ghost', () => {
-	let $ghosts = document.querySelectorAll('.ghost');
-	$ghosts.forEach(($ghost) => {
-		if ($ghost.classList.contains('is-visible') === false) {
-			$ghost.classList.remove('is-hidden');
-			$ghost.classList.add('is-visible');
-		} else {
-			$ghost.classList.remove('is-visible');
-			$ghost.classList.add('is-hidden');
-		}
-	});
-});
-</script>
-							</span>
-						</span>
-					</p>
+					<p>This button can <button class="js-toggle-ghost">toggle the element</button> by adding and removing state classes.</p>
 
 					<p>However, you can't always safely assume the initial state of elements. For example, a button used to toggle the state of a value stored somewhere else, such as keeping a list in <code>localStorage</code> of pages a user has marked as favourites.</p>
 
@@ -147,8 +125,7 @@ activate('.js-toggle-ghost', () => {
 		</section>
 	</main>
 
-	<script type="module">
-		import expander from '/portfolio/assets/scripts/expander.js';
-	</script>
+	<script type="module" src="/portfolio/assets/js/dist/expander.bundle.js"></script>
+	<script type="module" src="/portfolio/assets/js/dist/animations.bundle.js"></script>
 </body>
 </html>

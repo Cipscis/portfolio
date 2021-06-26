@@ -197,4 +197,5 @@ const keys = (function () {
 	};
 })();
 
+export { keys };
 export default keys;

@@ -1,6 +1,6 @@
 /* Drag/Sort 1.0 */
 
-import { publish } from './pubsub.js';
+import { publish } from 'pubsub';
 
 // Can work with or without a pubsub implementation
 const dragsort = (function (publish) {

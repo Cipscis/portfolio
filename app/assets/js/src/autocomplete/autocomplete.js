@@ -1,9 +1,9 @@
 /* Autocomplete 1.0 */
 
-import './status.js';
-import { debounce } from './throttle-debounce.js';
-import activate from './activate.js';
-import { publish } from './pubsub.js';
+import { status } from '../status/status.js';
+import { debounce } from 'debounce';
+import { activate } from 'activate';
+import { publish } from 'pubsub';
 
 const autocomplete = (function (templayed, debounce, activate, publish) {
 	'use strict';

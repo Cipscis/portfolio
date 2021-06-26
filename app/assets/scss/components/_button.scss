@@ -1,0 +1,15 @@
+.content button,
+.button {
+	@include button-reset;
+
+	display: inline-block;
+
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	line-height: 1.7;
+	cursor: pointer;
+
+	transition: 0.3s background;
+	@include contrast-clickable;
+}

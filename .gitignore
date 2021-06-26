@@ -1,5 +1,5 @@
-/.jshintrc
-/node_modules
-/*.sublime-workspace
-/app/assets/css/*.css
-/portfolio
+node_modules/
+.env
+*.sublime-workspace
+app/assets/css/
+app/assets/js/dist/

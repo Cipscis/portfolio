@@ -1,0 +1,65 @@
+.status {
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	pointer-events: none;
+
+	font-size: 12px;
+
+	visibility: hidden;
+	opacity: 0;
+
+	@include contrast-primary;
+	border: 1px solid var(--border);
+	padding: 10px 20px;
+
+	&::after {
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 10px;
+
+		width: 20px;
+		height: 20px;
+		border-radius: 20px;
+
+		line-height: 20px;
+		text-align: center;
+		font-size: 10px;
+
+		color: $white;
+	}
+	&.success,
+	&.error {
+		animation: 0.5s becomeVisible forwards,
+		           // Make sure the delay here matches the delay in status.js
+		           0.5s 0.1s fadein forwards;
+	}
+	&.success {
+		&::after {
+			background: var(--status-success);
+			content: "✓";
+		}
+	}
+	&.error {
+		&::after {
+			background: var(--status-error);
+			content: "❌";
+			font-size: 0.7em;
+		}
+	}
+
+	&.hidden {
+		animation: 0.5s becomeHidden forwards,
+		           0.5s fadeout forwards;
+	}
+}
+
+.status--static {
+	position: static;
+}
+
+.status--absolute {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

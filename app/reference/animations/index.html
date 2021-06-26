@@ -26,15 +26,15 @@
 					<p>If <code>animation-delay</code> is also used, it's possible to use a single state change to transition an element through a series of animations. For example, the <a href="/portfolio/components/status/">status</a> component uses a series of animations to show a status message and then hide it again after a delay:</p>
 
 					<pre class="code code--block">animation: 0.5s becomeVisible forwards,
-           // Make sure the delay here matches the delay in status.js
-           0.5s 0.1s fadein forwards,
+	// Make sure the delay here matches the delay in status.js
+	0.5s 0.1s fadein forwards,
 
-           0.5s 3.6s fadeout forwards,
-           0.5s 3.6s becomeHidden forwards;</pre>
+	0.5s 3.6s fadeout forwards,
+	0.5s 3.6s becomeHidden forwards;</pre>
 
-		           <p>Four utility animations are used here to make it easier to create custom animations with different speeds and delays, instead of using separate CSS animations that each affect multiple properties. These utility animations are all simple:</p>
+					<p>Four utility animations are used here to make it easier to create custom animations with different speeds and delays, instead of using separate CSS animations that each affect multiple properties. These utility animations are all simple:</p>
 
-		           <pre class="code code--block">@keyframes becomeVisible {
+					<pre class="code code--block">@keyframes becomeVisible {
 	  0% { visibility: visible; }
 	100% { visibility: visible; }
 }
@@ -59,7 +59,7 @@
 
 					<p>If the <code>becomeHidden</code> animation had <code>visibility: visible;</code> at the start and <code>visibility: hidden;</code> at the end, then the element's visibility would switch halfway through the animation. By remaining <code>visible</code> until the end, then applying <code>visibility: hidden;</code>, it's ensured that the element will only become hidden at the very end of the animation.</p>
 
-					<p>Because <code>visibility: hidden;</code> doesn't remove an element from the flow, if it's being shown or hidden by changing its <code>opacity</code> then changing its <code>visibility</code> will node change the appearance of the animation. However, animating the <code>visibility</code> property when showing or hiding an element ensures that screen readers can know whether or not to read it out.</p>
+					<p>Because <code>visibility: hidden;</code> doesn't remove an element from the flow, if it's being shown or hidden by changing its <code>opacity</code> then changing its <code>visibility</code> will not change the appearance of the animation. However, animating the <code>visibility</code> property when showing or hiding an element ensures that screen readers can know whether or not to read it out.</p>
 
 					<p>The fact that <code>visibility: hidden;</code> doesn't remove an element from the flow also means this is typically most useful for making elements with <code>position: absolute;</code> or <code>position: fixed;</code> appear and disappear.</p>
 
@@ -85,7 +85,7 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 
 					<p>There are a couple of ways to handle this. Which one works best depends on whether or not you can safely assume that the element's initial state will always be the same. This is most likely the state for elements that are always hidden by default.</p>
 
-					<p>In those cases, you can just not apply an animation to the element itself, but only to its various state classes, and when the page loads the element doesn't have any of those state classes.</p>
+					<p>In those cases, you can not apply an animation to the element itself, but only to its various state classes, and when the page loads the element doesn't have any of those state classes.</p>
 
 					<p>For example, here is an element that is hidden by default, but will appear when it's given an <code>is-visible</code> state class and disappear when it's given an <code>is-hidden</code> state class:</p>
 
@@ -95,20 +95,20 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 
 					<p>
 						See
-						<span class="tooltip tooltip--block" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-css-trigger" aria-describedby="tooltip-ghost-css-body">
+						<span class="tooltip tooltip--block js-tooltip" tabindex="0" role="dialog" aria-labelledby="tooltip-ghost-css-trigger" aria-describedby="tooltip-ghost-css-body">
 							<span class="tooltip__trigger" id="tooltip-ghost-css-trigger">the CSS</span>
-							<span class="tooltip__body" id="tooltip-ghost-css-body">
+							<span class="tooltip__body js-tooltip__body" id="tooltip-ghost-css-body">
 									<style class="code code--block">.ghost {
 	opacity: 0;
 	visibility: hidden;
 }
 .ghost.is-visible {
 	animation: 1s becomeVisible forwards,
-	           1s fadein forwards;
+			   1s fadein forwards;
 }
 .ghost.is-hidden {
 	animation: 1s fadeout forwards,
-	           1s becomeHidden forwards;
+			   1s becomeHidden forwards;
 }</style>
 							</span>
 						</span>
@@ -125,6 +125,7 @@ window.setTimeout(() => $status.textContent = message, delay);</pre>
 		</section>
 	</main>
 
+	<script type="module" src="/portfolio/assets/js/dist/tooltip.bundle.js"></script>
 	<script type="module" src="/portfolio/assets/js/dist/expander.bundle.js"></script>
 	<script type="module" src="/portfolio/assets/js/dist/animations.bundle.js"></script>
 </body>

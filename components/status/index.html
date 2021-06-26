@@ -1,0 +1,99 @@
+<html>
+<head>
+	<title>Status</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Status 1.1</h1>
+
+			<p><a href="changelog">Changelog</a></p>
+
+			<p>This can be used to show global status messages.</p>
+		</div>
+
+		<div class="content">
+			<section id="basic-functionality">
+				<h2>Basic functionality</h2>
+
+				<p>Statuses can be shown globally or in a specific element, optionally with "success" or "error" classes applied.</p>
+
+				<p>The default behaviour is to look for an element with the class <code>js-status</code>, and use that to display all statuses. Optionally, a selector or specific Element can be specified to be used instead.</p>
+
+				<p>
+					<button class="button js-status-example-success">Show global success message</button>
+					<button class="button js-status-example-error">Show global error message</button>
+					<button class="button js-status-example-hide">Hide global message</button>
+				</p>
+
+				<div class="panel">
+					<p>
+						<button class="button js-status-example-custom">Show success message on custom element</button>
+					</p>
+					<p>
+						<button class="button js-status-example-custom-hide">Hide custom message</button>
+					</p>
+
+					<span class="status status--static js-status-custom" role="alert"></span>
+				</div>
+
+				<p>Recommended default styles can be found in <a href="https://github.com/Cipscis/portfolio/blob/master/assets/scss/components/_status.scss" target="_blank">status.scss</a>. The important styles to keep are the animations, particularly the <code>becomeVisible</code> and <code>becomeHidden</code> <a href="http://localhost:8089/portfolio/reference/animations/" target="_blank">animations</a>, which are used alongside <code>animation-fill-mode: forwards;</code> to hide and show the element. Typically, a global status element will keep <code>position: fixed;</code> too.</p>
+			</section>
+
+			<section id="accessibility">
+				<h2>Accessibility</h2>
+
+				<p>Status elements should have a <code>role="alert"</code> attribute, which will cause them to be read out by screen readers. See the <a href="https://www.w3.org/TR/wai-aria-practices/#alert" target="_blank">Alert</a> section on the WAI-ARIA Authoring Practices page for more information.</p>
+
+				<p>In order to meet <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/time-limits-no-exceptions.html" target="_blank">WCAG 2.0 success criterion 2.2.3 - No Timing</a>, alerts should not disappear automatically where it can be avoided.</p>
+
+				<p>However, there are some cases where making an alert remain visible indefinitely can cause larger issues, such as an alert telling the user that their changes have been saved automatically. In these cases, an autohide delay argument can be used to specify the time (in milliseconds) that an alert should remain visible. For example:</p>
+
+				<p><button type="button" class="js-status-example-autohide">Show autohiding message</button></p>
+			</section>
+
+			<section id="methods">
+				<h2>Methods</h2>
+
+				<p>The <code>$status</code> argument is optional, and can be used to specify a selector or a Node to use to display the message. If it is absent, Status will look for an element with the class <code>js-status</code>.</p>
+
+				<p>The <code>autohideDelay</code> argument is also optional, it allows you to specify a time (in milliseconds) after which the message should be hidden automatically.</p>
+
+				<p>
+					<code>success(message, $status, autohideDelay)</code><br />
+					Show a message with the success class.
+				</p>
+
+				<p>
+					<code>error(message, $status, autohideDelay)</code><br />
+					Show a message with the error class.
+				</p>
+
+				<p>
+					<code>hide($status)</code><br />
+					Hide a visible message.
+				</p>
+			</section>
+
+			<section id="pubsub-events">
+				<h2>Pubsub events</h2>
+
+				<p><code>/status/success</code> calls the <code>success</code> method.</p>
+
+				<p><code>/status/error</code> calls the <code>error</code> method.</p>
+
+				<p><code>/status/hide</code> calls the <code>hide</code> method.</p>
+			</section>
+		</div>
+	</main>
+
+	<span class="status js-status" role="alert"></span>
+
+	<script type="module" src="/portfolio/assets/js/dist/status.bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<html>
+<head>
+	<title>Drag/Sort</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Drag/Sort 1.0</h1>
+
+			<p><a href="changelog">Changelog</a></p>
+
+			<p>Allows for a vertical list of items that can have their order changed via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank">HTML Drag and Drop API</a>.</p>
+
+			<p>Assumes a vertical list in that <code>padding-top</code> and <code>padding-bottom</code> are used to preview the new placement of an item being dragged.</p>
+		</div>
+
+		<div class="demo panel">
+			<ul class="draggable js-dragsort__list">
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item">
+						<div class="demo__draggable-item">
+							<span class="demo__draggable-handle js-dragsort__handle" draggable="true"></span>
+							<span>Item #1</span>
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item">
+						<div class="demo__draggable-item">
+							<span class="demo__draggable-handle js-dragsort__handle" draggable="true"></span>
+							<span>Item #2</span>
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item">
+						<div class="demo__draggable-item">
+							<span class="demo__draggable-handle js-dragsort__handle" draggable="true"></span>
+							<span>Item #3</span>
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item">
+						<div class="demo__draggable-item">
+							<span class="demo__draggable-handle js-dragsort__handle" draggable="true"></span>
+							<span>Item #4</span>
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item">
+						<div class="demo__draggable-item">
+							<span class="demo__draggable-handle js-dragsort__handle" draggable="true"></span>
+							<span>Item #5</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="demo panel">
+			<ul class="draggable js-dragsort__list">
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item js-dragsort__handle" draggable="true">
+						<div class="demo__draggable-item">
+							Item #1
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item js-dragsort__handle" draggable="true">
+						<div class="demo__draggable-item">
+							Item #2
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item js-dragsort__handle" draggable="true">
+						<div class="demo__draggable-item">
+							Item #3
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item js-dragsort__handle" draggable="true">
+						<div class="demo__draggable-item">
+							Item #4
+						</div>
+					</div>
+				</li>
+				<li class="js-dragsort__wrap">
+					<div class="draggable__item js-dragsort__item js-dragsort__handle" draggable="true">
+						<div class="demo__draggable-item">
+							Item #5
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</main>
+
+	<script type="module" src="/portfolio/assets/js/dist/dragsort.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Tooltip</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<div class="content">
+			<h1>Tooltip 1.0</h1>
+
+			<p><a href="changelog">Changelog</a></p>
+
+			<p>This is a
+				<span class="tooltip js-tooltip" tabindex="0" role="dialog" aria-labelledby="tooltip-example-trigger" aria-describedby="tooltip-example-body">
+					<span class="tooltip__trigger" id="tooltip-example-trigger">tooltip</span>.
+					<span class="tooltip__body js-tooltip__body" id="tooltip-example-body">
+						<span class="p">Tooltips can exist within <code class="tag">p</code> tags, but typically need to contain paragraphs themselves. However, if any element which is block level by default is put inside a <code class="tag">p</code> tag, it forces the <code class="tag">p</code> tag to close.</span>
+
+						<span class="p">To get around this, a <code class="tag">span class="p"</code> tag can be used to emulate the styles of a <code class="tag">p</code> tag.</span>
+
+						<span class="p">Tooltips can also contain elements that can receive focus, such as <a href="#">links</a>.</span>
+					</span>
+				</span>
+			</p>
+
+			<p>It's also possible to create a
+				<span class="tooltip tooltip--block js-tooltip" tabindex="0" role="dialog" aria-labelledby="tooltip-block-example-trigger" aria-describedby="tooltip-block-example-body">
+					<span class="tooltip__trigger" id="tooltip-block-example-trigger">block tooltip</span>.
+					<span class="tooltip__body js-tooltip__body" id="tooltip-block-example-body">
+						<span class="p">Block tooltips are wider than standard tooltips, and appear beneath their trigger with the same indentation as the rest of the content.</span>
+					</span>
+				</span>
+			</p>
+
+			<p>These tooltips work without JavaScript, because they rely on the <code>:hover</code>, <code>:focus</code>, and (where supported) <code>:focus-within</code> pseudoclasses.</p>
+
+			<p>The disadvantage of not using JavaScript is that the tooltips can't detect how close they are to the edge of the page. If they are near enough to the right hand edge of the window that they don't fit, the page width will increase to accommodate them, causing a horizontal scrollbar to appear.</p>
+
+			<p>It's best to avoid putting tooltips close enough to the bottom of the window that their content can't fit, since this can cause the page to jump back and forth.</p>
+
+			<p>If JavaScript is present, the tooltips will improve their functionality slightly. Pressing the Escape key while one is open will close it (see <a href="https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus" target="_blank">WCAG 2.1 success criterion 1.4.13 - Dismissable</a>)</p>
+		</div>
+	</main>
+
+	<script type="module" src="/portfolio/assets/js/dist/tooltip.bundle.js"></script>
+</body>
+</html>

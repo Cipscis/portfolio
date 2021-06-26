@@ -1,8 +1,8 @@
 /* Status 1.1 */
 
-import { subscribe } from './pubsub.js'
+import { subscribe } from 'pubsub'
 
-const statusMessage = (function (subscribe) {
+const status = (function (subscribe) {
 	const selectors = {
 		status: '.js-status'
 	};
@@ -153,4 +153,5 @@ const statusMessage = (function (subscribe) {
 	};
 })(subscribe);
 
-export default statusMessage;
+export { status };
+export default status;

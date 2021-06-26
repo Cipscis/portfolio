@@ -93,19 +93,7 @@
 
 	<span class="status js-status" role="alert"></span>
 
-	<script type="module">
-		import statusMessage from '/portfolio/assets/scripts/status.js';
-		import activate from '/portfolio/assets/scripts/activate.js';
-
-		activate('.js-status-example-success', () => statusMessage.success('Success :)'));
-		activate('.js-status-example-error', () => statusMessage.error('Error :('));
-		activate('.js-status-example-hide', () => statusMessage.hide());
-
-		activate('.js-status-example-custom', () => statusMessage.success('Custom success :)', '.js-status-custom'));
-		activate('.js-status-example-custom-hide', () => statusMessage.hide('.js-status-custom'));
-
-		activate('.js-status-example-autohide', () => statusMessage.success('This message will hide in 10 seconds', undefined, 10000));
-	</script>
+	<script type="module" src="/portfolio/assets/js/dist/status.bundle.js"></script>
 </body>
 
 </html>

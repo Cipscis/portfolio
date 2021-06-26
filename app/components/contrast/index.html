@@ -13,18 +13,7 @@
 
 			<button class="button js-toggle-dark-mode">Toggle Contrast Mode</button>
 
-			<script type="module">
-				import activate from '/portfolio/assets/scripts/activate.js';
-
-				activate('.js-toggle-dark-mode', () => {
-					let $body = document.querySelector('body');
-					if ($body.classList.contains('dark-mode')) {
-						$body.classList.remove('dark-mode');
-					} else {
-						$body.classList.add('dark-mode');
-					}
-				});
-			</script>
+			<script type="module" src="/portfolio/assets/js/dist/contrast.bundle.js"></script>
 
 			<h2>Contrast Palette</h2>
 

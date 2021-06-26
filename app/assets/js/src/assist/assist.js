@@ -1,6 +1,6 @@
 /* Assist 1.0 */
 
-import { subscribe } from './pubsub.js';
+import { subscribe } from 'pubsub';
 
 const assist = (function (subscribe) {
 	const $messageEl = document.createElement('span');
@@ -43,4 +43,5 @@ const assist = (function (subscribe) {
 	};
 })(subscribe);
 
+export { assist };
 export default assist;

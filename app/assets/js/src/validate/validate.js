@@ -1,4 +1,4 @@
-import { throttle } from './throttle-debounce.js';
+import { throttle } from 'throttle';
 
 const validate = (function (throttle) {
 	const selectors = {
@@ -54,4 +54,5 @@ const validate = (function (throttle) {
 	return module.bindValidateEvent;
 })(throttle);
 
+export { validate };
 export default validate;

@@ -31,5 +31,11 @@
 		"gulp-sass": "^4.1.0",
 		"sass": "^1.34.1",
 		"webpack": "^5.40.0"
+	},
+	"dependencies": {
+		"activate": "github:cipscis/activate#semver:1.x",
+		"debounce": "github:cipscis/debounce#semver:1.x",
+		"pubsub": "github:cipscis/pubsub#semver:1.x",
+		"throttle": "github:cipscis/throttle#semver:1.x"
 	}
 }

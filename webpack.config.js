@@ -14,7 +14,6 @@ let config = {
 		contrast: './app/assets/js/src/contrast/example.js',
 		dragsort: './app/assets/js/src/dragsort/dragsort.js',
 		expander: './app/assets/js/src/expander/expander.js',
-		keybinding: './app/assets/js/src/keybinding/example.js',
 		modal: './app/assets/js/src/modal/example.js',
 		status: './app/assets/js/src/status/example.js',
 		tooltip: './app/assets/js/src/tooltip/tooltip.js',

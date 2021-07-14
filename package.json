@@ -35,6 +35,7 @@
 	"dependencies": {
 		"activate": "github:cipscis/activate#semver:1.x",
 		"debounce": "github:cipscis/debounce#semver:1.x",
+		"keybinding": "github:cipscis/keybinding#semver:2.x",
 		"pubsub": "github:cipscis/pubsub#semver:1.x",
 		"throttle": "github:cipscis/throttle#semver:1.x"
 	}

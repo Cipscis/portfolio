@@ -1,7 +1,7 @@
 /* Modal 1.1 */
 
 import { activate } from 'activate';
-import { keys } from '../keybinding/keybinding.js';
+import * as keys from 'keybinding';
 import { subscribe } from 'pubsub';
 
 const modal = (function (activate, keys, subscribe) {

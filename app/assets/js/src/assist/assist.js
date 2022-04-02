@@ -1,6 +1,6 @@
 /* Assist 1.0 */
 
-import { subscribe } from 'pubsub';
+import { subscribe } from '@cipscis/pubsub';
 
 const assist = (function (subscribe) {
 	const $messageEl = document.createElement('span');

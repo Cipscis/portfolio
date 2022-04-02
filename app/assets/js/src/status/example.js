@@ -1,5 +1,5 @@
 import { status } from './status.js';
-import { activate } from 'activate';
+import { activate } from '@cipscis/activate';
 
 activate('.js-status-example-success', () => status.success('Success :)'));
 activate('.js-status-example-error', () => status.error('Error :('));

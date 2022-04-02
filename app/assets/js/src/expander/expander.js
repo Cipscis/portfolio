@@ -1,6 +1,6 @@
 /* Expander 1.2 */
 
-import { activate } from 'activate';
+import { activate } from '@cipscis/activate';
 
 const expander = (function (activate) {
 	const selectors = {

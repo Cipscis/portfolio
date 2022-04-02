@@ -1,6 +1,6 @@
 /* Status 1.1 */
 
-import { subscribe } from 'pubsub'
+import { subscribe } from '@cipscis/pubsub'
 
 const status = (function (subscribe) {
 	const selectors = {

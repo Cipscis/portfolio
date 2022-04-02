@@ -1,4 +1,4 @@
-import { throttle } from 'throttle';
+import { throttle } from '@cipscis/throttle';
 
 const validate = (function (throttle) {
 	const selectors = {

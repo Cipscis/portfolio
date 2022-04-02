@@ -5,7 +5,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = fileURLToPath(import.meta.url);
 
-let config = {
+import resolveTypeScriptPluginModule from 'resolve-typescript-plugin';
+const ResolveTypeScriptPlugin = resolveTypeScriptPluginModule.default;
+
+const srcPath = path.resolve(__dirname, '../src');
+const entryPath = './app/assets/js/src';
+const distPath = path.resolve(__dirname, '../app/assets/js/dist');
+
+const config = {
 	mode: process.env.MODE,
 	entry: {
 		animations: './app/assets/js/src/animations/example.js',
@@ -20,8 +27,20 @@ let config = {
 		validate: './app/assets/js/src/validate/example.js',
 	},
 	output: {
-		path: path.resolve(__dirname, '../app/assets/js/dist'),
+		path: distPath,
 		filename: '[name].bundle.js',
+	},
+	resolve: {
+		fullySpecified: true,
+		plugins: [new ResolveTypeScriptPlugin()],
+	},
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				loader: 'ts-loader',
+			},
+		],
 	},
 };
 

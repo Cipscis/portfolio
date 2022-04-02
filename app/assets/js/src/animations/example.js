@@ -1,4 +1,4 @@
-import { activate } from 'activate';
+import { activate } from '@cipscis/activate';
 
 activate('.js-toggle-ghost', () => {
 	let $ghosts = document.querySelectorAll('.ghost');

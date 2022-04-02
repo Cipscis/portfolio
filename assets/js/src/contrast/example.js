@@ -1,4 +1,4 @@
-import { activate } from 'activate';
+import { activate } from '@cipscis/activate';
 
 activate('.js-toggle-dark-mode', () => {
 	let $body = document.querySelector('body');

@@ -1,8 +1,8 @@
 /* Modal 1.1 */
 
-import { activate } from 'activate';
-import * as keys from 'keybinding';
-import { subscribe } from 'pubsub';
+import { activate } from '@cipscis/activate';
+import * as keys from '@cipscis/keybinding';
+import { subscribe } from '@cipscis/pubsub';
 
 const modal = (function (activate, keys, subscribe) {
 	const selectors = {

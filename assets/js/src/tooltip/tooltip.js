@@ -1,6 +1,6 @@
 /* Tooltip 1.0 */
 
-import * as keys from 'keybinding';
+import * as keys from '@cipscis/keybinding';
 
 const tooltip = (function () {
 	const selectors = {

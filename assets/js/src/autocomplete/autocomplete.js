@@ -1,9 +1,9 @@
 /* Autocomplete 1.0 */
 
 import { status } from '../status/status.js';
-import { debounce } from 'debounce';
-import { activate } from 'activate';
-import { publish } from 'pubsub';
+import { debounce } from '@cipscis/debounce';
+import { activate } from '@cipscis/activate';
+import { publish } from '@cipscis/pubsub';
 
 const autocomplete = (function (templayed, debounce, activate, publish) {
 	'use strict';

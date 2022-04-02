@@ -2,7 +2,7 @@
 <head>
 	<title>Module Pattern</title>
 
-	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+	<link rel="stylesheet" href="/portfolio/assets/css/main.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -73,5 +73,7 @@ export default exampleModule;</pre>
 			<p>For modules that need to do more than just expose an API, I typically include an <code>init</code> method. This allows the module to be loaded immediately, but the actual initialisation step (at which point the DOM may need to have finished loading in order for events to be bound, for example) can be delayed.</p>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="/portfolio/assets/js/dist/main.bundle.js"></script>
 </body>
 </html>

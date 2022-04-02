@@ -15,10 +15,12 @@ const distPath = path.resolve(__dirname, '../app/assets/js/dist');
 const config = {
 	mode: process.env.MODE,
 	entry: {
+		main: './app/assets/js/src/main.ts',
+
 		animations: './app/assets/js/src/animations/example.js',
 		autocomplete: './app/assets/js/src/autocomplete/example.js',
 		assist: './app/assets/js/src/assist/example.js',
-		contrast: './app/assets/js/src/contrast/example.js',
+		contrast: './app/assets/js/src/contrast/contrast.ts',
 		dragsort: './app/assets/js/src/dragsort/dragsort.js',
 		expander: './app/assets/js/src/expander/expander.js',
 		modal: './app/assets/js/src/modal/example.js',

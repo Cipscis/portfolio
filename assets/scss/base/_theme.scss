@@ -18,9 +18,7 @@ $red--pale: #fee;
 $base-font-family: "Roboto Slab", "Times New Roman", Times, serif;
 $heading-font-family: "Roboto", Arial, sans-serif;
 
-
-:root,
-.light-mode {
+@mixin light-mode {
 	--primary-background: #{$white};
 	--primary-background-active: #{darken($white, 5)};
 	--primary-color: #{$grey--dark};
@@ -53,7 +51,7 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--status-error: #e00;
 }
 
-.dark-mode {
+@mixin dark-mode {
 	--primary-background: #{$grey--dark};
 	--primary-background-active: #{lighten($grey--dark, 5)};
 	--primary-color: #{$grey--lightest};
@@ -86,6 +84,22 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--status-error: red;
 }
 
+:root {
+	@include light-mode;
+
+	@media (prefers-color-scheme: dark) {
+		@include dark-mode;
+	}
+}
+
+.light-mode {
+	@include light-mode;
+}
+
+.dark-mode {
+	@include dark-mode;
+}
+
 
 
 @mixin contrast($background, $color: null, $active: null) {
@@ -105,7 +119,6 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 		}
 	}
 }
-
 
 @mixin contrast-primary {
 	@include contrast(
@@ -153,6 +166,13 @@ $outline-default: #4d90fe;
 	outline-width: 2px;
 	@supports(outline-style: auto) {
 		outline-style: auto;
+	}
+}
+
+
+@mixin transition($transition) {
+	.allow-transitions & {
+		transition: $transition;
 	}
 }
 

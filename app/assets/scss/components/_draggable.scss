@@ -11,7 +11,7 @@
 		cursor: move;
 	}
 
-	transition: all 0.25s ease-in-out;
+	@include transition(all 0.25s ease-in-out);
 	&.is-dragging {
 		&::before {
 			content: "";
@@ -35,7 +35,7 @@
 		position: fixed;
 		z-index: 100;
 		pointer-events: none;
-		transition: none;
+		@include transition(none);
 		opacity: 0.7;
 	}
 }

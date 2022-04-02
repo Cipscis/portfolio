@@ -2,7 +2,7 @@
 <head>
 	<title>Contrast</title>
 
-	<link rel="stylesheet" href="/portfolio/assets/css/style.css" />
+	<link rel="stylesheet" href="/portfolio/assets/css/main.css" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -11,6 +11,12 @@
 		<div class="content">
 			<h1>Contrast</h1>
 
+			<p>This was an experiment with using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*" target="_blank">CSS custom properties</a> to create a "dark mode" version of the CSS. It's based on the use of various contrast groups, applying text and background colours together via <a href="https://sass-lang.com/documentation/at-rules/mixin" target="_blank">Sass mixins</a> created in <code>_theme.scss</code>.</p>
+
+			<p>This button overrides the contrast mode from being automatically detected via <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme" target="_blank">prefers-color-scheme</a> to being set via a CSS class. This selected mode is then remembered via <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">localStorage</a> and re-applied on page load with JavaScript.</p>
+
+			<p>This has the unfortunate effect of making any element with a CSS transition flashing if the mode is changed from the default on page load. Ideally, it would be remembered via a cookie so the page could be retrieved from the server with the correct class already in place, but because this repo is served as a static website from GitHub Pages that's not possible. To prevent the flashing, transitions are applied using a Sass mixin that requires an <code>allow-transitions</code> class on the <code class="tag">body</code> element, and that class is added shortly after the contrast mode is initialised.</p>
+
 			<button class="button js-toggle-dark-mode">Toggle Contrast Mode</button>
 
 			<script type="module" src="/portfolio/assets/js/dist/contrast.bundle.js"></script>
@@ -18,6 +24,7 @@
 			<h2>Contrast Palette</h2>
 
 			<div class="contrast-primary">
+
 				<p>This is what content looks like in the primary contrast group.</p>
 
 				<p class="contrast-low">Low contrast text is available.</p>
@@ -120,6 +127,8 @@
 
 		<div class="content">
 			<h2>Nesting containers:</h2>
+
+			<p>Because of how CSS custom properties work, it is possible to nest light and dark mode containers correctly instead of having one always take precedence due to CSS specificity.</p>
 		</div>
 
 		<div class="light-mode content">
@@ -136,5 +145,7 @@
 			</div>
 		</div>
 	</main>
+
+	<script type="text/javascript" src="/portfolio/assets/js/dist/main.bundle.js"></script>
 </body>
 </html>

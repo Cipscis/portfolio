@@ -96,11 +96,9 @@
 				<p>I've found this can be useful for applications such as labels on a graph, where scaling the font size along with the size of the component ensures it takes up the same amount of space. But the <code>vw</code> unit does not scale with the base font size:</p>
 			</div>
 
-			<style type="text/css" class="code code--block">
-.zoom-vw {
+			<style type="text/css" class="code code--block">.zoom-vw {
 	font-size: clamp(1rem, 1.5vw, 1.5rem);
-}
-			</style>
+}</style>
 
 			<p class="zoom-vw">This paragraph's font size is specified using the <code class="code">clamp</code> function, with its calculation between the minimum and maximum values based entirely on the <code class="code">vw</code> unit.</p>
 

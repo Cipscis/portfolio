@@ -354,7 +354,6 @@ body,
 html {
   font-family: "Roboto Slab", "Times New Roman", Times, serif;
   line-height: 1.7;
-  font-size: 18px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -378,6 +377,7 @@ a[href^=tel]:after {
 .p {
   display: block;
   margin: 20px 0;
+  font-size: 1.125rem;
 }
 .content p:first-child,
 .p:first-child {
@@ -394,6 +394,36 @@ a[href^=tel]:after {
 
 .content > p:last-child {
   margin-bottom: 18px;
+}
+
+.content h1,
+.h1 {
+  font-size: 1.75rem;
+}
+
+.content h2,
+.h2 {
+  font-size: 1.625rem;
+}
+
+.content h3,
+.h3 {
+  font-size: 1.5rem;
+}
+
+.content h4,
+.h4 {
+  font-size: 1.375rem;
+}
+
+.content h5,
+.h5 {
+  font-size: 1.25rem;
+}
+
+.content h6,
+.h6 {
+  font-size: 1.1875rem;
 }
 
 .content a,
@@ -416,9 +446,10 @@ a[href^=tel]:after {
   margin-left: 10px;
   margin-right: 10px;
   padding: 0 30px;
+  font-size: 1.125rem;
 }
-.content blockquote:before,
-.blockquote:before {
+.content blockquote::before,
+.blockquote::before {
   content: "“";
   font-size: 60px;
   line-height: 1;
@@ -462,10 +493,17 @@ a[href^=tel]:after {
   content: ">";
 }
 
+.content .code, .content var,
+.content .var {
+  font-size: 1.125rem;
+}
+
 .content .code--block,
 .code--block {
   display: block;
   margin: 20px 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
 }
 .content .code--block:first-child,
 .code--block:first-child {
@@ -484,6 +522,7 @@ a[href^=tel]:after {
   border: 1px solid var(--border);
   box-shadow: 0 2px 5px var(--shadow);
   font-family: monospace;
+  font-size: 1.125rem;
 }
 
 .content ul, .content ol {
@@ -491,6 +530,7 @@ a[href^=tel]:after {
 }
 .content ul > li, .content ol > li {
   margin: 9px 0;
+  font-size: 1.125rem;
 }
 .content hr {
   margin: 36px 0;
@@ -528,6 +568,7 @@ body {
   border-radius: 5px;
   text-decoration: none;
   line-height: 1.7;
+  font-size: 1.125rem;
   cursor: pointer;
   background: var(--clickable-background);
   color: var(--clickable-color);
@@ -732,6 +773,7 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  font-size: 1.125rem;
 }
 @supports (display: grid) {
   .link-grid__item {

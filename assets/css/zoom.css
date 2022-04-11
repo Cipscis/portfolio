@@ -1,0 +1,86 @@
+.zoom-rem__control__heading {
+  clear: left;
+  margin: 0;
+  padding: 10px 0 0;
+}
+
+.zoom-rem__control__label {
+  float: left;
+}
+.zoom-rem__control__label[for] {
+  cursor: pointer;
+}
+
+.zoom-rem__control__input {
+  float: left;
+  clear: left;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.3rem 0.3rem 0.3rem 0;
+}
+
+.zoom-rem__pod {
+  clear: left;
+  border: 1px solid var(--border);
+  max-width: 400px;
+}
+.zoom-rem__pod,
+.zoom-rem__pod .zoom-rem__pod__heading,
+.zoom-rem__pod .zoom-rem__pod__text {
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out, font-size 0.3s ease-in-out, line-height 0.3s ease-in-out;
+}
+
+input[type=radio][name=font-size][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  font-size: 27px;
+}
+input[type=radio][name=font-size][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  font-size: 18px;
+}
+
+input[type=radio][name=font-size][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  font-size: 1.6875rem;
+}
+input[type=radio][name=font-size][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  font-size: 1.125rem;
+}
+
+input[type=radio][name=line-height][value=unitless]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  line-height: 1.7;
+}
+input[type=radio][name=line-height][value=unitless]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  line-height: 1.7;
+}
+
+input[type=radio][name=line-height][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  line-height: 45.9px;
+}
+input[type=radio][name=line-height][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  line-height: 30.6px;
+}
+
+input[type=radio][name=line-height][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  line-height: 2.86875rem;
+}
+input[type=radio][name=line-height][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod___text {
+  line-height: 2.86875rem;
+}
+
+input[type=radio][name=spacing][value=px]:checked ~ .zoom-rem__pod {
+  padding: 20px;
+}
+input[type=radio][name=spacing][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  margin: 0 0 20px;
+}
+input[type=radio][name=spacing][value=px]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  margin: 0;
+}
+
+input[type=radio][name=spacing][value=rem]:checked ~ .zoom-rem__pod {
+  padding: 1.25rem;
+}
+input[type=radio][name=spacing][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
+  margin: 0 0 1.25rem;
+}
+input[type=radio][name=spacing][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
+  margin: 0;
+}

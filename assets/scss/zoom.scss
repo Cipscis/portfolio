@@ -1,0 +1,114 @@
+@import "tools/grid-ram";
+@import "tools/rem";
+
+@mixin option($name, $value) {
+	input[type="radio"][name=#{$name}][value=#{$value}]:checked ~ .zoom-rem__pod {
+		@content
+	}
+}
+
+.zoom-rem {}
+
+.zoom-rem__control__heading {
+	clear: left;
+	margin: 0;
+	padding: 10px 0 0;
+}
+
+.zoom-rem__control__label {
+	float: left;
+	&[for] {
+		cursor: pointer;
+	}
+}
+
+.zoom-rem__control__input {
+	float: left;
+	clear: left;
+
+	width: 1.1rem;
+	height: 1.1rem;
+	margin: 0.3rem 0.3rem 0.3rem 0;
+}
+
+.zoom-rem__pod {
+	clear: left;
+
+	border: 1px solid var(--border);
+	max-width: 400px;
+
+	&,
+	.zoom-rem__pod__heading,
+	.zoom-rem__pod__text {
+		transition:
+			margin 0.3s ease-in-out,
+			padding 0.3s ease-in-out,
+			font-size 0.3s ease-in-out,
+			line-height 0.3s ease-in-out;
+	}
+}
+
+@include option("font-size", "px") {
+	.zoom-rem__pod__heading {
+		font-size: 27px;
+	}
+	.zoom-rem__pod__text {
+		font-size: 18px;
+	}
+}
+
+@include option("font-size", "rem") {
+	.zoom-rem__pod__heading {
+		font-size: rem(27px);
+	}
+	.zoom-rem__pod__text {
+		font-size: rem(18px);
+	}
+}
+
+@include option("line-height", "unitless") {
+	.zoom-rem__pod__heading {
+		line-height: 1.7;
+	}
+	.zoom-rem__pod__text {
+		line-height: 1.7;
+	}
+}
+
+@include option("line-height", "px") {
+	.zoom-rem__pod__heading {
+		line-height: 1.7 * 27px;
+	}
+	.zoom-rem__pod__text {
+		line-height: 1.7 * 18px;
+	}
+}
+
+@include option("line-height", "rem") {
+	.zoom-rem__pod__heading {
+		line-height: rem(1.7 * 27px);
+	}
+	.zoom-rem__pod___text {
+		line-height: rem(1.7 * 27px);
+	}
+}
+
+@include option("spacing", "px") {
+	padding: 20px;
+	.zoom-rem__pod__heading {
+		margin: 0 0 20px;
+	}
+	.zoom-rem__pod__text {
+		margin: 0;
+	}
+}
+
+@include option("spacing", "rem") {
+	padding: rem(20px);
+	.zoom-rem__pod__heading {
+		margin: 0 0 rem(20px);
+	}
+	.zoom-rem__pod__text {
+		margin: 0;
+	}
+}

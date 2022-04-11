@@ -2,6 +2,28 @@
 
 import gulp from 'gulp';
 
+///////////
+import { stat, rm } from 'fs/promises';
+
+const clean = function () {
+	const removeIfExists = function (path) {
+		return new Promise((resolve, reject) => {
+			stat(path)
+				.then(() => {
+					rm(path, { recursive: true })
+						.then(resolve) // Removed - desired state
+						.catch(reject); // Could not remove - error
+				})
+				.catch(resolve); // Doesn't exist - desired state
+		});
+	};
+
+	return Promise.all([
+		removeIfExists('app/assets/js/dist'),
+		removeIfExists('app/assets/css'),
+	]);
+};
+
 //////////////////////
 // Webpack bundling //
 //////////////////////
@@ -79,6 +101,8 @@ const build = gulp.parallel(buildSass, buildJs);
 const watch = gulp.parallel(watchSass, watchJs);
 
 export {
+	clean,
+
 	build,
 	watch,
 

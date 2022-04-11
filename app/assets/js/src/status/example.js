@@ -8,4 +8,4 @@ activate('.js-status-example-hide', () => status.hide());
 activate('.js-status-example-custom', () => status.success('Custom success :)', '.js-status-custom'));
 activate('.js-status-example-custom-hide', () => status.hide('.js-status-custom'));
 
-activate('.js-status-example-autohide', () => status.success('This message will hide in 10 seconds', undefined, 10000));
+activate('.js-status-example-autohide', () => status.success('This message will hide in 10 seconds', null, 10000));

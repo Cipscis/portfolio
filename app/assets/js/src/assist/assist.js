@@ -7,11 +7,11 @@ const assist = (function (subscribe) {
 	let messageElInit = false;
 
 	const classes = {
-		visuallyhidden: 'u-visuallyhidden'
+		visuallyhidden: 'u-visuallyhidden',
 	};
 
 	const events = {
-		speak: '/assist/speak'
+		speak: '/assist/speak',
 	};
 
 	const module = {
@@ -31,15 +31,15 @@ const assist = (function (subscribe) {
 			document.body.appendChild($messageEl);
 
 			messageElInit = true;
-		}
+		},
 	};
 
 	if (subscribe) {
-		subscribe('/assist/speak', module.speak);
+		subscribe(events.speak, module.speak);
 	}
 
 	return {
-		speak: module.speak
+		speak: module.speak,
 	};
 })(subscribe);
 

@@ -5,11 +5,11 @@ import * as keys from '@cipscis/keybinding';
 const tooltip = (function () {
 	const selectors = {
 		tooltip: '.js-tooltip',
-		body: '.js-tooltip__body'
+		body: '.js-tooltip__body',
 	};
 
 	const classes = {
-		hidden: 'tooltip--hidden'
+		hidden: 'tooltip--hidden',
 	};
 
 	let initialised = false;
@@ -27,7 +27,7 @@ const tooltip = (function () {
 		_initEvents: function () {
 			let $tooltips = document.querySelectorAll(selectors.tooltip);
 
-			$tooltips.forEach($tooltip => {
+			$tooltips.forEach(($tooltip) => {
 				$tooltip.addEventListener('mouseleave', module._removeHiddenClassEvent($tooltip));
 				$tooltip.addEventListener('focusout', module._processTooltipFocusOut);
 			});
@@ -40,13 +40,13 @@ const tooltip = (function () {
 		_hideOpenTooltips: function () {
 			let $tooltips = module._getOpenTooltips();
 
-			$tooltips.forEach($tooltip => {
+			$tooltips.forEach(($tooltip) => {
 				$tooltip.classList.add(classes.hidden);
 			});
 		},
 
 		_removeHiddenClassEvent: function ($tooltip) {
-			return e => {
+			return (e) => {
 				if (document.activeElement !== $tooltip) {
 					module._removeHiddenClass($tooltip);
 				}
@@ -76,7 +76,7 @@ const tooltip = (function () {
 			let $openBodies = module._getOpenTooltipBodies();
 
 			let $tooltips = [];
-			$openBodies.forEach($el => {
+			$openBodies.forEach(($el) => {
 				let $tooltip = module._getClosestTooltip($el);
 
 				if ($tooltip) {
@@ -91,7 +91,7 @@ const tooltip = (function () {
 
 		_getOpenTooltipBodies: function () {
 			let $bodies = document.querySelectorAll(selectors.body);
-			let $openBodies = Array.from($bodies).filter($el => {
+			let $openBodies = Array.from($bodies).filter(($el) => {
 				return $el.offsetParent !== null;
 			});
 
@@ -105,11 +105,11 @@ const tooltip = (function () {
 			}
 
 			return $tooltip;
-		}
+		},
 	};
 
 	return {
-		init: module.init
+		init: module.init,
 	};
 })();
 

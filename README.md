@@ -17,13 +17,13 @@ This project creates five npm tasks:
 
 * `npm run server` runs a Node.js server on the port specified in the [`.env`](#env) file, using [Express](https://expressjs.com/).
 
-* `npm run build` compiles CSS files using [gulp-sass](https://www.npmjs.com/package/gulp-sass) and bundles JavaScript using [Webpack](https://webpack.js.org/).
+* `npm run build` compiles CSS files using [gulp-sass](https://www.npmjs.com/package/gulp-sass), then compiles TypeScript and bundles JavaScript using [Webpack](https://webpack.js.org/).
 
 * `npm run watch` first runs the `build` task, then watches the relevant directories and reruns the `build` task if it sees any changes.
 
 * `npm start` runs both the `server` and `watch` tasks simultaneously.
 
-* `npm test` task runs any configured test suites using [Jasmine](https://jasmine.github.io/).
+* `npm test` lints any TypeScript.
 
 Usually, you will just want to run `npm start`.
 
@@ -65,21 +65,33 @@ These dependencies are used when working on the project locally.
 
 * [Node.js](https://nodejs.org/en/): Runtime environment
 
-* [npm](https://www.npmjs.com/): project manager
+* [npm](https://www.npmjs.com/): Package manager
 
 * [Gulp](https://gulpjs.com/): Task runner
 
-* [sass](https://www.npmjs.com/project/sass): Compiling CSS from [Sass](https://sass-lang.com/)
+* [TypeScript](https://www.typescriptlang.org/): JavaScript extension for static type checking
 
-* [gulp-sass](https://www.npmjs.com/project/gulp-sass): Using the `sass` compiler with Gulp
+* [sass](https://www.npmjs.com/package/sass): Compiling CSS from [Sass](https://sass-lang.com/)
+
+	* [gulp-sass](https://www.npmjs.com/package/gulp-sass): Using the `sass` compiler with Gulp
 
 * [Webpack](https://webpack.js.org/): For JavaScript dependency management, used with Gulp
 
+	* [ts-loader](https://github.com/TypeStrong/ts-loader): For compiling TypeScript using Webpack
+
+	* [resolve-typescript-plugin](https://github.com/softwareventures/resolve-typescript-plugin): For using ES Module syntax with Webpack's `ts-loader`
+
 * [Express](https://expressjs.com/): Running a Node.js server, accessed at `http://localhost:<PORT>`
 
-* [Concurrently](https://www.npmjs.com/project/concurrently): Running server and development build tasks concurrently
+* [Concurrently](https://www.npmjs.com/package/concurrently): Running server and development build tasks concurrently
 
-* [dotenv](https://www.npmjs.com/project/dotenv): Reading environment variables from [`.env`](#env) file
+* [dotenv](https://www.npmjs.com/package/dotenv): Reading environment variables from [`.env`](#env) file
+
+* [eslint](https://www.npmjs.com/package/eslint): Linting TypeScript files
+
+	* [@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin): Allows `eslint` to lint TypeScript
+
+	* [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser): Allows `eslint` to parse TypeScript
 
 ### Deploy
 

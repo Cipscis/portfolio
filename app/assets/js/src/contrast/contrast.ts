@@ -14,7 +14,7 @@ const classes = Object.freeze({
 enum Mode {
 	LIGHT = 'light',
 	DARK = 'dark',
-};
+}
 
 const localStorageKey = 'contrast-mode';
 
@@ -28,7 +28,7 @@ function init(): void {
 /**
  * If a mode has been remembered in localStorage, apply it */
 function _initMode(): void {
-	var initialMode = _recallMode();
+	const initialMode = _recallMode();
 
 	if (initialMode) {
 		_setMode(initialMode);
@@ -49,7 +49,7 @@ function _initEvents(): void {
  * with JavaScript.
  */
 function _allowTransitions(): void {
-	const $body = document.querySelector('body')!;
+	const $body = document.querySelector('body') as HTMLBodyElement;
 
 	$body.classList.add(classes.allowTransitions);
 }
@@ -58,7 +58,7 @@ function _allowTransitions(): void {
  * Retrieve the currently active mode.
  */
 function _getMode(): Mode {
-	const $body = document.querySelector('body')!;
+	const $body = document.querySelector('body') as HTMLBodyElement;
 
 	if ($body.classList.contains(classes.dark)) {
 		return Mode.DARK;
@@ -77,7 +77,7 @@ function _getMode(): Mode {
  * Set the currently active mode by applying a class to the body element.
  */
 function _setMode(mode: Mode): void {
-	const $body = document.querySelector('body')!;
+	const $body = document.querySelector('body') as HTMLBodyElement;
 
 	switch (mode) {
 		case Mode.LIGHT:

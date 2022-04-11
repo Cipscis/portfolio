@@ -1,2 +1,2 @@
 (()=>{"use strict";var e;new Map,Object.freeze({toggle:".js-toggle-dark-mode"}),Object.freeze({light:"light-mode",dark:"dark-mode",allowTransitions:"allow-transitions"}),function(e){e.LIGHT="light",e.DARK="dark"}(e||(e={}))})();
-//# sourceMappingURL=contrast.bundle.js.map
+//# sourceMappingURL=contrast.js.map

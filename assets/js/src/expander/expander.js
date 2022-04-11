@@ -5,12 +5,12 @@ import { activate } from '@cipscis/activate';
 const expander = (function (activate) {
 	const selectors = {
 		section: '.js-expander',
-		trigger: '.js-expander__trigger'
+		trigger: '.js-expander__trigger',
 	};
 
 	const States = {
 		OPENED: 'Opened',
-		CLOSED: 'Closed'
+		CLOSED: 'Closed',
 	};
 
 	const module = {
@@ -71,15 +71,13 @@ const expander = (function (activate) {
 			// Inverse of _getTriggerSection
 
 			let $allTriggers = Array.from(document.querySelectorAll(selectors.trigger));
-			let $matchingTriggers = $allTriggers.filter($trigger => module._getTriggerSection($trigger) === $section);
+			let $matchingTriggers = $allTriggers.filter(($trigger) => module._getTriggerSection($trigger) === $section);
 
 			return $matchingTriggers;
 		},
 
 
 		_toggleSection: function ($section, desiredState) {
-			let $triggers = $section.querySelectorAll(selectors.trigger);
-
 			if (typeof desiredState === 'undefined') {
 				let state = module._getSectionState($section);
 
@@ -94,7 +92,7 @@ const expander = (function (activate) {
 		},
 
 
-		_getSectionState: function ($section ) {
+		_getSectionState: function ($section) {
 			let ariaExpanded = $section.getAttribute('aria-expanded');
 
 			let state = States.UNDEFINED;
@@ -175,11 +173,11 @@ const expander = (function (activate) {
 					window.setTimeout(() => $hash.scrollIntoView(), 0);
 				}
 			}
-		}
+		},
 	};
 
 	return {
-		init: module.init
+		init: module.init,
 	};
 })(activate);
 

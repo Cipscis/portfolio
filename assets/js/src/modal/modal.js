@@ -9,24 +9,24 @@ const modal = (function (activate, keys, subscribe) {
 		modal: '.js-modal',
 		body: '.js-modal__body',
 		trigger: '.js-modal__trigger',
-		close: '.js-modal__close'
+		close: '.js-modal__close',
 	};
 
 	const dataSelectors = {
-		bodyOpenClass: 'modal-body-open-class'
+		bodyOpenClass: 'modal-body-open-class',
 	};
 
 	const classes = {
-		bodyOpen: 'modal__body-open'
+		bodyOpen: 'modal__body-open',
 	};
 
 	const events = {
 		show: '/modal/show',
-		hide: '/modal/hide'
+		hide: '/modal/hide',
 	};
 
-	let $focus = undefined; // The active modal window
-	let $active = undefined; // The element that had focus before opening the modal window
+	let $focus = null; // The active modal window
+	let $active = null; // The element that had focus before opening the modal window
 
 	const visible = function ($el) {
 		let style = window.getComputedStyle($el);
@@ -95,14 +95,14 @@ const modal = (function (activate, keys, subscribe) {
 			keys.bind('escape', module._hide, true);
 
 			document.addEventListener('click', module._hideIfBackgroundClick);
-			document.querySelectorAll('*').forEach(el => el.addEventListener('focus', module._wrapTab));
+			document.querySelectorAll('*').forEach((el) => el.addEventListener('focus', module._wrapTab));
 		},
 
 		_unbindModalActiveEvents: function () {
 			keys.unbind('escape', module._hide);
 
 			document.removeEventListener('click', module._hideIfBackgroundClick);
-			document.querySelectorAll('*').forEach(el => el.removeEventListener('focus', module._wrapTab));
+			document.querySelectorAll('*').forEach((el) => el.removeEventListener('focus', module._wrapTab));
 		},
 
 		// Event callbacks
@@ -207,8 +207,8 @@ const modal = (function (activate, keys, subscribe) {
 					$focus.focus();
 				}
 
-				$active = undefined;
-				$focus = undefined;
+				$active = null;
+				$focus = null;
 			}
 		},
 
@@ -237,11 +237,11 @@ const modal = (function (activate, keys, subscribe) {
 			let $tabbable = Array.prototype.filter.call($descendents, tabbable);
 
 			return $tabbable;
-		}
+		},
 	};
 
 	return {
-		init: module.init
+		init: module.init,
 	};
 })(activate, keys, subscribe);
 

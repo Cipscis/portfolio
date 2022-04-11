@@ -1,9 +1,9 @@
 /* Autocomplete 1.0 */
 
-import { status } from '../status/status.js';
 import { debounce } from '@cipscis/debounce';
 import { activate } from '@cipscis/activate';
 import { publish } from '@cipscis/pubsub';
+/* global templayed */
 
 const autocomplete = (function (templayed, debounce, activate, publish) {
 	'use strict';
@@ -16,13 +16,13 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 		resultItem: '.js-autocomplete__result-item',
 
 		template: '.js-autocomplete__template',
-		status: '.js-autocomplete__status'
+		status: '.js-autocomplete__status',
 	};
 
 	const dataSelectors = {
 		source: 'autocomplete-source',
 		value: 'autocomplete-value',
-		templateId: 'autocomplete-template-id'
+		templateId: 'autocomplete-template-id',
 	};
 
 	const delay = 500;
@@ -79,7 +79,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			let $input = this;
 			let $wrapper = $input.closest(selectors.wrapper);
 
-			let results = module._doQuery($wrapper);
+			module._doQuery($wrapper);
 		}, delay),
 
 		_doQuery: function ($wrapper) {
@@ -91,7 +91,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			if (val.length >= minQueryLength) {
 				let request = new XMLHttpRequest();
 				let data = {
-					query: val
+					query: val,
 				};
 
 				request.onload = function () {
@@ -157,7 +157,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 
 		_bindResultEvents: function ($results) {
 			let $resultItems = $results.querySelectorAll(selectors.resultItem);
-			$resultItems.forEach(el => el.addEventListener('keydown', module._changeResultFocus));
+			$resultItems.forEach((el) => el.addEventListener('keydown', module._changeResultFocus));
 			activate($resultItems, module._selectResultEvent);
 		},
 
@@ -214,8 +214,6 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 
 		_onUnfocus: function ($wrapper) {
 			return function (e) {
-				let $hadFocus = e.target;
-
 				// 1 ms timeout so we can check what element has focus after blur
 				window.setTimeout(function () {
 					let $hasFocus = document.activeElement;
@@ -231,7 +229,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 						}
 					}
 				}, 1);
-			}
+			};
 		},
 
 		_onFocus: function ($wrapper) {
@@ -266,7 +264,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 
 			if (!$result) {
 				let $resultItems = $wrapper.querySelectorAll(selectors.resultItem);
-				$result = Array.prototype.find.call($resultItems, el => el.getAttribute('aria-selected') === 'true');
+				$result = Array.prototype.find.call($resultItems, (el) => el.getAttribute('aria-selected') === 'true');
 			}
 
 			if ((!$result) || $result.matches(selectors.resultItem) === false) {
@@ -287,7 +285,6 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 
 		_selectResult: function ($result, focusOnInput) {
 			let $wrapper = $result.closest(selectors.wrapper);
-			let $results = $wrapper.querySelector(selectors.results);
 			let $input = $wrapper.querySelector(selectors.input);
 
 			$input.value = $result.getAttribute(`data-${dataSelectors.value}`);
@@ -354,7 +351,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			let $input = $wrapper.querySelector(selectors.input);
 			let $results = $wrapper.querySelectorAll(selectors.resultItem);
 
-			$results.forEach(el => {
+			$results.forEach((el) => {
 				if (el !== $result) {
 					el.setAttribute('aria-selected', false);
 				}
@@ -368,7 +365,7 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			let $resultItems = $wrapper.querySelectorAll(selectors.resultItem);
 
 			$input.removeAttribute('aria-activedescendant');
-			$resultItems.forEach(el => el.setAttribute('aria-selected', false));
+			$resultItems.forEach((el) => el.setAttribute('aria-selected', false));
 		},
 
 		_getFocusEl: function ($wrapper) {
@@ -385,11 +382,11 @@ const autocomplete = (function (templayed, debounce, activate, publish) {
 			}
 
 			return $focusEl;
-		}
+		},
 	};
 
 	return {
-		init: module.init
+		init: module.init,
 	};
 })(templayed, debounce, activate, publish);
 

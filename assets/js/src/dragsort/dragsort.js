@@ -19,13 +19,13 @@ const dragsort = (function (publish) {
 	// IE11 basically just breaks if you try to do anything fancy
 	// Safari breaks if you try to set a drag image
 	const fullSupport = !(isIE11 || isSafari);
-	const useClone = fullSupport;
+	let useClone = fullSupport;
 
 	const selectors = {
 		list: '.js-dragsort__list',
 		wrap: '.js-dragsort__wrap',
 		item: '.js-dragsort__item',
-		handle: '.js-dragsort__handle'
+		handle: '.js-dragsort__handle',
 	};
 
 	const classes = {
@@ -34,12 +34,12 @@ const dragsort = (function (publish) {
 
 		clone: 'is-clone',
 
-		fullSupport: 'dragsort-full'
+		fullSupport: 'dragsort-full',
 	};
 
 	const events = {
 		dragStart: '/dragsort/start',
-		dragStop: '/dragsort/stop'
+		dragStop: '/dragsort/stop',
 	};
 
 	const module = {
@@ -52,12 +52,12 @@ const dragsort = (function (publish) {
 		},
 
 		_initEvents: function () {
-			document.querySelectorAll(selectors.handle).forEach(el => el.addEventListener('dragstart', module._processDragStart));
-			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragenter', module._processDragEnter));
-			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragleave', module._processDragLeave));
-			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragover', module._processDragOver));
-			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('drop', module._processDrop));
-			document.querySelectorAll(selectors.item).forEach(el => el.addEventListener('dragend', module._processDragEnd));
+			document.querySelectorAll(selectors.handle).forEach((el) => el.addEventListener('dragstart', module._processDragStart));
+			document.querySelectorAll(selectors.item).forEach((el) => el.addEventListener('dragenter', module._processDragEnter));
+			document.querySelectorAll(selectors.item).forEach((el) => el.addEventListener('dragleave', module._processDragLeave));
+			document.querySelectorAll(selectors.item).forEach((el) => el.addEventListener('dragover', module._processDragOver));
+			document.querySelectorAll(selectors.item).forEach((el) => el.addEventListener('drop', module._processDrop));
+			document.querySelectorAll(selectors.item).forEach((el) => el.addEventListener('dragend', module._processDragEnd));
 		},
 
 		_processDragStart: function (e) {
@@ -154,8 +154,6 @@ const dragsort = (function (publish) {
 		},
 
 		_processDrop: function (e) {
-			let $list = e.target.closest(selectors.list);
-
 			let $drop = e.target.closest(selectors.item);
 			let $dropWrap = $drop.closest(selectors.wrap);
 
@@ -200,7 +198,7 @@ const dragsort = (function (publish) {
 
 			$draggedEl.classList.remove(classes.dragging);
 			$list.classList.remove(classes.dragging);
-			$draggedEl = undefined;
+			$draggedEl = null;
 
 			module._destroyClone();
 			module._clearDropTarget();
@@ -213,12 +211,12 @@ const dragsort = (function (publish) {
 		_clearDropTarget: function () {
 			let $droppable = document.querySelectorAll('.' + classes.droppable);
 
-			$droppable.forEach(el => {
+			$droppable.forEach((el) => {
 				el.classList.remove(classes.droppable);
-				el.style.padding = 0
+				el.style.padding = 0;
 			});
 
-			$dropTarget = undefined;
+			$dropTarget = null;
 			dropDepth = 0;
 		},
 
@@ -251,7 +249,7 @@ const dragsort = (function (publish) {
 				$clone.style.height = height;
 
 				// Prevent issues with moving elements containing selected radio buttons
-				$clone.querySelectorAll('[type="radio"][name]').forEach(el => el.removeAttribute('name'));
+				$clone.querySelectorAll('[type="radio"][name]').forEach((el) => el.removeAttribute('name'));
 
 				document.querySelector('body').appendChild($clone);
 				$clone.classList.add(classes.clone);
@@ -269,9 +267,9 @@ const dragsort = (function (publish) {
 				}
 				module._uninitCloneEvents();
 
-				$clone = undefined;
-				cloneOffsetX = undefined;
-				cloneOffsetY = undefined;
+				$clone = null;
+				cloneOffsetX = null;
+				cloneOffsetY = null;
 			}
 		},
 
@@ -288,11 +286,11 @@ const dragsort = (function (publish) {
 
 			$clone.style.left = x;
 			$clone.style.top = y;
-		}
+		},
 	};
 
 	return {
-		init: module.init
+		init: module.init,
 	};
 
 })(publish);

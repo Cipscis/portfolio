@@ -3,13 +3,13 @@ import { throttle } from '@cipscis/throttle';
 const validate = (function (throttle) {
 	const selectors = {
 		invalid: 'input:invalid, select:invalid, textarea:invalid',
-		status: '.js-validate__status'
-	}
+		status: '.js-validate__status',
+	};
 
 	const classes = {
 		validated: 'is-validated',
 
-		error: 'is-error'
+		error: 'is-error',
 	};
 
 	const module = {
@@ -48,7 +48,7 @@ const validate = (function (throttle) {
 			let $status = $form.querySelectorAll(selectors.status);
 
 			$status.foreach(($status) => $status.classList.remove(classes.error));
-		}
+		},
 	};
 
 	return module.bindValidateEvent;

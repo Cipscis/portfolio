@@ -1,32 +1,32 @@
 /* Status 1.1 */
 
-import { subscribe } from '@cipscis/pubsub'
+import { subscribe } from '@cipscis/pubsub';
 
 const status = (function (subscribe) {
 	const selectors = {
-		status: '.js-status'
+		status: '.js-status',
 	};
 
 	const dataAttributes = {
-		autohide: 'data-autohide-timeout'
+		autohide: 'data-autohide-timeout',
 	};
 
 	const events = {
 		success: '/status/success',
 		error: '/status/error',
-		hide: '/status/hide'
+		hide: '/status/hide',
 	};
 
 	const Types = {
 		SUCCESS: 'SUCCESS',
-		ERROR: 'ERROR'
+		ERROR: 'ERROR',
 	};
 
 	const classes = {
 		[Types.SUCCESS]: 'success',
 		[Types.ERROR]: 'error',
 
-		hidden: 'hidden'
+		hidden: 'hidden',
 	};
 
 	// Delay is used for screen reader accessibility.
@@ -141,7 +141,7 @@ const status = (function (subscribe) {
 			$status = module._getEl($status);
 
 			module._show(message, Types.ERROR, $status, autohideDelay);
-		}
+		},
 	};
 
 	module._initSubscriptions();
@@ -149,7 +149,7 @@ const status = (function (subscribe) {
 	return {
 		hide: module.hide,
 		success: module.success,
-		error: module.error
+		error: module.error,
 	};
 })(subscribe);
 

@@ -1,3 +1,5 @@
+@import "tools/rem";
+
 .content {
 	input, select, textarea {
 		line-height: 1.5;
@@ -15,12 +17,44 @@
 	&:last-child {
 		margin-bottom: 0;
 	}
+
+	font-size: rem(18px);
 }
 .content:nth-child(n+2) {
 	margin-top: 18px;
 }
 .content > p:last-child {
 	margin-bottom: 18px;
+}
+
+.content h1,
+.h1 {
+	font-size: rem(28px);
+}
+
+.content h2,
+.h2 {
+	font-size: rem(26px);
+}
+
+.content h3,
+.h3 {
+	font-size: rem(24px);
+}
+
+.content h4,
+.h4 {
+	font-size: rem(22px);
+}
+
+.content h5,
+.h5 {
+	font-size: rem(20px);
+}
+
+.content h6,
+.h6 {
+	font-size: rem(19px);
 }
 
 .content a,
@@ -46,7 +80,9 @@
 	margin-right: 10px;
 	padding: 0 30px;
 
-	&:before {
+	font-size: rem(18px);
+
+	&::before {
 		content: "“";
 		font-size: 60px;
 		line-height: 1;
@@ -90,6 +126,9 @@
 		}
 	}
 }
+.content .code {
+	font-size: rem(18px);
+}
 .content .code--block,
 .code--block {
 	display: block;
@@ -100,6 +139,9 @@
 	&:last-child {
 		margin-bottom: 0;
 	}
+
+	font-size: rem(18px);
+	line-height: 1.5;
 }
 
 .content var,
@@ -115,6 +157,8 @@
 	border: 1px solid var(--border);
 	box-shadow: 0 2px 5px var(--shadow);
 	font-family: monospace;
+
+	font-size: rem(18px);
 }
 
 .content {
@@ -122,6 +166,7 @@
 		padding-left: 20px;
 		> li {
 			margin: 9px 0;
+			font-size: rem(18px);
 		}
 	}
 

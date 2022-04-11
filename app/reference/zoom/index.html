@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title>Accessibility - Zoom</title>
+
+	<link rel="stylesheet" href="/portfolio/assets/css/main.css" />
+	<link rel="stylesheet" href="/portfolio/assets/css/zoom.css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<main class="layout">
+		<section>
+			<div class="content">
+				<h1>Zoom</h1>
+
+				<p>Vision disabilities often make it hard to perceive content on a web page. There are various assistive technologies available to help with this, and one of these tools is the ability to zoom a page.</p>
+
+				<p>There are at least three types of zoom:</p>
+
+				<ol>
+					<li>"Pinch" zoom</li>
+					<li>Browser/OS zoom</li>
+					<li>Browser default font size</li>
+				</ol>
+
+				<p><strong>"Pinch" zoom</strong> is likely familiar to anyone who has used a browser on a tablet or smartphone. It zooms in on a particular part of the UI, but you then have to scroll left and right as well as up and down to see everything.</p>
+
+				<p><strong>Browser/OS zoom</strong> works slightly differently. Effectively, this adjusts the size of a CSS pixel, meaning everything scales up as though the browser window were a little smaller, but because the browser window <em>isn't</em> any smaller everything is able to zoom in by the same amount.</p>
+
+				<p>Changing the <strong>default font size</strong> in your browser is the odd one out here. With some exceptions, both "pinch" zoom and browser/OS zoom generally work seamlessly for any responsive design, regardless of how it was put together. But changing the default font size in your browser only affects a web page if sizes are specified relative to the base font size.</p>
+
+				<hr />
+			</div>
+		</section>
+
+		<section>
+			<div class="content">
+				<p>If disabled users need to increase the base font size in their browser in order to make text easier to perceive without necessarily making significant changes to the layout, which is a likely consequence of using <strong>browser/OS zoom</strong>, websites should accommodate this.</p>
+
+				<p>Most typically, this means using <code>rem</code> units instead of <code>px</code>. Any font size (or anything else, like an element's padding) specified in <code>rem</code> will scale up or down with the browser's default font size, whereas if it is specified in <code>px</code> then it will be uncoupled from that setting.</p>
+
+				<p>To see an example of these differences, try adjusting these settings and using various different methods of zooming to see how the example pod changes.</p>
+
+				<p>If your base font size is set to the default <code>16px</code>, then you likely won't notice any difference when changing between these settings. But if you try setting it to something else, you will start to see differences.</p>
+			</div>
+
+			<div class="zoom-rem">
+				<!-- This flat markup is used to allow the subsequent sibling selector to
+					alter the example pod's styles without needing any JavaScript -->
+
+				<h2 class="zoom-rem__control__heading">Font Size</h2>
+
+				<input class="zoom-rem__control__input" id="font-size-px" type="radio" name="font-size" value="px" checked />
+				<label class="zoom-rem__control__label" for="font-size-px">px</label>
+
+				<input class="zoom-rem__control__input" id="font-size-rem" type="radio" name="font-size" value="rem" />
+				<label class="zoom-rem__control__label" for="font-size-rem">rem</label>
+
+				<h2 class="zoom-rem__control__heading">Line Height</h2>
+
+				<input class="zoom-rem__control__input" id="line-height-unitless" type="radio" name="line-height" value="unitless" checked />
+				<label class="zoom-rem__control__label" for="line-height-unitless">unitless</label>
+
+				<input class="zoom-rem__control__input" id="line-height-px" type="radio" name="line-height" value="px" />
+				<label class="zoom-rem__control__label" for="line-height-px">px</label>
+
+				<input class="zoom-rem__control__input" id="line-height-rem" type="radio" name="line-height" value="rem" />
+				<label class="zoom-rem__control__label" for="line-height-rem">rem</label>
+
+				<h2 class="zoom-rem__control__heading">Padding and Margins</h2>
+
+				<input class="zoom-rem__control__input" id="spacing-px" type="radio" name="spacing" value="px" checked />
+				<label class="zoom-rem__control__label" for="spacing-px">px</label>
+
+				<input class="zoom-rem__control__input" id="spacing-rem" type="radio" name="spacing" value="rem" />
+				<label class="zoom-rem__control__label" for="spacing-rem">rem</label>
+
+				<div class="zoom-rem__pod">
+					<h2 class="zoom-rem__pod__heading">This example pod has a heading</h2>
+
+					<p class="zoom-rem__pod__text">It also has some text in it. Enough to make it wrap onto multiple lines.</p>
+				</div>
+			</div>
+
+			<div class="content">
+				<p><code>rem</code> isn't the only <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#relative_length_units" target="_blank">relative CSS unit</a> that can be used for this, though it is generally the most convenient.</p>
+
+				<hr />
+			</div>
+		</section>
+
+		<section>
+			<div class="content">
+				<p>Another pattern that shows up sometimes is using a combination of the <code>clamp</code> function and the <code>vw</code> unit, which is relative to the viewport width, to make a font's size able to scale smoothly with the size of the browser.</p>
+
+				<p>I've found this can be useful for applications such as labels on a graph, where scaling the font size along with the size of the component ensures it takes up the same amount of space. But the <code>vw</code> unit does not scale with the base font size:</p>
+			</div>
+
+			<style type="text/css" class="code code--block">
+.zoom-vw {
+	font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+			</style>
+
+			<p class="zoom-vw">This paragraph's font size is specified using the <code class="code">clamp</code> function, with its calculation between the minimum and maximum values based entirely on the <code class="code">vw</code> unit.</p>
+
+			<div class="content">
+				<p>For this example, changing the default browser font size will affect the relationship between the <code>1.5vw</code> calculation and the minimum and maximum <code>rem</code> values in the <code>clamp</code> function. So changing the base font size can adjust the minimum and maximum font sizes, but while the result is between them the size of the font won't depend on the browser's default font size.</p>
+			</div>
+		</section>
+	</main>
+
+	<script type="text/javascript" src="/portfolio/assets/js/dist/main.js"></script>
+</body>
+</html>

@@ -39,8 +39,11 @@
 	display: block;
 	flex-grow: 1;
 	text-align: center;
-	padding: 20px;
+	padding: 20px 10px;
 	border: 1px solid var(--border);
+
+	font-size: rem(18px);
+	line-height: 1.2;
 
 	font-weight: bold;
 	text-decoration: none;
@@ -53,6 +56,9 @@
 	display: block;
 	text-align: center;
 	padding: 5px 10px;
+
+	font-size: rem(18px);
+	line-height: 1.2;
 
 	text-decoration: none;
 

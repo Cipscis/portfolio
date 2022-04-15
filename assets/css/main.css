@@ -786,8 +786,10 @@ input::placeholder {
   display: block;
   flex-grow: 1;
   text-align: center;
-  padding: 20px;
+  padding: 20px 10px;
   border: 1px solid var(--border);
+  font-size: 1.125rem;
+  line-height: 1.2;
   font-weight: bold;
   text-decoration: none;
   background: var(--primary-background);
@@ -807,6 +809,8 @@ input::placeholder {
   display: block;
   text-align: center;
   padding: 5px 10px;
+  font-size: 1.125rem;
+  line-height: 1.2;
   text-decoration: none;
   border: 1px solid var(--border);
   border-top: 0;

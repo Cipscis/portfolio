@@ -3,7 +3,7 @@
 
 @mixin option($name, $value) {
 	input[type="radio"][name=#{$name}][value=#{$value}]:checked ~ .zoom-rem__pod {
-		@content
+		@content;
 	}
 }
 
@@ -88,7 +88,7 @@
 	.zoom-rem__pod__heading {
 		line-height: rem(1.7 * 27px);
 	}
-	.zoom-rem__pod___text {
+	.zoom-rem__pod__text {
 		line-height: rem(1.7 * 27px);
 	}
 }

@@ -30,9 +30,10 @@
 	}
 	&.success,
 	&.error {
-		animation: 0.5s becomeVisible forwards,
-		           // Make sure the delay here matches the delay in status.js
-		           0.5s 0.1s fadein forwards;
+		animation:
+			0.5s becomeVisible forwards,
+			// Make sure the delay here matches the delay in status.js
+			0.5s 0.1s fadein forwards;
 	}
 	&.success {
 		&::after {
@@ -49,8 +50,9 @@
 	}
 
 	&.hidden {
-		animation: 0.5s becomeHidden forwards,
-		           0.5s fadeout forwards;
+		animation:
+			0.5s becomeHidden forwards,
+			0.5s fadeout forwards;
 	}
 }
 

@@ -93,16 +93,20 @@
 	}
 
 	cite {
-		&:before {
+		&::before {
 			content: "― ";
 		}
 	}
 }
 
 .content code,
-.code {
+.content var,
+.code,
+.var {
 	display: inline-block;
 	vertical-align: bottom;
+
+	font-size: rem(18px);
 	line-height: 1.5;
 
 	@include contrast-offset;
@@ -112,7 +116,6 @@
 	font-family: monospace;
 	white-space: pre;
 	tab-size: 4;
-	-moz-tab-size: 4;
 
 	max-width: 100%;
 	overflow: auto;
@@ -125,9 +128,6 @@
 			content: ">";
 		}
 	}
-}
-.content .code {
-	font-size: rem(18px);
 }
 .content .code--block,
 .code--block {
@@ -142,11 +142,6 @@
 
 	font-size: rem(18px);
 	line-height: 1.5;
-}
-
-.content var,
-.var {
-	@extend .code;
 }
 
 .content kbd,

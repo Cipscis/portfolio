@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $white: #fff;
 $grey--lightest: #eee;
 $grey--lighter: #ccc;
@@ -7,20 +9,20 @@ $grey--mid: #444;
 $grey--dark: #333;
 $black: #000;
 
-$blue--pale: darken(#def, 10%);
-$blue--dim: darken($blue--pale, 40%);
+$blue--pale: color.adjust(#def, $lightness: -10%);
+$blue--dim: color.adjust($blue--pale, $lightness: -40%);
 
-$green--pale: darken(#dfe, 10%);
-$green--dim: darken($green--pale, 60%);
+$green--pale: color.adjust(#dfe, $lightness: -10%);
+$green--dim: color.adjust($green--pale, $lightness: -60%);
 
 $red--pale: #fee;
 
-$base-font-family: "Roboto Slab", "Times New Roman", Times, serif;
-$heading-font-family: "Roboto", Arial, sans-serif;
+$base-font-family: "Roboto Slab", "Times New Roman", "Times", serif;
+$heading-font-family: "Roboto", "Arial", sans-serif;
 
 @mixin light-mode {
 	--primary-background: #{$white};
-	--primary-background-active: #{darken($white, 5)};
+	--primary-background-active: #{color.adjust($white, $lightness: -5%)};
 	--primary-color: #{$grey--dark};
 	--primary-color-low-contrast: #767676; // Brightest grey with sufficient contrast against $white
 
@@ -34,14 +36,14 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--border: #{$grey--light};
 
 	--clickable-background: #{$grey--lightest};
-	--clickable-background-active: #{darken($grey--lightest, 10)};
+	--clickable-background-active: #{color.adjust($grey--lightest, $lightness: -10%)};
 	--clickable-color: var(--primary-color);
 
 	--highlight-background: #{$green--pale};
-	--highlight-background-active: #{darken($green--pale, 10)};
+	--highlight-background-active: #{color.adjust($green--pale, $lightness: -10%)};
 
 	--highlight-bar: #{$blue--pale};
-	--highlight-bar-active: #{darken($blue--pale, 10)};
+	--highlight-bar-active: #{color.adjust($blue--pale, $lightness: -10%)};
 
 	--error-background: #{$red--pale};
 	--error-color: #e00;
@@ -53,7 +55,7 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 
 @mixin dark-mode {
 	--primary-background: #{$grey--dark};
-	--primary-background-active: #{lighten($grey--dark, 5)};
+	--primary-background-active: #{color.adjust($grey--dark, $lightness: 5%)};
 	--primary-color: #{$grey--lightest};
 	--primary-color-low-contrast: #9b9b9b; // Darkest grey with sufficient contrast against $grey--dark;
 
@@ -67,14 +69,14 @@ $heading-font-family: "Roboto", Arial, sans-serif;
 	--border: #{$grey--lighter};
 
 	--clickable-background: #{$grey};
-	--clickable-background-active: #{lighten($grey, 10)};
+	--clickable-background-active: #{color.adjust($grey, $lightness: 10%)};
 	--clickable-color: var(--primary-color);
 
 	--highlight-background: #{$green--dim};
-	--highlight-background-active: #{lighten($green--dim, 10)};
+	--highlight-background-active: #{color.adjust($green--dim, $lightness: 10%)};
 
 	--highlight-bar: #{$blue--dim};
-	--highlight-bar-active: #{lighten($blue--dim, 10)};
+	--highlight-bar-active: #{color.adjust($blue--dim, $lightness: 10%)};
 
 	--error-background: #755;
 	--error-color: red;
@@ -164,7 +166,7 @@ $outline-default: #4d90fe;
 	// IE11 and Edge don't support outline-style: auto
 	outline-style: solid;
 	outline-width: 2px;
-	@supports(outline-style: auto) {
+	@supports (outline-style: auto) {
 		outline-style: auto;
 	}
 }

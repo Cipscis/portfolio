@@ -3,7 +3,7 @@
 
 	counter-reset: counter-items;
 	.counter__item {
-		&:before {
+		&::before {
 			counter-increment: counter-items;
 			content: counter(counter-items);
 

@@ -61,7 +61,7 @@ input[type=radio][name=line-height][value=px]:checked ~ .zoom-rem__pod .zoom-rem
 input[type=radio][name=line-height][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__heading {
   line-height: 2.86875rem;
 }
-input[type=radio][name=line-height][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod___text {
+input[type=radio][name=line-height][value=rem]:checked ~ .zoom-rem__pod .zoom-rem__pod__text {
   line-height: 2.86875rem;
 }
 

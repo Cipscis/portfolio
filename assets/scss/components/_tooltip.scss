@@ -15,7 +15,7 @@ $tooltip-wiggle-room: 18px;
 @mixin tooltip-trigger {
 	background-color: var(--highlight-background-active);
 
-	&:before {
+	&::before {
 		content: "";
 		position: absolute;
 
@@ -44,7 +44,7 @@ $tooltip-wiggle-room: 18px;
 	position: absolute;
 	z-index: 2;
 
-	&:before {
+	&::before {
 		content: "";
 		position: absolute;
 		z-index: -1;
@@ -106,8 +106,8 @@ $tooltip-wiggle-room: 18px;
 
 		margin-top: 25px;
 
-		&:before,
-		&:after {
+		&::before,
+		&::after {
 			display: none;
 		}
 	}

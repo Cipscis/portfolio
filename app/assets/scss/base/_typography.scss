@@ -1,7 +1,7 @@
 @use "sass:math";
 
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
 
 html {
 	font-family: $base-font-family;
@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 	a[href^="http"],
 	a[href^="mailto"],
 	a[href^="tel"] {
-		&:after {
+		&::after {
 			content: " [" attr(href) "]";
 			overflow-wrap: break-word;
 		}
